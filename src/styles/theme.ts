@@ -15,6 +15,9 @@ export const theme = extendTheme({
         },
         gray: {
             50: "#F9F9F9",
+            100: "#DDDDDD",
+            400: "#6A6A6A",
+            800: "#373737"
         },
         fonts: {
             heading: "Didact Gothic",
