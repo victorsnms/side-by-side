@@ -25,7 +25,6 @@ export const theme = extendTheme({
         red: {
             500: "#FF2E00"
         }
-        
     },
     fonts: {
         heading: "Didact Gothic",
