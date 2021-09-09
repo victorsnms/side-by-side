@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { AppProvider } from './providers';
-import { BrowserRouter } from 'react-router-dom'
+import React from "react"
+import ReactDOM from "react-dom"
+import { AppProvider } from "./providers"
+import { BrowserRouter } from "react-router-dom"
+import { Routes } from "./routes"
 
 ReactDOM.render(
   <React.StrictMode>
