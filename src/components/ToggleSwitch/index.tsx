@@ -36,7 +36,7 @@ export const ToggleSwitch = ({ children }: ToggleSwitchProps) => {
             left={position}
             w="50%"
             h="90%"
-            bg="green"
+            bg="green.300"
             borderRadius="50px"
             justifyContent="center"
             alignItems="center"

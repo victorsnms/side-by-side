@@ -21,7 +21,7 @@ interface IInputProps extends ChakraInputProps {
   placeholder: string;
   icon: IconType;
   error?: FieldError | null;
-  width?: string;
+  width?: string[];
 }
 
 type inputVariationProps = {
@@ -36,7 +36,7 @@ const inputVariation: inputVariationProps = {
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
-  { name, placeholder, icon: Icon, error = null, width, ...rest },
+  { name, placeholder, icon: Icon, error = null, ...rest },
   ref
 ) => {
   const [variation, setVariation] = useState("default");
@@ -81,7 +81,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           onBlurCapture={handleInputBlur}
           onFocus={handleInputFocus}
           name={name}
-          w={width}
           pb="1px"
           border="1px"
           borderColor={

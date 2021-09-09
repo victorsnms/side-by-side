@@ -1,22 +1,23 @@
+import { ButtonProps } from "@chakra-ui/core";
 import { Button } from "@chakra-ui/react";
 
-interface IButtonFormsProps {
+interface IButtonFormsProps extends ButtonProps {
     children: string;
     handleClick: () => void;
+    width: string[];
 }
 
-export const ButtonForms = ({ children, handleClick }: IButtonFormsProps) => {
+export const ButtonForms = ({ children, handleClick,  width }: IButtonFormsProps) => {
   return (
     <Button
       as="button"
       fontSize="20px"
-      fontWeight="600"
+      fontWeight="500"
       fontFamily="Didact Gothic"
       bg="green.300"
       color="white"
-      w="75%"
-      maxW="338px"
-      h="38px"
+      size="md"
+      w={width}
       borderRadius="20px"
       onClick={handleClick}
       _hover={{ bg: "green.400" }}
