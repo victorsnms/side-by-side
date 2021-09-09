@@ -5,11 +5,11 @@ const Home = () => {
 
 
     return(
-        <Flex>
+        <Flex direction="column">
             <HomeMenu/>
-            <Box>
+            <Flex>
                     Teste
-            </Box>
+            </Flex>
         </Flex>
     )
 };
