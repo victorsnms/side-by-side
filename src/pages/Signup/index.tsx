@@ -8,49 +8,65 @@ import { RiLockPasswordLine } from "react-icons/ri";
 
 export const Signup = () => {
   return (
-    <Flex flexDirection={["column", "row"]}>
-      <Center>
-        <Box>
+    <Flex
+      direction={["column", "column", "column", "row"]}
+      justify="center"
+      align="center"
+      h={{ lg: "100vh"}}
+    >
+      <Center alignSelf={{lg: "flex-end"}}>
+        <Box pr={["0", "0", "0", "10em"]}>
+          {window.innerWidth > 991 && <Text>LOGO</Text>}
           <Image
             src={ImageLogin}
             alt="Illustration signup"
-            boxSize={[170, 200, 200, 450, 610]}
+            boxSize={[170, 200, 200, 450, 500]}
           />
         </Box>
       </Center>
       <Center>
-        <Box>
-          <ToggleSwitch children={["Login", "Signup"]} />
+        <Box
+          bg={{ lg: "white" }}
+          h={{ lg: "460px" }}
+          w={{ lg: "400px" }}
+          shadow={{ lg: "lg" }}
+          pt={{ lg: "2.5em" }}
+          textAlign="center"
+        >
+          <Box pl={{ lg: "2em" }}>
+            <ToggleSwitch children={["Login", "Signup"]} />
+          </Box>
+          <Center>
+            <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
+              <Input
+                icon={AiOutlineUser}
+                name="name"
+                placeholder="Name"
+                w={["262px", "350px"]}
+              />
+              <Input
+                icon={AiOutlineMail}
+                name="email"
+                placeholder="Email"
+                w={["262px", "350px"]}
+              />
+              <Input
+                type="password"
+                icon={RiLockPasswordLine}
+                name="password"
+                placeholder="Password"
+                w={["262px", "350px"]}
+              />
+            </VStack>
+          </Center>
 
-          <VStack spacing="14px" mt="30px">
-            <Input
-              icon={AiOutlineUser}
-              name="name"
-              placeholder="Name"
-              w={["262px", "438px"]}
-            />
-            <Input
-              icon={AiOutlineMail}
-              name="email"
-              placeholder="Email"
-              w={["262px", "438px"]}
-            />
-            <Input
-              type="password"
-              icon={RiLockPasswordLine}
-              name="password"
-              placeholder="Password"
-              w={["262px", "438px"]}
-            />
-          </VStack>
-
-          <Box mt="40px">
+          <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
             <ButtonForms
               children={"Signup"}
               handleClick={() => ""}
-              width={["262px", "438px"]}
+              width={["262px"]}
             />
-            <Text textAlign="center" mt="12px" fontSize="16px">
+            <Text mt="12px" fontSize="16px">
               Already have an account?{" "}
               <Link href="/login" color="red.500" textDecoration="underline">
                 Login
