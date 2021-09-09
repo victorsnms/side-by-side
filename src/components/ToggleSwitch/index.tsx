@@ -2,17 +2,17 @@ import { Box, HStack, Text, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface ToggleSwitchProps {
-  children: string[];
+  options: string[];
 }
 
-export const ToggleSwitch = ({ children }: ToggleSwitchProps) => {
-  const [isLeft, setIsLeft] = useState(true);
+export const ToggleSwitch = ({ options }: ToggleSwitchProps) => {
+  const [isLeft, setIsLeft] = useState(false);
   const [position, setPosition] = useState("");
-  const [option, setOption] = useState(children[0]);
+  const [option, setOption] = useState(options[0]);
   const handleMovement = () => {
     setIsLeft(!isLeft);
     setPosition(isLeft ? "0%" : "43%");
-    setOption(isLeft ? children[0] : children[1]);
+    setOption(isLeft ? options[0] : options[1]);
   };
   return (
     <>
@@ -25,10 +25,10 @@ export const ToggleSwitch = ({ children }: ToggleSwitchProps) => {
       >
         <HStack w="100%" h="100%">
           <Flex w="50%" h="100%" justifyContent="center" alignItems="center">
-            <Text as="label">{children[0]}</Text>
+            <Text as="label">{options[0]}</Text>
           </Flex>
           <Flex w="50%" h="100%" justifyContent="center" alignItems="center">
-            <Text as="label">{children[1]}</Text>
+            <Text as="label">{options[1]}</Text>
           </Flex>
           <Flex
             as="span"
