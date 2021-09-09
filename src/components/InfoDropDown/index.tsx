@@ -4,17 +4,23 @@ import {
 	Box,
 	AccordionIcon,
 	AccordionPanel,
+	AccordionItemProps
 } from "@chakra-ui/react"
 
-interface InfoDropDownProps {
+interface InfoDropDownProps extends AccordionItemProps {
 	title: string
 	content: string
 }
 
-export const InfoDropDown = ({ title, content }: InfoDropDownProps) => (
-	<AccordionItem>
+export const InfoDropDown = ({ title, content, ...rest }: InfoDropDownProps) => (
+	<AccordionItem {...rest}> 
 		<AccordionButton>
-			<Box flex="1" textAlign="left" as="h2">
+			<Box 
+				flex="1" 
+				textAlign="left" 
+				as="h3"
+				p='3'
+			>
 				{title}
 			</Box>
 			<AccordionIcon />
