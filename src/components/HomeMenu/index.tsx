@@ -1,8 +1,14 @@
 import { Button } from "@chakra-ui/button";
 import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout"
+import { useHistory } from "react-router";
 
 const HomeMenu = () => {
 
+    const history = useHistory();
+
+    const sendTo = (path: string) => {
+        history.push(path);
+    };
 
     return(
         <Flex 
@@ -21,6 +27,7 @@ const HomeMenu = () => {
                     borderRadius="5px"
                     _hover={{ bg: "gray.50", color: "green.300" }}
                     _focus={{}}
+                    onClick={() => sendTo("/joinus")}
                 >
                     Sign up
                 </Button>
@@ -34,6 +41,7 @@ const HomeMenu = () => {
                     border="1px solid white"
                     _hover={{ bg: "green.400" }}
                     _focus={{}}
+                    onClick={() => sendTo("/joinus")}
                 >
                     Login
                 </Button>

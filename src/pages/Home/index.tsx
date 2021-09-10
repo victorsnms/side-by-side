@@ -1,10 +1,21 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Center, Flex, Text } from "@chakra-ui/layout";
+import { useHistory } from "react-router";
 import HomeMenu from "../../components/HomeMenu";
+import backgroundPlastic from "../../assets/images/plastic.png"
+import backgroundCup from "../../assets/images/bluecup.png"
+import homeMap from "../../assets/images/homemap.svg"
+import homeTaggedMap from "../../assets/images/hometaggedmap.svg"
+
 
 const Home = () => {
 
+    const history = useHistory();
+
+    const sendTo = (path: string) => {
+        history.push(path);
+    };
 
     return(
         <Flex direction="column">
@@ -13,15 +24,16 @@ const Home = () => {
                     direction="column" 
                     justifyContent="center"
                     w="100%"
-                    h="50vh"
+                    h={["50vh", "60vh", "70vh", "80vh"]}
                     bg="gray.100"
-                    pl="50px"
-                    bgImage="url('/images/plastic.png')" 
+                    pl={["40px", "50px", "60px", "70px"]}
+                    bgImage={backgroundPlastic}
+                    backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
                     bgPosition="center"
                     bgRepeat="no-repeat">
                     <Text 
-                        fontSize={["2xl", "2xl", "3xl"]}
-                        fontWeight="500"
+                        fontSize={["2xl", "2xl", "4xl"]}
+                        fontWeight="bold"
                         color="white"
                     >
                         Find, Recycle, Connect
@@ -45,6 +57,7 @@ const Home = () => {
                         borderRadius="10px"
                         _hover={{ bg: "green.300", color: "green.400" }}
                         _focus={{}}
+                        onClick={() => sendTo("/joinus")}
                     >
                         Join us
                     </Button>
@@ -53,22 +66,46 @@ const Home = () => {
             <Center 
                     w="100%"
                     py="10"  
-                    fontSize={["3xl", "4xl", "5xl"]}  
+                    bg="white"
+                    fontSize={["3xl", "4xl"]}  
+                    fontWeight="bold"
                 >RECYCLING</Center>
-            <Flex mb="20" textAlign={["center", "center", "left"]} direction="column">
-                <Flex px="20" justifyContent="space-around" direction={["column", "column", "row"]}>
-                    <Flex justifyContent="center" direction="column">
-                        <Text>Find collection wastes</Text>
-                        <Text>Das wer tribst dush der maine seele, 
+            <Flex 
+                mb="20" 
+                textAlign={["center", "center", "left"]} 
+                direction="column"
+                >
+                <Flex 
+                    px="20" 
+                    bg="white"
+                    justifyContent="space-around" 
+                    direction={["column", "column", "row"]}>
+                    <Flex 
+                        justifyContent="center" 
+                        direction="column">
+                        <Text fontSize="3xl">Find collection wastes</Text>
+                        <Text maxW="300px">Das wer tribst dush der maine seele, 
                             zum  bisth zo rum dur ich in mir</Text>
                     </Flex>
-                    <Image w={["200px", "250px", "300px"]} h={["200px", "250px", "300px"]} bg="gray.300"/>
+                    <Image 
+                        src={homeTaggedMap}
+                        w={["200px", "250px", "300px"]} 
+                        h={["200px", "250px", "300px"]} 
+                        />
                 </Flex>
-                <Flex px="20" justifyContent="space-around" direction={["column-reverse", "column-reverse", "row"]}>
-                    <Image w={["200px", "250px", "300px"]} h={["200px", "250px", "300px"]} bg="gray.300"/>
+                <Flex 
+                    px="20" 
+                    mt="50px"
+                    justifyContent="space-around" 
+                    direction={["column-reverse", "column-reverse", "row"]}>
+                    <Image 
+                        src={homeMap}
+                        w={["200px", "250px", "300px"]} 
+                        h={["200px", "250px", "300px"]} 
+                        />
                     <Flex justifyContent="center" direction="column">
-                        <Text>Register new points</Text>
-                        <Text>Das wer tribst dush der maine seele, 
+                        <Text fontSize="3xl">Register new points</Text>
+                        <Text maxW="300px">Das wer tribst dush der maine seele, 
                             zum  bisth zo rum dur ich in mir</Text>
                     </Flex>
                 </Flex>
@@ -77,15 +114,16 @@ const Home = () => {
                     direction="column" 
                     justifyContent="center"
                     w="100%"
-                    h="50vh"
+                    h={["50vh", "60vh", "70vh", "80vh"]}
                     bg="gray.100"
-                    pl="50px"
-                    bgImage="url('/images/plastic.png')" 
+                    pl={["40px", "50px", "60px", "70px"]}
+                    bgImage={backgroundCup}
+                    backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
                     bgPosition="center"
                     bgRepeat="no-repeat">
                     <Text 
                         fontSize={["2xl", "2xl", "3xl"]}
-                        fontWeight="500"
+                        fontWeight="bold"
                         color="white"
                     >
                         EVENTS
@@ -101,8 +139,14 @@ const Home = () => {
                         Crie eventos
                     </Text>
                 </Flex>
-                <Flex py="100px" alignItems="center" direction="column">
-                    <Text fontSize={["2xl", "2xl", "3xl"]}>Salve o planeta!</Text>
+                <Flex 
+                    py="100px" 
+                    alignItems="center" 
+                    direction="column">
+                    <Text 
+                        fontSize={["2xl", "2xl", "3xl"]}
+                        >Salve o planeta!
+                    </Text>
                     <Button
                         mt="6"
                         w={["250px", "300px", "350px", "400px"]}
@@ -114,6 +158,7 @@ const Home = () => {
                         borderRadius="10px"
                         _hover={{ bg: "green.300", color: "green.400" }}
                         _focus={{}}
+                        onClick={() => sendTo("/joinus")}
                     >
                         Join us
                     </Button>
@@ -122,7 +167,8 @@ const Home = () => {
                     h={["15vh", "14vh", "13vh", "12vh"]} 
                     fontSize={["sm", "md", "lg"]}
                     bg="white"
-                >Copyright 2021 Echologys Brasil SA. All rights reserved</Center>
+                >&copy;Copyright 2021 Echologys Brasil SA. All rights reserved
+                </Center>
         </Flex>
     )
 };
