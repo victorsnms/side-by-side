@@ -1,13 +1,13 @@
-import { Button } from "@chakra-ui/react";
+import { Button,ButtonProps } from "@chakra-ui/react";
 
-interface IButtonFormsProps {
+interface IButtonFormsProps extends ButtonProps {
     children: string;
     handleClick?: () => void;
     width: string[];
     type: "button" | "submit" | "reset" | undefined;
 }
 
-export const ButtonForms = ({ children, handleClick=undefined, width, type=undefined }: IButtonFormsProps) => {
+export const ButtonForms = ({ children, handleClick=undefined, width, type=undefined, ...rest }: IButtonFormsProps) => {
   return (
     <Button
       type={type}
@@ -21,6 +21,7 @@ export const ButtonForms = ({ children, handleClick=undefined, width, type=undef
       borderRadius="20px"
       onClick={handleClick}
       _hover={{ bg: "green.400" }}
+      {...rest}
     >
       { children }
     </Button>
