@@ -73,9 +73,22 @@ export const EventModal = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered={[true, true, false, false]}
+      >
         <ModalOverlay bg="green.70" />
-        <ModalContent bg={"white"} mb={"0px"} alignSelf={"flex-end"} >
+        <ModalContent
+          bg={"white"}
+          mb={"0px"}
+          alignSelf={"flex-end"}
+          justifySelf="flex-start"
+          h={["max-content", "inherit", "100%", "100%"]}
+          width="100%"
+          borderBottomRadius="none"
+          textAlign="left"
+        >
           <ModalCloseButton
             w="32px"
             alignSelf="flex-end"
@@ -131,18 +144,25 @@ export const EventModal = () => {
                   <InputLeftElement color={"gray.200"} fontSize="1em">
                     <Icon as={AiOutlineAlignLeft} />
                   </InputLeftElement>
-                <Textarea as="textarea" placeholder="Description..." {...register("description")} ></Textarea>
+                  <Textarea
+                    as="textarea"
+                    placeholder="Description..."
+                    {...register("description")}
+                  ></Textarea>
                 </InputGroup>
                 <Input
-                    icon={FaRegImage}
-                    placeholder="Cover picture url"                    error={errors.date}
-                    {...register("date")}
-                  />
+                  icon={FaRegImage}
+                  placeholder="Cover picture url"
+                  error={errors.date}
+                  {...register("date")}
+                />
               </VStack>
             </Flex>
           </ModalBody>
           <ModalFooter justifyContent="center">
-            <ButtonForms type="submit" width={["75%","75%"]}>Create</ButtonForms>
+            <ButtonForms type="submit" width={["75%", "75%"]}>
+              Create
+            </ButtonForms>
           </ModalFooter>
         </ModalContent>
       </Modal>
