@@ -21,7 +21,7 @@ interface IInputProps extends ChakraInputProps {
   placeholder: string;
   icon: IconType;
   error?: FieldError | null;
-  width?: string;
+  width?: string[];
 }
 
 type inputVariationProps = {
@@ -36,7 +36,7 @@ const inputVariation: inputVariationProps = {
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
-  { name, placeholder, icon: Icon, error = null, width, ...rest },
+  { name, placeholder, icon: Icon, error = null, ...rest },
   ref
 ) => {
   const [variation, setVariation] = useState("default");
@@ -44,19 +44,22 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
 
   useEffect(() => {
     if (error) {
-      return setVariation("error");
+      setVariation("error");
     }
-  }, [error]);
+    else if(value.length > 1) {
+      setVariation("filled");
+    }
+  }, [error, value]);
 
   const handleInputFocus = useCallback(() => {
     if (!error) {
-      return setVariation("focus");
+      setVariation("focus");
     }
   }, [error]);
 
   const handleInputBlur = useCallback(() => {
     if (value.length > 1 && !error) {
-      return setVariation("filled");
+      setVariation("filled");
     }
   }, [error, value]);
 
@@ -81,7 +84,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           onBlurCapture={handleInputBlur}
           onFocus={handleInputFocus}
           name={name}
-          w={width}
           pb="1px"
           border="1px"
           borderColor={
@@ -94,7 +96,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           {...rest}
         />
 
-        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+        {!!error && <FormErrorMessage mt="-2px" mb={{lg: "-8px"}}>{error.message}</FormErrorMessage>}
       </InputGroup>
     </FormControl>
   );

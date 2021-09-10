@@ -6,7 +6,7 @@ interface ToggleSwitchProps {
 }
 
 export const ToggleSwitch = ({ options }: ToggleSwitchProps) => {
-  const [isLeft, setIsLeft] = useState(true);
+  const [isLeft, setIsLeft] = useState(false);
   const [position, setPosition] = useState("");
   const [option, setOption] = useState(options[0]);
   const handleMovement = () => {
@@ -36,7 +36,7 @@ export const ToggleSwitch = ({ options }: ToggleSwitchProps) => {
             left={position}
             w="50%"
             h="90%"
-            bg="green"
+            bg="green.300"
             borderRadius="50px"
             justifyContent="center"
             alignItems="center"
