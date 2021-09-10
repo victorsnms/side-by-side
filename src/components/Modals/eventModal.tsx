@@ -29,6 +29,8 @@ export const EventModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const desktop = 768
   const [isMobile, setIsMobile] = useState(window.innerWidth);
+const [switchOption, setSwitchOption] = useState(false)
+
 
   const eventSchema = yup.object().shape({
     name: yup.string().required("Event name required"),
@@ -61,7 +63,7 @@ export const EventModal = () => {
 
 {isMobile < desktop ? (
 
-      <ModalMobile isOpen={isOpen} onClose={onClose} options={options}>
+      <ModalMobile isOpen={isOpen} onClose={onClose} options={options} setSwitchOption={setSwitchOption} switchOption={switchOption}>
         <FormEvent
           errors={errors}
           eventSubmit={handleSubmit(eventSubmit)}
@@ -70,7 +72,7 @@ export const EventModal = () => {
       </ModalMobile>
 ) :(
 
-      <DrawerDesktop isOpen={isOpen} onClose={onClose} options={options}>
+      <DrawerDesktop isOpen={isOpen} onClose={onClose} options={options} setSwitchOption={setSwitchOption} switchOption={switchOption}>
         <FormEvent
           errors={errors}
           eventSubmit={handleSubmit(eventSubmit)}

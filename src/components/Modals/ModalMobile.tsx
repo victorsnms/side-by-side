@@ -9,12 +9,14 @@ import {
 
 import { ToggleSwitch } from "../ToggleSwitch";
 
-import { ReactElement } from "react";
+import { ReactElement, Dispatch } from "react";
 
 interface ModalMobileProps {
   isOpen: boolean;
   onClose: () => void;
   options: string[];
+  switchOption:boolean
+  setSwitchOption: Dispatch<React.SetStateAction<boolean>>;
   children: ReactElement;
 }
 
@@ -23,8 +25,9 @@ export const ModalMobile = ({
   onClose,
   options,
   children,
+  switchOption,
+  setSwitchOption
 }: ModalMobileProps) => {
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={"inside"} trapFocus={false} >
       <ModalOverlay bg="green.70" />
@@ -47,7 +50,7 @@ export const ModalMobile = ({
           size="sm"
         />
         <ModalHeader display="flex" justifyContent="center" mt="1rem">
-          <ToggleSwitch options={options} />
+          <ToggleSwitch options={options} setSwitchOption={setSwitchOption} switchOption={switchOption} />
         </ModalHeader>
         <ModalBody >
             {children}

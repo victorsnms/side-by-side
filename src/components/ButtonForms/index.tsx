@@ -1,4 +1,4 @@
-import { Button,ButtonProps } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 
 interface IButtonFormsProps extends ButtonProps {
     children: string;
@@ -7,7 +7,7 @@ interface IButtonFormsProps extends ButtonProps {
     type: "button" | "submit" | "reset" | undefined;
 }
 
-export const ButtonForms = ({ children, handleClick=undefined, width, type=undefined, ...rest }: IButtonFormsProps) => {
+export const ButtonForms = ({ children, handleClick=undefined, width, type=undefined, ...rest}: IButtonFormsProps) => {
   return (
     <Button
       type={type}

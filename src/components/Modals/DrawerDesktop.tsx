@@ -7,8 +7,7 @@ import {
   DrawerHeader,
 } from "@chakra-ui/react";
 
-import { ReactElement } from "react";
-import { FaGlasses } from "react-icons/fa";
+import { ReactElement, Dispatch } from "react";
 import { ToggleSwitch } from "../ToggleSwitch";
 
 interface DrawerDesktopProps {
@@ -16,6 +15,8 @@ interface DrawerDesktopProps {
   onClose: () => void;
   children: ReactElement;
   options: string[];
+  switchOption: boolean;
+  setSwitchOption: Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const DrawerDesktop = ({
@@ -23,6 +24,8 @@ export const DrawerDesktop = ({
   onClose,
   children,
   options,
+  setSwitchOption,
+  switchOption,
 }: DrawerDesktopProps) => {
   return (
     <Drawer
@@ -35,9 +38,13 @@ export const DrawerDesktop = ({
       <DrawerContent minW="350px">
         <DrawerCloseButton />
         <DrawerHeader>
-          <ToggleSwitch options={options} />
+          <ToggleSwitch
+            options={options}
+            setSwitchOption={setSwitchOption}
+            switchOption={switchOption}
+          />
         </DrawerHeader>
-        <DrawerBody >{children}</DrawerBody>
+        <DrawerBody>{children}</DrawerBody>
       </DrawerContent>
     </Drawer>
   );
