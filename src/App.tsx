@@ -1,7 +1,13 @@
+import { BadgesBoard } from "./components/BadgesBoard";
 import { Routes } from "./routes";
 
 function App() {
-  return <Routes />;
+  return (
+    <>
+      <BadgesBoard></BadgesBoard>
+      <Routes />
+    </>
+  );
 }
 
 export default App;
