@@ -44,19 +44,22 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
 
   useEffect(() => {
     if (error) {
-      return setVariation("error");
+      setVariation("error");
     }
-  }, [error]);
+    else if(value.length > 1) {
+      setVariation("filled");
+    }
+  }, [error, value]);
 
   const handleInputFocus = useCallback(() => {
     if (!error) {
-      return setVariation("focus");
+      setVariation("focus");
     }
   }, [error]);
 
   const handleInputBlur = useCallback(() => {
     if (value.length > 1 && !error) {
-      return setVariation("filled");
+      setVariation("filled");
     }
   }, [error, value]);
 
@@ -93,7 +96,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           {...rest}
         />
 
-        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+        {!!error && <FormErrorMessage mt="-2px">{error.message}</FormErrorMessage>}
       </InputGroup>
     </FormControl>
   );

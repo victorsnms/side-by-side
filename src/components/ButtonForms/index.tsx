@@ -1,16 +1,16 @@
-import { ButtonProps } from "@chakra-ui/core";
 import { Button } from "@chakra-ui/react";
 
-interface IButtonFormsProps extends ButtonProps {
+interface IButtonFormsProps {
     children: string;
-    handleClick: () => void;
+    handleClick?: () => void;
     width: string[];
+    type: "button" | "submit" | "reset" | undefined;
 }
 
-export const ButtonForms = ({ children, handleClick,  width }: IButtonFormsProps) => {
+export const ButtonForms = ({ children, handleClick=undefined, width, type=undefined }: IButtonFormsProps) => {
   return (
     <Button
-      as="button"
+      type={type}
       fontSize="20px"
       fontWeight="500"
       fontFamily="Didact Gothic"
