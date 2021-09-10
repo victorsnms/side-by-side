@@ -13,7 +13,6 @@ import {
   HStack,
   Textarea,
   useDisclosure,
-  TagLeftIcon,
   Icon,
   InputGroup,
   InputLeftElement,
@@ -30,6 +29,7 @@ import {
 } from "react-icons/ai";
 import { FaMapMarkerAlt, FaRegImage } from "react-icons/fa";
 import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
+import { ButtonForms } from "../ButtonForms";
 
 interface EventData {
   name: string;
@@ -75,7 +75,7 @@ export const EventModal = () => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="green.70" />
-        <ModalContent bg={"white"} mb={"0px"} alignSelf={"flex-end"} h="80%">
+        <ModalContent bg={"white"} mb={"0px"} alignSelf={"flex-end"} >
           <ModalCloseButton
             w="32px"
             alignSelf="flex-end"
@@ -103,7 +103,7 @@ export const EventModal = () => {
                 />
                 <Input
                   icon={FaMapMarkerAlt}
-                  placeholder="Event Name"
+                  placeholder="Address"
                   error={errors.address}
                   {...register("address")}
                 />
@@ -142,7 +142,7 @@ export const EventModal = () => {
             </Flex>
           </ModalBody>
           <ModalFooter justifyContent="center">
-            <Button type="submit">Create</Button>
+            <ButtonForms type="submit" width={["75%","75%"]}>Create</ButtonForms>
           </ModalFooter>
         </ModalContent>
       </Modal>
