@@ -1,27 +1,31 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Center, Container, Flex, HStack, Spacer, Square } from "@chakra-ui/layout"
+import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout"
 
 const HomeMenu = () => {
 
 
     return(
-        <Flex bg="green.300" h="80px" pl="30px">
+        <Flex 
+            bg="green.300" 
+            h={["15vh", "14vh", "13vh", "12vh"]} 
+            pl={["10px", "20px", "30px"]}>
             <Center fontSize="4xl" color="white">LOGO</Center>
             <Spacer/>
-            <HStack spacing="10px" pr="30px">
+            <HStack pr={["10px", "20px", "30px"]}>
                 <Button
-                    fontSize={["xl", "xl", "2xl"]}
+                    fontSize={["lg", "xl", "2xl"]}
                     fontWeight="300"
                     bg="green.300"
                     color="white"
                     h="38px"
                     borderRadius="5px"
-                    _hover={{ bg: "white", color: "green.300" }}
+                    _hover={{ bg: "gray.50", color: "green.300" }}
+                    _focus={{}}
                 >
                     Sign up
                 </Button>
                 <Button
-                    fontSize={["xl", "xl", "2xl"]}
+                    fontSize={["lg", "xl", "2xl"]}
                     fontWeight="300"
                     bg="green.300"
                     color="white"
@@ -29,6 +33,7 @@ const HomeMenu = () => {
                     borderRadius="5px"
                     border="1px solid white"
                     _hover={{ bg: "green.400" }}
+                    _focus={{}}
                 >
                     Login
                 </Button>
