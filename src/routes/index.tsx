@@ -1,7 +1,7 @@
-import { Switch } from "react-router"
-import {App} from "../App"
-import { Route } from "./Routes"
-
+import { Switch } from "react-router";
+import Home from "../pages/Home";
+import { Signup } from "../pages/Signup";
+import { Route } from "./Routes";
 
 // Import your component here
 /* <Route exact path="/" />
@@ -15,7 +15,8 @@ import { Route } from "./Routes"
 <Route /> */
 
 export const Routes = () => (
-	<Switch>
-		<Route exact path="/" component={App} />
-	</Switch>
-)
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/singup" component={Signup} />
+  </Switch>
+);
