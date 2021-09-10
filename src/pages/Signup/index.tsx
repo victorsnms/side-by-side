@@ -32,7 +32,7 @@ export const Signup = () => {
           textAlign="center"
         >
           <Box pl={{ lg: "2em" }}>
-            <ToggleSwitch children={["Login", "Signup"]} />
+            <ToggleSwitch options={["Login", "Signup"]} />
           </Box>
           
           <SignupForm />
