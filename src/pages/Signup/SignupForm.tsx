@@ -6,6 +6,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
 
 interface IFormValues {
   name: string;
@@ -35,7 +36,10 @@ export const SignupForm = () => {
   });
 
   const handleSignUp = (data: IFormValues) => {
-    console.log(data);
+    axios
+      .post("https://capstone-group2.herokuapp.com/register", data)
+      .then((_) => console.log("Registration completed successfully!"))
+      .catch((_) => console.log("Failed to register"));
   };
 
   return (
@@ -69,7 +73,7 @@ export const SignupForm = () => {
         />
       </VStack>
 
-      <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
+      <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center" mb="2em">
         <ButtonForms children={"Signup"} width={["262px"]} type="submit" />
         <Text mt="12px" fontSize="16px">
           Already have an account?{" "}

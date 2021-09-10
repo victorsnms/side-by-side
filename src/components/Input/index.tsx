@@ -96,7 +96,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
           {...rest}
         />
 
-        {!!error && <FormErrorMessage mt="-2px">{error.message}</FormErrorMessage>}
+        {!!error && <FormErrorMessage mt="-2px" mb={{lg: "-8px"}}>{error.message}</FormErrorMessage>}
       </InputGroup>
     </FormControl>
   );
