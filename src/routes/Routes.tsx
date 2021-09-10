@@ -7,7 +7,7 @@ interface Props extends RouteProps {
   isPrivate?: boolean;
 }
 
-export const Route = ({ component: Component, isPrivate, ...rest }: Props) => {
+export const Route = ({ component: Component, isPrivate = false, ...rest }: Props) => {
   const { accessToken } = useAuth();
   return (
     <ReactRoute
