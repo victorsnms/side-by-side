@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router"
-import App from "../App"
+import Home from "../pages/Home"
+import { Signup } from "../pages/Signup"
 
 // Import your component here
 /* <Route exact path="/" />
@@ -14,9 +15,9 @@ import App from "../App"
 
 export const Routes = () => (
 	<Switch>
-		<Route exact path="/" component={App} />
+		<Route exact path="/" component={Home} />
 		<Route path="/login" />
-		<Route path="/signup" />
+		<Route path="/signup" component={Signup}/>
 		<Route exact path="/dashboard" />
 		<Route path="/dashboard/badges" />
 		<Route path="/dashboard/info" />
