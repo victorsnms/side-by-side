@@ -1,5 +1,6 @@
 import { Redirect, Route as ReactRoute, RouteProps } from "react-router-dom";
 import { ComponentType } from "react";
+import { useAuth } from "../providers/AuthContext";
 
 interface Props extends RouteProps {
   component: ComponentType;
@@ -7,7 +8,7 @@ interface Props extends RouteProps {
 }
 
 export const Route = ({ component: Component, isPrivate, ...rest }: Props) => {
-  const accessToken = "foobar"; //pegar token do provider context
+  const { accessToken } = useAuth();
   return (
     <ReactRoute
       {...rest}
