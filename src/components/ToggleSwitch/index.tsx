@@ -3,8 +3,8 @@ import { useState, Dispatch } from "react";
 
 interface ToggleSwitchProps {
   options: string[];
-  setSwitchOption: Dispatch<React.SetStateAction<boolean>>;
-  switchOption: boolean;
+  setSwitchOption?: Dispatch<React.SetStateAction<boolean>>;
+  switchOption?: boolean;
 }
 
 export const ToggleSwitch = ({ options, setSwitchOption,switchOption}: ToggleSwitchProps) => {
