@@ -1,13 +1,15 @@
 import { Button } from "@chakra-ui/button";
-import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout"
+import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout";
+import { useFormContext } from "../../providers/FormContext";
 import { useHistory } from "react-router";
 
 const HomeMenu = () => {
-
+    const { setFormOption } = useFormContext();
     const history = useHistory();
 
     const sendTo = (path: string) => {
-        history.push(path);
+        setFormOption(path);
+        history.push("/joinUs");
     };
 
     return(
@@ -27,7 +29,7 @@ const HomeMenu = () => {
                     borderRadius="5px"
                     _hover={{ bg: "gray.50", color: "green.300" }}
                     _focus={{}}
-                    onClick={() => sendTo("/joinus")}
+                    onClick={() => sendTo("signup")}
                 >
                     Sign up
                 </Button>
@@ -41,7 +43,7 @@ const HomeMenu = () => {
                     border="1px solid white"
                     _hover={{ bg: "green.400" }}
                     _focus={{}}
-                    onClick={() => sendTo("/joinus")}
+                    onClick={() => sendTo("login")}
                 >
                     Login
                 </Button>

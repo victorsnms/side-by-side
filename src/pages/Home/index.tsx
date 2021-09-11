@@ -1,20 +1,22 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Center, Flex, Text } from "@chakra-ui/layout";
-import { useHistory } from "react-router";
 import HomeMenu from "../../components/HomeMenu";
 import backgroundPlastic from "../../assets/images/plastic.png"
 import backgroundCup from "../../assets/images/bluecup.png"
 import homeMap from "../../assets/images/homemap.svg"
 import homeTaggedMap from "../../assets/images/hometaggedmap.svg"
+import { useFormContext } from "../../providers/FormContext";
+import { useHistory } from "react-router";
 
 
 const Home = () => {
-
+    const { setFormOption } = useFormContext();
     const history = useHistory();
-
+    
     const sendTo = (path: string) => {
-        history.push(path);
+        setFormOption(path);
+        history.push("/joinUs");
     };
 
     return(
@@ -57,7 +59,7 @@ const Home = () => {
                         borderRadius="10px"
                         _hover={{ bg: "green.300", color: "green.400" }}
                         _focus={{}}
-                        onClick={() => sendTo("/joinus")}
+                        onClick={() => sendTo("signup")}
                     >
                         Join us
                     </Button>
@@ -158,7 +160,7 @@ const Home = () => {
                         borderRadius="10px"
                         _hover={{ bg: "green.300", color: "green.400" }}
                         _focus={{}}
-                        onClick={() => sendTo("/joinus")}
+                        onClick={() => sendTo("signup")}
                     >
                         Join us
                     </Button>

@@ -1,7 +1,7 @@
 import { Input } from "../../components/Input";
 import { ButtonForms } from "../../components/ButtonForms";
-import { Center, Box, VStack, Text, Link } from "@chakra-ui/react";
-import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { Center, Box, VStack } from "@chakra-ui/react";
+import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,14 +9,12 @@ import * as yup from "yup";
 import axios from "axios";
 
 interface IFormValues {
-  name: string;
   email: string;
   password: string;
 }
 
-export const SignupForm = () => {
+export const LoginForm = () => {
   const formSchema = yup.object().shape({
-    name: yup.string().required("Required field"),
     email: yup.string().required("Required field").email("Invalid email"),
     password: yup
       .string()
@@ -50,13 +48,6 @@ export const SignupForm = () => {
     >
       <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
         <Input
-          icon={AiOutlineUser}
-          placeholder="Name"
-          w={["262px", "350px"]}
-          error={errors.name}
-          {...register("name")}
-        />
-        <Input
           icon={AiOutlineMail}
           placeholder="Email"
           w={["262px", "350px"]}
@@ -73,14 +64,8 @@ export const SignupForm = () => {
         />
       </VStack>
 
-      <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center" mb="2em">
-        <ButtonForms children={"Signup"} width={["262px"]} type="submit" />
-        <Text mt="12px" fontSize="16px">
-          Already have an account?{" "}
-          <Link href="/login" color="red.500" textDecoration="underline">
-            Login
-          </Link>
-        </Text>
+      <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
+        <ButtonForms children={"Login"} width={["262px"]} type="submit" />
       </Box>
     </Center>
   );

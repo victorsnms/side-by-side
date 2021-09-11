@@ -1,7 +1,7 @@
 import { Switch } from "react-router";
 import { Dashboard } from "../pages/Dashboard";
 import Home from "../pages/Home";
-import { Signup } from "../pages/Signup";
+import { JoinUsForms } from "../pages/JoinUsForms";
 import { Route } from "./Routes";
 
 // Import your component here
@@ -18,7 +18,7 @@ import { Route } from "./Routes";
 export const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/singup" component={Signup} />
     <Route exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/joinUs" component={JoinUsForms} />
   </Switch>
 );
