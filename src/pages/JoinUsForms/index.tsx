@@ -36,15 +36,17 @@ export const JoinUsForms = () => {
                 src={ImageDesktop}
                 alt="Illustration form page"
                 w={["200px", "240px", "240", "490px", "580px"]}
+                opacity="85%"
               />
             </>
           ) : (
             <Image
-              src={ImageMobile}
+              src={ImageDesktop}
               alt="Illustration form page"
               w="220px"
-              mt="2vh"
-              mb="7vh"
+              mt="4vh"
+              mb="5vh"
+              opacity="85%"
             />
           )}
         </Box>
