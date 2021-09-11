@@ -6,6 +6,7 @@ import {
   ReactNode,
 } from "react";
 import { api } from "../services/api";
+import jwt_decode from "jwt-decode";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -19,7 +20,7 @@ interface User {
 
 interface AuthState {
   accessToken: string;
-  user: User;
+  id: () => string;
 }
 
 interface SignInCredentials {
@@ -28,7 +29,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: User;
+  id: () => string;
   accessToken: string;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => void;
@@ -47,36 +48,35 @@ const useAuth = () => {
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>(() => {
-    const accessToken = localStorage.getItem("@Doit:accessToken");
-    const user = localStorage.getItem("@Doit:user");
-    if (accessToken && user) {
-      return { accessToken, user: JSON.parse(user) };
+    const accessToken = localStorage.getItem("@Foobar:accessToken");
+    const id = localStorage.getItem("@Foobar:id");
+    if (accessToken && id) {
+      return { accessToken, id: JSON.parse(id) };
     }
     return {} as AuthState;
   });
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    //Falta as rotas do JSONSERVER
-    const response = await api.post("/register", { email, password });
-    const { accessToken, user } = response.data;
-
+    const response = await api.post("/login", { email, password });
+    const { accessToken } = response.data;
+    const {sub: id} = jwt_decode<string>(accessToken)
     localStorage.setItem("@Foobar:accessToken", accessToken);
-    localStorage.setItem("@Foobar:user", JSON.stringify(user));
-    setData({ accessToken, user });
+    localStorage.setItem("@Foobar:id", JSON.stringify(id));
+    setData({ accessToken, id });
   }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem("@Foobar:accessToken");
-    localStorage.removeItem("@Foobar:user");
+    localStorage.removeItem("@Foobar:id");
 
     setData({} as AuthContextData);
   }, []);
   return (
     <AuthContext.Provider
       value={{
+        id : data.id,
         accessToken: data.accessToken,
         signIn,
-        user: data.user,
         signOut,
       }}
     >
