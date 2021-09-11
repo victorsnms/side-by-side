@@ -6,9 +6,11 @@ import { SignupForm } from "./SignupForm";
 import { Link } from "@chakra-ui/react";
 import { LoginForm } from "./LoginForm";
 import { useFormContext } from "../../providers/FormContext";
+import { useState } from "react";
 
 export const JoinUsForms = () => {
   const { formOption, setFormOption } = useFormContext();
+  const [switchOption, setSwitchOption] = useState(false);
 
   return (
     <Flex
@@ -62,7 +64,11 @@ export const JoinUsForms = () => {
           textAlign="center"
         >
           <Box pl={{ lg: "2em" }}>
-            <ToggleSwitch options={["Login", "Signup"]} />
+            <ToggleSwitch
+              options={["Login", "Signup"]}
+              setSwitchOption={setSwitchOption}
+              switchOption={switchOption}
+            />
           </Box>
 
           {formOption === "signup" && (
