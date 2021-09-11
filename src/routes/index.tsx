@@ -18,7 +18,7 @@ import { Route } from "./Routes";
 export const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/dashboard" component={Dashboard} isPrivate />
     <Route exact path="/joinUs" component={JoinUsForms} />
   </Switch>
 );

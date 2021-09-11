@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
+import { useAuth } from "../../providers/AuthContext";
 
 interface IFormValues {
   email: string;
@@ -14,15 +15,10 @@ interface IFormValues {
 }
 
 export const LoginForm = () => {
+  const { signIn } = useAuth();
   const formSchema = yup.object().shape({
     email: yup.string().required("Required field").email("Invalid email"),
-    password: yup
-      .string()
-      .required("Required field")
-      .matches(
-        /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g,
-        "Invalid password"
-      ),
+    password: yup.string().required("Required field"),
   });
 
   const {
@@ -34,10 +30,7 @@ export const LoginForm = () => {
   });
 
   const handleSignUp = (data: IFormValues) => {
-    axios
-      .post("https://capstone-group2.herokuapp.com/register", data)
-      .then((_) => console.log("Registration completed successfully!"))
-      .catch((_) => console.log("Failed to register"));
+    signIn(data);
   };
 
   return (
