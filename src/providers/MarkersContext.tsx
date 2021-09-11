@@ -8,19 +8,13 @@ import {
   useCallback,
 } from "react";
 import { api } from "../services/api";
+import { Marker } from "../types/makerData";
 
 interface MarkersProviderProps {
   children: ReactNode;
 }
 
-interface Marker {
-  lat: number;
-  lng: number;
-  time: Date;
-  type: string;
-  title: string;
-  description?: string;
-}
+
 
 interface MarkersContextData {
   markers: Marker[];

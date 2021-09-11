@@ -9,6 +9,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { useAuth } from "../../providers/AuthContext";
 import { api } from "../../services/api";
+import { userDefaultData } from "../../utils/userDefaultData";
 
 interface IFormValues {
   name: string;
@@ -16,7 +17,12 @@ interface IFormValues {
   password: string;
 }
 
+
+
 export const SignupForm = () => {
+ const {badges,experience,image_url,my_events,places} = userDefaultData
+
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Required field"),
     email: yup.string().required("Required field").email("Invalid email"),
@@ -35,8 +41,9 @@ export const SignupForm = () => {
   });
 
   const handleSignUp = (data: IFormValues) => {
+
     const { name, email, password} = data
-    api.post("/register", { email, password, name });
+    api.post("/register", { email, password, name, badges, experience, image_url, my_events, places}).then(response => console.log(response));
   };
 
   return (
