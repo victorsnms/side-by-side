@@ -14,6 +14,7 @@ import {
 import { FaMapMarkerAlt, FaRegImage } from "react-icons/fa";
 import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
+import { Textarea } from "../TextareaForms";
 
 interface ModalFormProps {
   eventSubmit: () => void;
@@ -61,7 +62,7 @@ export const FormEvent = ({
             {...register("time")}
           />
         </HStack>
-        <Input
+        <Textarea
           icon={AiOutlineAlignLeft}
           placeholder="Description..."
           error={errors.description}
