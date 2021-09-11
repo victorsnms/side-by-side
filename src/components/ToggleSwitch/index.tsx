@@ -11,6 +11,7 @@ export const ToggleSwitch = ({ options, setSwitchOption,switchOption}: ToggleSwi
   const [isLeft, setIsLeft] = useState(false);
   const [position, setPosition] = useState("");
   const [option, setOption] = useState(options[0]);
+
   const handleMovement = () => {
     setIsLeft(!isLeft);
     setPosition(isLeft ? "0%" : "43%");
