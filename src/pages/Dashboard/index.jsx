@@ -98,6 +98,7 @@ export const Dashboard = () => {
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}
+        clickableIcons={false}
       >
         {markers.map((marker) => (
           <Marker
