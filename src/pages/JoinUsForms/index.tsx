@@ -1,6 +1,5 @@
 import { ToggleSwitch } from "../../components/ToggleSwitch";
 import ImageDesktop from "../../assets/images/image-joinpage.svg";
-import ImageMobile from "../../assets/images/image-joinpage-mobile.svg";
 import { Flex, Center, Box, Image, Text } from "@chakra-ui/react";
 import { SignupForm } from "./SignupForm";
 import { Link } from "@chakra-ui/react";
