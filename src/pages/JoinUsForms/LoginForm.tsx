@@ -6,7 +6,6 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import { useAuth } from "../../providers/AuthContext";
 
 interface IFormValues {

@@ -12,7 +12,7 @@ interface FormContextData {
 const FormContext = createContext<FormContextData>({} as FormContextData);
 
 export const FormProvider = ({children}: FormProviderProps) => {
-    const [formOption, setFormOption] = useState("login");
+    const [formOption, setFormOption] = useState("Login");
 
     return(
         <FormContext.Provider value={{ formOption, setFormOption }}>

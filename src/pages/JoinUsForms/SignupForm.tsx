@@ -6,8 +6,6 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
-import { useAuth } from "../../providers/AuthContext";
 import { api } from "../../services/api";
 import { userDefaultData } from "../../utils/userDefaultData";
 
@@ -17,19 +15,13 @@ interface IFormValues {
   password: string;
 }
 
-
-
 export const SignupForm = () => {
- const {badges,experience,image_url,my_events,places} = userDefaultData
-
+  const { badges, experience, image_url, my_events, places } = userDefaultData;
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Required field"),
     email: yup.string().required("Required field").email("Invalid email"),
-    password: yup
-      .string()
-      .required("Required field")
-      
+    password: yup.string().required("Required field"),
   });
 
   const {
@@ -41,9 +33,19 @@ export const SignupForm = () => {
   });
 
   const handleSignUp = (data: IFormValues) => {
-
-    const { name, email, password} = data
-    api.post("/register", { email, password, name, badges, experience, image_url, my_events, places}).then(response => console.log(response));
+    const { name, email, password } = data;
+    api
+      .post("/register", {
+        email,
+        password,
+        name,
+        badges,
+        experience,
+        image_url,
+        my_events,
+        places,
+      })
+      .then((response) => console.log(response));
   };
 
   return (
@@ -78,7 +80,7 @@ export const SignupForm = () => {
       </VStack>
 
       <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
-        <ButtonForms children={"Signup"} width={["262px"]} type="submit"/>
+        <ButtonForms children={"Signup"} width={["262px"]} type="submit" />
       </Box>
     </Center>
   );
