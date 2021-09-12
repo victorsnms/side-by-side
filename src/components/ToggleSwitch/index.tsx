@@ -13,16 +13,24 @@ export const ToggleSwitch = ({
   setSwitchOption,
   switchOption,
 }: ToggleSwitchProps) => {
-  const [isLeft, setIsLeft] = useState(false);
-  const [position, setPosition] = useState("");
-  const [option, setOption] = useState(options[0]);
   const { formOption, setFormOption } = useFormContext();
+  const [isLeft, setIsLeft] = useState(formOption === options[0] ? true : false);
+  const [position, setPosition] = useState(isLeft ? "-2%" : "46%");
+  const [option, setOption] = useState(formOption === options[0] ? options[0] : options[1]);
 
   const handleMovement = () => {
-    setIsLeft(!isLeft);
-    setPosition(isLeft ? "0%" : "43%");
-    setOption(isLeft ? options[0] : options[1]);
-    formOption === "login" ? setFormOption("signup") : setFormOption("login");
+    if(formOption === options[0]) {
+       setFormOption(options[1]); 
+       setIsLeft(false);
+       setPosition("46%");
+       setOption(options[1]);
+    }
+    else {
+      setFormOption(options[0]);
+      setIsLeft(true);
+      setPosition("-2%");
+      setOption(options[0]);
+    } 
     setSwitchOption(!switchOption);
   };
 

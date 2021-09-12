@@ -54,7 +54,7 @@ const Home = () => {
           borderRadius="10px"
           _hover={{ bg: "green.300", color: "green.400" }}
           _focus={{}}
-          onClick={() => sendTo("signup")}
+          onClick={() => sendTo("Sign up")}
         >
           Join us
         </Button>
@@ -146,7 +146,7 @@ const Home = () => {
           borderRadius="10px"
           _hover={{ bg: "green.300", color: "green.400" }}
           _focus={{}}
-          onClick={() => sendTo("signup")}
+          onClick={() => sendTo("Sign up")}
         >
           Join us
         </Button>

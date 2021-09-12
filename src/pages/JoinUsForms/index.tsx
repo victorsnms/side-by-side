@@ -64,13 +64,13 @@ export const JoinUsForms = () => {
         >
           <Box pl={{ lg: "2em" }}>
             <ToggleSwitch
-              options={["Login", "Signup"]}
+              options={["Login", "Sign up"]}
               setSwitchOption={setSwitchOption}
               switchOption={switchOption}
             />
           </Box>
 
-          {formOption === "signup" && (
+          {formOption === "Sign up" && (
             <>
               <SignupForm />
               <Text mt="12px" fontSize="16px" mb="2em">
@@ -86,7 +86,7 @@ export const JoinUsForms = () => {
             </>
           )}
 
-          {formOption === "login" && (
+          {formOption === "Login" && (
             <>
               <LoginForm />
               <Text mt="12px" fontSize="16px" mb="2em">
