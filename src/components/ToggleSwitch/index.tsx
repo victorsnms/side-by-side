@@ -1,5 +1,6 @@
 import { Box, HStack, Text, Flex } from "@chakra-ui/react";
 import { useState, Dispatch } from "react";
+import { useFormContext } from "../../providers/FormContext";
 
 interface ToggleSwitchProps {
   options: string[];
@@ -15,11 +16,13 @@ export const ToggleSwitch = ({
   const [isLeft, setIsLeft] = useState(false);
   const [position, setPosition] = useState("");
   const [option, setOption] = useState(options[0]);
+  const { formOption, setFormOption } = useFormContext();
 
   const handleMovement = () => {
     setIsLeft(!isLeft);
     setPosition(isLeft ? "0%" : "43%");
     setOption(isLeft ? options[0] : options[1]);
+    formOption === "login" ? setFormOption("signup") : setFormOption("login");
     setSwitchOption(!switchOption);
   };
 
