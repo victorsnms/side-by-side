@@ -29,7 +29,7 @@ const HomeMenu = () => {
                     borderRadius="5px"
                     _hover={{ bg: "gray.50", color: "green.300" }}
                     _focus={{}}
-                    onClick={() => sendTo("signup")}
+                    onClick={() => sendTo("Sign up")}
                 >
                     Sign up
                 </Button>
@@ -43,7 +43,7 @@ const HomeMenu = () => {
                     border="1px solid white"
                     _hover={{ bg: "green.400" }}
                     _focus={{}}
-                    onClick={() => sendTo("login")}
+                    onClick={() => sendTo("Login")}
                 >
                     Login
                 </Button>

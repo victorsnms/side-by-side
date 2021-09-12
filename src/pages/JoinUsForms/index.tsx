@@ -1,6 +1,5 @@
 import { ToggleSwitch } from "../../components/ToggleSwitch";
 import ImageDesktop from "../../assets/images/image-joinpage.svg";
-import ImageMobile from "../../assets/images/image-joinpage-mobile.svg";
 import { Flex, Center, Box, Image, Text } from "@chakra-ui/react";
 import { SignupForm } from "./SignupForm";
 import { Link } from "@chakra-ui/react";
@@ -65,13 +64,13 @@ export const JoinUsForms = () => {
         >
           <Box pl={{ lg: "2em" }}>
             <ToggleSwitch
-              options={["Login", "Signup"]}
+              options={["Login", "Sign up"]}
               setSwitchOption={setSwitchOption}
               switchOption={switchOption}
             />
           </Box>
 
-          {formOption === "signup" && (
+          {formOption === "Sign up" && (
             <>
               <SignupForm />
               <Text mt="12px" fontSize="16px" mb="2em">
@@ -87,7 +86,7 @@ export const JoinUsForms = () => {
             </>
           )}
 
-          {formOption === "login" && (
+          {formOption === "Login" && (
             <>
               <LoginForm />
               <Text mt="12px" fontSize="16px" mb="2em">
