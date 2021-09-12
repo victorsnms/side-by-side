@@ -1,5 +1,5 @@
 import { Box, HStack, Text, Flex } from "@chakra-ui/react";
-import { useState, Dispatch } from "react";
+import { useState, Dispatch, useEffect } from "react";
 
 interface ToggleSwitchProps {
   options: string[];
@@ -12,15 +12,20 @@ export const ToggleSwitch = ({
   setSwitchOption,
   switchOption,
 }: ToggleSwitchProps) => {
-  const [isLeft, setIsLeft] = useState(false);
-  const [position, setPosition] = useState("");
+  // const [isLeft, setIsLeft] = useState(switchOption);
+  const [position, setPosition] = useState("0%");
   const [option, setOption] = useState(options[0]);
 
+  useEffect(() => {
+    setPosition("0%");
+    setSwitchOption(true);
+  }, []);
+
   const handleMovement = () => {
-    setIsLeft(!isLeft);
-    setPosition(isLeft ? "0%" : "43%");
-    setOption(isLeft ? options[0] : options[1]);
+    // setIsLeft(!switchOption);
     setSwitchOption(!switchOption);
+    setPosition(!switchOption ? "0%" : "43%");
+    setOption(!switchOption ? options[0] : options[1]);
   };
 
   return (

@@ -19,33 +19,28 @@ import { FaMapMarkerAlt, FaRegImage } from "react-icons/fa";
 import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
-import { useState } from "react";
+import { eventDefaultData } from "../../utils/eventDefaultData";
 
-
-interface EventData {
-  name: string;
+interface EventDataForm {
+  title: string;
   address: string;
   contact: string;
-  time: string;
+  start_time: string;
+  end_time: string;
   date: string;
   description: string;
   picture_url?: string;
-  voluntaries?: {
-    name: string;
-    id: string;
-  }[];
-  lat?: string;
-  lgn?: string;
 }
 
 export const FormEvent = () => {
-
+  const { created_at, participants, picture_url, type } = eventDefaultData;
 
   const eventSchema = yup.object().shape({
-    name: yup.string().required("Event name required"),
+    title: yup.string().required("Event name required"),
     address: yup.string().required("Eventa address required"),
     contact: yup.string().required("Email or cellphone required"),
-    time: yup.string().required("Event time required"),
+    start_time: yup.string().required("Event start time required"),
+    end_time: yup.string().required("Event end time required"),
     date: yup.string().required("Event date required"),
     description: yup.string().required("Event description required"),
     picture_url: yup.string().url("Url image invalid"),
@@ -57,7 +52,7 @@ export const FormEvent = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(eventSchema) });
 
-  const eventSubmit = (data: EventData) => {
+  const eventSubmit = (data: EventDataForm) => {
     console.log(data);
   };
 
@@ -68,13 +63,15 @@ export const FormEvent = () => {
       onSubmit={handleSubmit(eventSubmit)}
     >
       <VStack spacing="5" h="100%">
-        <Text as="p">Create a new Event</Text>
-       
+        <Text as="p" color="green.400">
+          Create a new Event
+        </Text>
+
         <Input
           icon={AiFillShop}
           placeholder="Event name"
-          {...register("name")}
-          error={errors.name}
+          {...register("title")}
+          error={errors.title}
         />
         <Input
           icon={FaMapMarkerAlt}
@@ -88,18 +85,24 @@ export const FormEvent = () => {
           error={errors.contact}
           {...register("contact")}
         />
+        <Input
+          icon={AiOutlineCalendar}
+          placeholder="Date"
+          error={errors.date}
+          {...register("date")}
+        />
         <HStack>
           <Input
-            icon={AiOutlineCalendar}
-            placeholder="Date"
-            error={errors.date}
-            {...register("date")}
+            icon={RiTimeLine}
+            placeholder="Starts at:"
+            error={errors.start_time}
+            {...register("start_time")}
           />
           <Input
             icon={RiTimeLine}
-            placeholder="Time"
-            error={errors.time}
-            {...register("time")}
+            placeholder="Ends at:"
+            error={errors.end_time}
+            {...register("end_time")}
           />
         </HStack>
         <Textarea

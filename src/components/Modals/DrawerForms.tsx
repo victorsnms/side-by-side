@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToggleSwitch } from "../ToggleSwitch";
 import { FormEvent } from "./FormEvent";
 import { FormWasteCollection } from "./FormWasteCollection";
@@ -22,6 +22,10 @@ export const DrawerForms = () => {
   const position = isMobile ? "bottom" : "left";
 
   const [switchOption, setSwitchOption] = useState(true);
+
+  useEffect(() => {
+    setSwitchOption(true);
+  }, []);
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -33,7 +37,11 @@ export const DrawerForms = () => {
         trapFocus={false}
       >
         <DrawerOverlay bg="green.70" />
-        <DrawerContent minW={["80%", "80%","350px","350px"]} h={["90%","90%","100%", "100%"]} borderTopRadius={["12px","0"]}>
+        <DrawerContent
+          minW={["80%", "80%", "350px", "350px"]}
+          h={["90%", "90%", "100%", "100%"]}
+          borderTopRadius={["12px", "0"]}
+        >
           <DrawerCloseButton />
           <DrawerHeader>
             <ToggleSwitch
