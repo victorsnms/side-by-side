@@ -1,7 +1,17 @@
 import { Box, HStack } from "@chakra-ui/react";
-import { useRadio, useRadioGroup } from "@chakra-ui/radio";
-export const RadiosMaterialsType = () => {
-  function RadioCard(props: string) {
+import { useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/radio";
+import { Dispatch, SetStateAction } from "toasted-notes/node_modules/@types/react";
+
+interface RadioProps extends UseRadioProps {
+  children: string
+}
+
+interface  RadioValuesProps {
+  setMaterialsType: Dispatch<SetStateAction<string[]>>
+  materialsType: string[]
+}
+export const RadiosMaterialsType = ({setMaterialsType, materialsType}:RadioValuesProps) => {
+  function RadioCard(props: RadioProps) {
     const { getInputProps, getCheckboxProps } = useRadio(props);
 
     const input = getInputProps();
@@ -9,8 +19,10 @@ export const RadiosMaterialsType = () => {
 
     return (
       <Box as="label">
-        <input {...input} />
+        <input {...input} name={props.children}  />
         <Box
+        
+          onChange={() => console.log([props.children, ...materialsType])}
           {...checkbox}
           cursor="pointer"
           borderWidth="1px"
@@ -43,10 +55,10 @@ export const RadiosMaterialsType = () => {
   const group = getRootProps();
   return (
     <HStack {...group}>
-      {options.map((value: string) => {
+      {options.map((value) => {
         const radio = getRadioProps({ value });
         return (
-          <RadioCard key={value} {...radio}>
+          <RadioCard key={value} {...radio} >
             {value}
           </RadioCard>
         );

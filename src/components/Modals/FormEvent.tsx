@@ -1,11 +1,15 @@
-import { Flex, VStack, Text, HStack, Box } from "@chakra-ui/react";
 import {
-  DeepMap,
-  FieldError,
-  FieldValues,
-  UseFormRegister,
-} from "react-hook-form";
+  Flex,
+  VStack,
+  Text,
+  HStack,
+  Box,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Input } from "../Input";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   AiFillShop,
   AiOutlineCalendar,
@@ -15,21 +19,57 @@ import { FaMapMarkerAlt, FaRegImage } from "react-icons/fa";
 import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
+import { useState } from "react";
 
-interface ModalFormProps {
-  eventSubmit: () => void;
-  register: UseFormRegister<FieldValues>;
-  errors: DeepMap<FieldValues, FieldError>;
+
+interface EventData {
+  name: string;
+  address: string;
+  contact: string;
+  time: string;
+  date: string;
+  description: string;
+  picture_url?: string;
+  voluntaries?: {
+    name: string;
+    id: string;
+  }[];
+  lat?: string;
+  lgn?: string;
 }
-export const FormEvent = ({
-  eventSubmit,
-  register,
-  errors,
-}: ModalFormProps) => {
+
+export const FormEvent = () => {
+
+
+  const eventSchema = yup.object().shape({
+    name: yup.string().required("Event name required"),
+    address: yup.string().required("Eventa address required"),
+    contact: yup.string().required("Email or cellphone required"),
+    time: yup.string().required("Event time required"),
+    date: yup.string().required("Event date required"),
+    description: yup.string().required("Event description required"),
+    picture_url: yup.string().url("Url image invalid"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(eventSchema) });
+
+  const eventSubmit = (data: EventData) => {
+    console.log(data);
+  };
+
   return (
-    <Flex as="form" justifyContent="center" onSubmit={eventSubmit}>
+    <Flex
+      as="form"
+      justifyContent="center"
+      onSubmit={handleSubmit(eventSubmit)}
+    >
       <VStack spacing="5" h="100%">
         <Text as="p">Create a new Event</Text>
+       
         <Input
           icon={AiFillShop}
           placeholder="Event name"
