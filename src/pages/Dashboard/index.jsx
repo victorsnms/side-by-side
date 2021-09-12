@@ -8,6 +8,9 @@ import {
 import mapStyles from "./mapStyles";
 import "./index.css";
 import { useState, useCallback, useRef } from "react";
+import { useMarkers } from "../../providers/MarkersContext";
+import { useAuth } from "../../providers/AuthContext";
+import { useEffect } from "react";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -33,29 +36,33 @@ export const Dashboard = () => {
   });
   const [selected, setSelected] = useState(null);
   const [inputMarker, setInputMarker] = useState([]);
-  const [mapMarker, setMapMarker] = useState([
-    {
-      lat: -25.41410596566802,
-      lng: -49.28868879508972,
-      time: new Date(),
-      type: "Event",
-      title: "Ponto A",
-    },
-    {
-      lat: -25.414351799555913,
-      lng: -49.24346097325786,
-      time: new Date(),
-      type: "Wastecol",
-      title: "Ponto B",
-    },
-    {
-      lat: -25.431392761944345,
-      lng: -49.268089429855344,
-      time: new Date(),
-      type: "Event",
-      title: "Ponto C",
-    },
-  ]);
+  const { markers, createMarker, loadMarkers } = useMarkers();
+  const { accessToken } = useAuth();
+
+  //Mock: markers
+  // [
+  //   {
+  //     lat: -25.41410596566802,
+  //     lng: -49.28868879508972,
+  //     time: new Date(),
+  //     type: "Event",
+  //     title: "Ponto A",
+  //   },
+  //   {
+  //     lat: -25.414351799555913,
+  //     lng: -49.24346097325786,
+  //     time: new Date(),
+  //     type: "Wastecol",
+  //     title: "Ponto B",
+  //   },
+  //   {
+  //     lat: -25.431392761944345,
+  //     lng: -49.268089429855344,
+  //     time: new Date(),
+  //     type: "Event",
+  //     title: "Ponto C",
+  //   },
+  // ]
 
   //onClick
   const onMapClick = useCallback((event) => {
@@ -63,7 +70,7 @@ export const Dashboard = () => {
       {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
-        time: new Date(),
+        created_at: new Date(),
       },
     ]);
   }, []);
@@ -72,6 +79,10 @@ export const Dashboard = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+  }, []);
+
+  useEffect(() => {
+    loadMarkers(accessToken);
   }, []);
 
   if (loadError) return <div>Error loading maps"</div>;
@@ -88,9 +99,9 @@ export const Dashboard = () => {
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {mapMarker.map((marker) => (
+        {markers.map((marker) => (
           <Marker
-            key={marker.time.toISOString()}
+            key={marker.created_at}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: marker.type === "Event" ? "/event.png" : "/wastecol.png",
@@ -111,13 +122,24 @@ export const Dashboard = () => {
           >
             <div>
               <h2>{selected.title}</h2>
+              <h3>
+                {selected.type === "WasteCollection" ? "Working" : null}Time:{" "}
+                {selected.start_time} - {selected.end_time}
+              </h3>
+              <h3>Contact:{selected.contact}</h3>
+              {selected.description ? <h3>{selected.description}</h3> : <></>}
+              {selected.materials_type ? (
+                <h3>Collecting: {selected.materials_type.join(", ")}</h3>
+              ) : (
+                <></>
+              )}
             </div>
           </InfoWindow>
         ) : null}
 
         {inputMarker.map((marker) => (
           <Marker
-            key={marker.time.toISOString()}
+            key={marker.created_at}
             position={{ lat: marker.lat, lng: marker.lng }}
           />
         ))}

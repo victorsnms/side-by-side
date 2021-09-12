@@ -14,11 +14,10 @@ interface MarkersProviderProps {
   children: ReactNode;
 }
 
-
-
 interface MarkersContextData {
   markers: Marker[];
   createMarker: (data: Marker, accessToken: string) => Promise<void>;
+  loadMarkers: (accessToken: string) => Promise<void>;
 }
 
 const MarkersContext = createContext<MarkersContextData>(
@@ -37,6 +36,19 @@ const useMarkers = () => {
 const MarkersProvider = ({ children }: MarkersProviderProps) => {
   const [markers, setMarkers] = useState<Marker[]>([]);
 
+  const loadMarkers = useCallback(async (accessToken: string) => {
+    try {
+      const response = await api.get("/markers", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      setMarkers(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
   const createMarker = useCallback(
     async (data: Marker, accessToken: string) => {
       api
@@ -52,7 +64,7 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
   );
 
   return (
-    <MarkersContext.Provider value={{ markers, createMarker }}>
+    <MarkersContext.Provider value={{ markers, createMarker, loadMarkers }}>
       {children}
     </MarkersContext.Provider>
   );
