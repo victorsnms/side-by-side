@@ -1,0 +1,1 @@
+export const types = ["Plastics","Metals", "Paper", "Wood", "Glass", "Clothing", "Tire", "Batteries", "Cardboard", "Pet Bottles", "Medicines", "Oils", "Lamps", "Debris", "Home Appliances", "Cosmetics", "Printer Cartridges", "Coffe Capsules", "Others" ]

@@ -1,11 +1,15 @@
-import { Flex, VStack, Text, HStack, Box } from "@chakra-ui/react";
 import {
-  DeepMap,
-  FieldError,
-  FieldValues,
-  UseFormRegister,
-} from "react-hook-form";
+  Flex,
+  VStack,
+  Text,
+  HStack,
+  Box,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Input } from "../Input";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   AiFillShop,
   AiOutlineCalendar,
@@ -15,26 +19,59 @@ import { FaMapMarkerAlt, FaRegImage } from "react-icons/fa";
 import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
+import { eventDefaultData } from "../../utils/eventDefaultData";
 
-interface ModalFormProps {
-  eventSubmit: () => void;
-  register: UseFormRegister<FieldValues>;
-  errors: DeepMap<FieldValues, FieldError>;
+interface EventDataForm {
+  title: string;
+  address: string;
+  contact: string;
+  start_time: string;
+  end_time: string;
+  date: string;
+  description: string;
+  picture_url?: string;
 }
-export const FormEvent = ({
-  eventSubmit,
-  register,
-  errors,
-}: ModalFormProps) => {
+
+export const FormEvent = () => {
+  const { created_at, participants, picture_url, type } = eventDefaultData;
+
+  const eventSchema = yup.object().shape({
+    title: yup.string().required("Event name required"),
+    address: yup.string().required("Eventa address required"),
+    contact: yup.string().required("Email or cellphone required"),
+    start_time: yup.string().required("Event start time required"),
+    end_time: yup.string().required("Event end time required"),
+    date: yup.string().required("Event date required"),
+    description: yup.string().required("Event description required"),
+    picture_url: yup.string().url("Url image invalid"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(eventSchema) });
+
+  const eventSubmit = (data: EventDataForm) => {
+    console.log(data);
+  };
+
   return (
-    <Flex as="form" justifyContent="center" onSubmit={eventSubmit}>
+    <Flex
+      as="form"
+      justifyContent="center"
+      onSubmit={handleSubmit(eventSubmit)}
+    >
       <VStack spacing="5" h="100%">
-        <Text as="p">Create a new Event</Text>
+        <Text as="p" color="green.400">
+          Create a new Event
+        </Text>
+
         <Input
           icon={AiFillShop}
           placeholder="Event name"
-          {...register("name")}
-          error={errors.name}
+          {...register("title")}
+          error={errors.title}
         />
         <Input
           icon={FaMapMarkerAlt}
@@ -48,18 +85,24 @@ export const FormEvent = ({
           error={errors.contact}
           {...register("contact")}
         />
+        <Input
+          icon={AiOutlineCalendar}
+          placeholder="Date"
+          error={errors.date}
+          {...register("date")}
+        />
         <HStack>
           <Input
-            icon={AiOutlineCalendar}
-            placeholder="Date"
-            error={errors.date}
-            {...register("date")}
+            icon={RiTimeLine}
+            placeholder="Starts at:"
+            error={errors.start_time}
+            {...register("start_time")}
           />
           <Input
             icon={RiTimeLine}
-            placeholder="Time"
-            error={errors.time}
-            {...register("time")}
+            placeholder="Ends at:"
+            error={errors.end_time}
+            {...register("end_time")}
           />
         </HStack>
         <Textarea

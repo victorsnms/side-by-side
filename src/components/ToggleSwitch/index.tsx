@@ -32,6 +32,8 @@ export const ToggleSwitch = ({
       setOption(options[0]);
     } 
     setSwitchOption(!switchOption);
+    setPosition(!switchOption ? "0%" : "43%");
+    setOption(!switchOption ? options[0] : options[1]);
   };
 
   return (
