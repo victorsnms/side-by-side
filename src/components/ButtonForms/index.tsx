@@ -2,21 +2,22 @@ import { Button } from "@chakra-ui/react";
 
 interface IButtonFormsProps {
     children: string;
-    handleClick: () => void;
+    handleClick?: () => void;
+    width: string[];
+    type: "button" | "submit" | "reset" | undefined;
 }
 
-export const ButtonForms = ({ children, handleClick }: IButtonFormsProps) => {
+export const ButtonForms = ({ children, handleClick=undefined, width, type=undefined }: IButtonFormsProps) => {
   return (
     <Button
-      as="button"
+      type={type}
       fontSize="20px"
-      fontWeight="600"
+      fontWeight="500"
       fontFamily="Didact Gothic"
       bg="green.300"
       color="white"
-      w="75%"
-      maxW="338px"
-      h="38px"
+      size="md"
+      w={width}
       borderRadius="20px"
       onClick={handleClick}
       _hover={{ bg: "green.400" }}
