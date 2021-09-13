@@ -22,7 +22,6 @@ const Home = () => {
   return (
     <Flex direction="column">
       <HomeMenu />
-      <BadgesDisplay/>
       <Flex
         direction="column"
         justifyContent="center"
