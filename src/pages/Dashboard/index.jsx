@@ -12,7 +12,8 @@ import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
 import { DrawerForms } from "../../components/Modals/DrawerForms";
 import { DashboardMenu } from "../../components/DashboardMenu";
-import { Box, VStack, Icon, Text } from "@chakra-ui/react"
+import { Box, VStack, Icon, Text } from "@chakra-ui/react";
+import { EventDetails } from "../../components/Modals/EventDetails";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -91,9 +92,11 @@ export const Dashboard = () => {
   if (!isLoaded) return <div>"Loading maps"</div>;
 
   return (
-    <div style={{position:"relative"}}>
-      <h1>Logo</h1>
-      <DrawerForms isDisable={inputMarker.length === 0} inputMarker={inputMarker}/>
+    <div style={{ position: "relative" }}>
+      <DrawerForms
+        isDisable={inputMarker.length === 0}
+        inputMarker={inputMarker}
+      />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}
@@ -126,7 +129,9 @@ export const Dashboard = () => {
             }}
           >
             <Box>
-              <Text color='green.400' fontSize="1rem" fontWeight="bold">{selected.title}</Text>
+              <Text color="green.400" fontSize="1rem" fontWeight="bold">
+                {selected.title}
+              </Text>
               <Text>
                 {selected.type === "WasteCollection" ? "Working" : null}Time:{" "}
                 {selected.start_time} - {selected.end_time}
@@ -138,6 +143,9 @@ export const Dashboard = () => {
               ) : (
                 <></>
               )}
+              {selected.type === "Event" ? (
+                <EventDetails marker={selected} />
+              ) : null}
             </Box>
           </InfoWindow>
         ) : null}
