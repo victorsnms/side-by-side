@@ -24,6 +24,7 @@ export const DashboardMenu = () => {
         flexDirection='column'
         justifyContent='center'
         alignItems='center'
+        z-index=""
     >
         <Box 
             position='absolute'
@@ -38,19 +39,19 @@ export const DashboardMenu = () => {
                 <Icon fontSize='3xl' as={BiHome}/>
                 <Text>Home</Text>
             </Box>
-            <Box textAlign='center' as={Link} to='/dashboard/info'>
+            <Box textAlign='center' as={Link} to='/info'>
                 <Icon fontSize='3xl' as={BiBookOpen}/>
                 <Text>Info</Text>
             </Box>
-            <Box textAlign='center' as={Link} to='/dashboard/map'>
+            <Box textAlign='center' as={Link} to='/map'>
                 <Icon fontSize='3xl' as={BiMap}/>
                 <Text>Map</Text>
             </Box>
-            <Box textAlign='center' as={Link} to='/dashboard/events'>
+            <Box textAlign='center' as={Link} to='/events'>
                 <Icon fontSize='3xl' as={BiGroup}/>
                 <Text>Events</Text>
             </Box>
-            <Box textAlign='center' as={Link} to='/dashboard/badges'>
+            <Box textAlign='center' as={Link} to='/badges'>
                 <Icon fontSize='3xl' as={BiTrophy}/>
                 <Text>Badges</Text>
             </Box>
