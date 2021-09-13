@@ -21,6 +21,6 @@ export const Routes = () => (
     <Route exact path="/dashboard" component={Dashboard} isPrivate />
     <Route path="/info" component={Info} isPrivate />
     <Route exact path="/joinUs" component={JoinUsForms} />
-    <Route exact path="/map" component={Dashboard} />
+    <Route exact path="/map" component={Dashboard} isPrivate/>
   </Switch>
 );
