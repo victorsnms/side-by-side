@@ -8,6 +8,8 @@ import homeMap from "../../assets/images/homemap.svg";
 import homeTaggedMap from "../../assets/images/hometaggedmap.svg";
 import { useFormContext } from "../../providers/FormContext";
 import { useHistory } from "react-router";
+import { Parallax } from 'react-scroll-parallax';
+
 
 const Home = () => {
   const { setFormOption } = useFormContext();
@@ -21,45 +23,46 @@ const Home = () => {
   return (
     <Flex direction="column">
       <HomeMenu />
-      <Flex
-        direction="column"
-        justifyContent="center"
-        w="100%"
-        h={["50vh", "60vh", "70vh", "80vh"]}
-        bg="gray.100"
-        pl={["40px", "50px", "60px", "70px"]}
-        bgImage={backgroundPlastic}
-        backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
-        bgPosition="center"
-        bgRepeat="no-repeat"
-      >
-        <Text fontSize={["2xl", "2xl", "4xl"]} fontWeight="bold" color="white">
-          Find, Recycle, Connect
-        </Text>
-        <Text
-          fontSize={["xl", "xl", "2xl"]}
-          color="white"
-          maxW={["200px", "300px", "350px"]}
+      <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
+        <Flex
+          direction="column"
+          justifyContent="center"
+          w="100%"
+          h={["50vh", "60vh", "70vh", "80vh"]}
+          bg="gray.100"
+          pl={["40px", "50px", "60px", "70px"]}
+          bgImage={backgroundPlastic}
+          backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
+          bgPosition="center"
+          bgRepeat="no-repeat"
         >
-          For a cleaner and more sustainable world
-        </Text>
-        <Button
-          mt="6"
-          w="130px"
-          fontSize={["xl", "xl", "2xl"]}
-          fontWeight="500"
-          bg="gray.50"
-          color="green.300"
-          h="45px"
-          borderRadius="10px"
-          _hover={{ bg: "green.300", color: "green.400" }}
-          _focus={{}}
-          onClick={() => sendTo("Sign up")}
-        >
-          Join us
-        </Button>
-      </Flex>
-
+          <Text fontSize={["2xl", "2xl", "4xl"]} fontWeight="bold" color="white">
+            Find, Recycle, Connect
+          </Text>
+          <Text
+            fontSize={["xl", "xl", "2xl"]}
+            color="white"
+            maxW={["200px", "300px", "350px"]}
+          >
+            For a cleaner and more sustainable world
+          </Text>
+          <Button
+            mt="6"
+            w="130px"
+            fontSize={["xl", "xl", "2xl"]}
+            fontWeight="500"
+            bg="gray.50"
+            color="green.300"
+            h="45px"
+            borderRadius="10px"
+            _hover={{ bg: "green.300", color: "green.400" }}
+            _focus={{}}
+            onClick={() => sendTo("Sign up")}
+          >
+            Join us
+          </Button>
+        </Flex>
+      </Parallax>
       <Center
         w="100%"
         py="10"
@@ -109,6 +112,7 @@ const Home = () => {
           </Flex>
         </Flex>
       </Flex>
+      <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
       <Flex
         direction="column"
         justifyContent="center"
@@ -133,6 +137,7 @@ const Home = () => {
           eventos
         </Text>
       </Flex>
+      </Parallax>
       <Flex py="100px" alignItems="center" direction="column">
         <Text fontSize={["2xl", "2xl", "3xl"]}>Salve o planeta!</Text>
         <Button
