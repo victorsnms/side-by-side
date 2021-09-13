@@ -6,12 +6,13 @@ import {
 } from "@react-google-maps/api";
 //mapstyles
 import mapStyles from "./mapStyles";
-import "./index.css";
 import { useState, useCallback, useRef } from "react";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
 import { DrawerForms } from "../../components/Modals/DrawerForms";
+import { DashboardMenu } from "../../components/DashboardMenu";
+import { Box, VStack, Icon, Text } from "@chakra-ui/react"
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -102,6 +103,7 @@ export const Dashboard = () => {
         onLoad={onMapLoad}
         clickableIcons={false}
       >
+        <DashboardMenu />
         {markers.map((marker) => (
           <Marker
             key={marker.created_at}
@@ -123,20 +125,20 @@ export const Dashboard = () => {
               setSelected(null);
             }}
           >
-            <div>
-              <h2>{selected.title}</h2>
-              <h3>
+            <Box>
+              <Text color='green.400' fontSize="1rem" fontWeight="bold">{selected.title}</Text>
+              <Text>
                 {selected.type === "WasteCollection" ? "Working" : null}Time:{" "}
                 {selected.start_time} - {selected.end_time}
-              </h3>
-              <h3>Contact:{selected.contact}</h3>
+              </Text>
+              <Text>Contact:{selected.contact}</Text>
               {selected.description ? <h3>{selected.description}</h3> : <></>}
               {selected.materials_type ? (
-                <h3>Collecting: {selected.materials_type.join(", ")}</h3>
+                <Text>Collecting: {selected.materials_type.join(", ")}</Text>
               ) : (
                 <></>
               )}
-            </div>
+            </Box>
           </InfoWindow>
         ) : null}
 
