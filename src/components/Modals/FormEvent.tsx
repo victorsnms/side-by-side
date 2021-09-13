@@ -20,6 +20,7 @@ import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
 import { eventDefaultData } from "../../utils/eventDefaultData";
+import { InputMarker } from "../../types/makerData";
 
 interface EventDataForm {
   title: string;
@@ -32,7 +33,8 @@ interface EventDataForm {
   picture_url?: string;
 }
 
-export const FormEvent = () => {
+
+export const FormEvent = ({inputMarker}:InputMarker) => {
   const { created_at, participants, picture_url, type } = eventDefaultData;
 
   const eventSchema = yup.object().shape({

@@ -17,4 +17,12 @@ export interface Marker {
     date?: string;
     id?: number
   }
+
+export interface InputMarker {
+  inputMarker: {
+    lat: number
+    lng: number
+    created_at: string
+  }
+}
   

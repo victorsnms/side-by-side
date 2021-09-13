@@ -11,6 +11,7 @@ import { useState, useCallback, useRef } from "react";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
+import { DrawerForms } from "../../components/Modals/DrawerForms";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -89,8 +90,9 @@ export const Dashboard = () => {
   if (!isLoaded) return <div>"Loading maps"</div>;
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
       <h1>Logo</h1>
+      <DrawerForms isDisable={inputMarker.length === 0} inputMarker={inputMarker}/>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}

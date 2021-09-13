@@ -21,6 +21,7 @@ import { ButtonForms } from "../ButtonForms";
 import { useState } from "react";
 import { OptionsMaterialsType } from "../OptionsMaterialsTypes";
 import { WCDefaultData } from "../../utils/WCDefaultData";
+import { InputMarker } from "../../types/makerData";
 
 interface WCDataForm {
   title: string;
@@ -30,7 +31,7 @@ interface WCDataForm {
   end_time?: string;
 }
 
-export const FormWasteCollection = () => {
+export const FormWasteCollection = ({inputMarker}:InputMarker) => {
   const [materialsType, setMaterialsType] = useState<string[]>([]);
   const [hasntMaterial, setHasntMaterial] = useBoolean();
   const { contact, create_at, end_time, start_time, type } = WCDefaultData;
