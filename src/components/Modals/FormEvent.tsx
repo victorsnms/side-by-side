@@ -21,6 +21,9 @@ import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
 import { eventDefaultData } from "../../utils/eventDefaultData";
 import { InputMarker } from "../../types/makerData";
+import { useMarkers } from "../../providers/MarkersContext";
+import { useAuth } from "../../providers/AuthContext";
+import { useEffect } from "react";
 
 interface EventDataForm {
   title: string;
@@ -33,9 +36,13 @@ interface EventDataForm {
   picture_url?: string;
 }
 
-
-export const FormEvent = ({inputMarker}:InputMarker) => {
-  const { created_at, participants, picture_url, type } = eventDefaultData;
+export const FormEvent = ({ inputMarker }: InputMarker) => {
+  const { picture_url_default, type } = eventDefaultData;
+  const { createMarker } = useMarkers();
+  const { getUser, userData, accessToken } = useAuth();
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const eventSchema = yup.object().shape({
     title: yup.string().required("Event name required"),
@@ -55,7 +62,18 @@ export const FormEvent = ({inputMarker}:InputMarker) => {
   } = useForm({ resolver: yupResolver(eventSchema) });
 
   const eventSubmit = (data: EventDataForm) => {
-    console.log(data);
+    const {
+      picture_url,
+    } = data;
+    const newData = {
+      ...data,
+      ...inputMarker[0],
+      type: type,
+      picture_url:
+        picture_url?.length !== 0 ? picture_url : picture_url_default,
+      participants: [userData],
+    };
+    createMarker(newData,accessToken);
   };
 
   return (

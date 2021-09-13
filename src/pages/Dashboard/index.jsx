@@ -92,11 +92,8 @@ export const Dashboard = () => {
   if (!isLoaded) return <div>"Loading maps"</div>;
 
   return (
-    <div style={{ position: "relative" }}>
-      <DrawerForms
-        isDisable={inputMarker.length === 0}
-        inputMarker={inputMarker}
-      />
+    <Box position="relative">
+      <DrawerForms isDisable={inputMarker.length === 0} inputMarker={inputMarker}/>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}
@@ -157,6 +154,6 @@ export const Dashboard = () => {
           />
         ))}
       </GoogleMap>
-    </div>
+    </Box>
   );
 };

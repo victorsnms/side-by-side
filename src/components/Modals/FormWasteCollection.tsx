@@ -22,19 +22,23 @@ import { useState } from "react";
 import { OptionsMaterialsType } from "../OptionsMaterialsTypes";
 import { WCDefaultData } from "../../utils/WCDefaultData";
 import { InputMarker } from "../../types/makerData";
+import { useAuth } from "../../providers/AuthContext";
+import { useMarkers } from "../../providers/MarkersContext";
 
 interface WCDataForm {
   title: string;
   address: string;
   contact: string;
-  start_time?: string;
-  end_time?: string;
+  start_time: string;
+  end_time: string;
 }
 
 export const FormWasteCollection = ({inputMarker}:InputMarker) => {
   const [materialsType, setMaterialsType] = useState<string[]>([]);
   const [hasntMaterial, setHasntMaterial] = useBoolean();
-  const { contact, create_at, end_time, start_time, type } = WCDefaultData;
+  const {accessToken} = useAuth();
+  const {createMarker} = useMarkers()
+ 
 
   const eventSchema = yup.object().shape({
     title: yup.string().required("Waste colection name required"),
@@ -52,11 +56,19 @@ export const FormWasteCollection = ({inputMarker}:InputMarker) => {
 
   const wasteCollectionSubmit = (data: WCDataForm) => {
     if (materialsType.length === 0) {
-      setHasntMaterial.on();
-    } else {
-      setHasntMaterial.off();
-      console.log(data, materialsType);
+     return setHasntMaterial.on();
+    } 
+    setHasntMaterial.off();
+    const newData ={
+      type: "waste collection",
+      materialsType: materialsType,
+      ...inputMarker[0],
+      ...data,
+
     }
+    createMarker(newData,accessToken)
+
+  
   };
 
   return (
