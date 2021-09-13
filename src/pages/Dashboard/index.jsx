@@ -10,6 +10,7 @@ import { useState, useCallback, useRef } from "react";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
+import { DrawerForms } from "../../components/Modals/DrawerForms";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { Box, VStack, Icon, Text } from "@chakra-ui/react"
 
@@ -90,7 +91,9 @@ export const Dashboard = () => {
   if (!isLoaded) return <div>"Loading maps"</div>;
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
+      <h1>Logo</h1>
+      <DrawerForms isDisable={inputMarker.length === 0} inputMarker={inputMarker}/>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}

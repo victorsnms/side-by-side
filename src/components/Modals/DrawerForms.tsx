@@ -5,17 +5,21 @@ import {
   DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
-  useBreakpoint,
   useDisclosure,
-  Button,
 } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
+import { InputMarker } from "../../types/makerData";
+import { ButtonAdd } from "../ButtomAdd";
 import { ToggleSwitch } from "../ToggleSwitch";
 import { FormEvent } from "./FormEvent";
 import { FormWasteCollection } from "./FormWasteCollection";
 
-export const DrawerForms = () => {
+interface DrawerFormProps extends InputMarker{
+  isDisable:boolean
+}
+
+export const DrawerForms = ({isDisable, inputMarker}:DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const options = ["Event", "Wast Point"];
   const isMobile = window.innerWidth < 768;
@@ -28,7 +32,7 @@ export const DrawerForms = () => {
   }, []);
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <ButtonAdd onClick={onOpen} disabled={isDisable}/>
 
       <Drawer
         isOpen={isOpen}
@@ -51,7 +55,7 @@ export const DrawerForms = () => {
             />
           </DrawerHeader>
           <DrawerBody>
-            {switchOption ? <FormEvent /> : <FormWasteCollection />}
+            {switchOption ? <FormEvent inputMarker={inputMarker} /> : <FormWasteCollection inputMarker={inputMarker}/>}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
