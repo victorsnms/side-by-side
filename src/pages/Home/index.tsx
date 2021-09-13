@@ -8,6 +8,7 @@ import homeMap from "../../assets/images/homemap.svg";
 import homeTaggedMap from "../../assets/images/hometaggedmap.svg";
 import { useFormContext } from "../../providers/FormContext";
 import { useHistory } from "react-router";
+import BadgesDisplay from "../../components/BadgesDisplay";
 
 const Home = () => {
   const { setFormOption } = useFormContext();
@@ -29,7 +30,7 @@ const Home = () => {
         bg="gray.100"
         pl={["40px", "50px", "60px", "70px"]}
         bgImage={backgroundPlastic}
-        backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
+        backgroundSize={["200%", "180%", "165%", "140%, 100%"]}
         bgPosition="center"
         bgRepeat="no-repeat"
       >
@@ -77,11 +78,9 @@ const Home = () => {
           direction={["column", "column", "row"]}
         >
           <Flex justifyContent="center" direction="column">
-            <Text fontSize="3xl">Find collection wastes</Text>
-            <Text maxW="300px">
-              Das wer tribst dush der maine seele, zum bisth zo rum dur ich in
-              mir
-            </Text>
+            <Text fontSize="3xl">Find collection points</Text>
+            <Text maxW="300px">Search for the precise places to disposal
+                  each of your espicific wastes.</Text>
           </Flex>
           <Image
             src={homeTaggedMap}
@@ -102,10 +101,8 @@ const Home = () => {
           />
           <Flex justifyContent="center" direction="column">
             <Text fontSize="3xl">Register new points</Text>
-            <Text maxW="300px">
-              Das wer tribst dush der maine seele, zum bisth zo rum dur ich in
-              mir
-            </Text>
+            <Text maxW="300px">Contribute to our network, 
+              by adding known collection points.</Text>  
           </Flex>
         </Flex>
       </Flex>
@@ -129,12 +126,12 @@ const Home = () => {
           color="white"
           maxW={["200px", "300px", "350px"]}
         >
-          Participe de eventos que contruibuem para limpeza do planeta Crie
-          eventos
+          Join the existing events and create new 
+          ones to contribute to cleaning the world.
         </Text>
       </Flex>
       <Flex py="100px" alignItems="center" direction="column">
-        <Text fontSize={["2xl", "2xl", "3xl"]}>Salve o planeta!</Text>
+        <Text fontSize={["2xl", "2xl", "3xl"]}>Save the planet!</Text>
         <Button
           mt="6"
           w={["250px", "300px", "350px", "400px"]}
