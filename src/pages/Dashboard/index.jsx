@@ -91,8 +91,7 @@ export const Dashboard = () => {
   if (!isLoaded) return <div>"Loading maps"</div>;
 
   return (
-    <div style={{position:"relative"}}>
-      <h1>Logo</h1>
+    <Box position="relative">
       <DrawerForms isDisable={inputMarker.length === 0} inputMarker={inputMarker}/>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -149,6 +148,6 @@ export const Dashboard = () => {
           />
         ))}
       </GoogleMap>
-    </div>
+    </Box>
   );
 };

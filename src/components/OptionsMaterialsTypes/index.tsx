@@ -27,6 +27,7 @@ export const OptionsMaterialsType = ({
           type={type}
           materialsType={materialsType}
           setMaterialsType={setMaterialsType}
+          key={index}
         />
       ))}
     </Wrap>

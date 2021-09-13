@@ -1,13 +1,13 @@
 import { User } from "./userData";
 
 export interface Marker {
+  type: string;
     title: string;
     lat: number;
     lng: number;
     start_time: string;
     end_time: string;
-    type: string;
-    created_at: Date;
+    created_at: string;
     address: string;
     contact: string;
     materials_type?: string[];
@@ -23,6 +23,6 @@ export interface InputMarker {
     lat: number
     lng: number
     created_at: string
-  }
+  }[]
 }
   

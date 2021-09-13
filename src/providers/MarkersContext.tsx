@@ -63,6 +63,10 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     []
   );
 
+  // const joinInEvent = useCallback((
+  //   api.patch("users")
+  // ) => {},[])
+
   return (
     <MarkersContext.Provider value={{ markers, createMarker, loadMarkers }}>
       {children}

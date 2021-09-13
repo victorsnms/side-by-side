@@ -7,15 +7,11 @@ import {
 } from "react";
 import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
+import {User} from "../types/userData"
+import { AxiosResponse } from "axios";
 
 interface AuthProviderProps {
   children: ReactNode;
-}
-
-interface User {
-  email: string;
-  id: string;
-  name: string;
 }
 
 interface AuthState {
@@ -33,6 +29,8 @@ interface AuthContextData {
   accessToken: string;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => void;
+  getUser: () => void;
+  userData: User
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -55,6 +53,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
     return {} as AuthState;
   });
+  const [userData, setUserData] = useState({} as User)
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await api.post("/login", { email, password });
@@ -71,6 +70,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     setData({} as AuthContextData);
   }, []);
+
+  const getUser = () => {
+    api.get(`/users/${data.id}`, {headers: { Authorization: `Bearer ${data.accessToken}` }}).then((response:AxiosResponse<User>) => setUserData(response.data)).catch((err) => console.log(err) )
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -78,6 +81,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         accessToken: data.accessToken,
         signIn,
         signOut,
+        getUser,
+        userData
       }}
     >
       {children}
