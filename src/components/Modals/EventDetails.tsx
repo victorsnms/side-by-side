@@ -26,9 +26,9 @@ export const EventDetails = ({marker}:EventDetailsProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <ButtonForms width={["100px","100px","100px"]} type={undefined} onClick={onOpen} color={"gray.60"} backgroundColor={"green.300"} h={4} fontSize={"12px"}>Show details</ButtonForms>
+      <ButtonForms  marginLeft={"2px"} marginBottom={"2px"} width={["100px","100px","100px"]} type={undefined} onClick={onOpen} color={"gray.60"} backgroundColor={"green.300"} h={4} fontSize={"12px"}>Show details</ButtonForms>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay bg="green.70"/>
         <ModalContent>
           <ModalHeader padding={0}>
             <Box
