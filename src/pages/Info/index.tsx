@@ -1,16 +1,11 @@
-import { Flex, Accordion, VStack, Heading } from "@chakra-ui/react"
+import { Flex, Accordion, Heading } from "@chakra-ui/react"
 import { InfoDropDown } from "../../components/InfoDropDown"
+import { DashboardMenu } from '../../components/DashboardMenu'
 import { infos } from "../../utils/infos"
 
 export const Info = () => {
   return <Flex minH='100vh' h='auto' justifyContent='space-between'>
-    <VStack
-     bg='red'
-     p='5rem'>
-      <p>1</p>
-      <p>2</p>
-      <p>3</p>
-    </VStack>
+    <DashboardMenu />
     <Flex 
       
       alignItems='center' 
