@@ -1,19 +1,41 @@
 import { Box, HStack, Text, Flex } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, Dispatch } from "react";
+import { useFormContext } from "../../providers/FormContext";
 
 interface ToggleSwitchProps {
   options: string[];
+  setSwitchOption: Dispatch<React.SetStateAction<boolean>>;
+  switchOption: boolean;
 }
 
-export const ToggleSwitch = ({ options }: ToggleSwitchProps) => {
-  const [isLeft, setIsLeft] = useState(false);
-  const [position, setPosition] = useState("");
-  const [option, setOption] = useState(options[0]);
+export const ToggleSwitch = ({
+  options,
+  setSwitchOption,
+  switchOption,
+}: ToggleSwitchProps) => {
+  const { formOption, setFormOption } = useFormContext();
+  const [isLeft, setIsLeft] = useState(formOption === options[0] ? true : false);
+  const [position, setPosition] = useState(isLeft ? "-2%" : "46%");
+  const [option, setOption] = useState(formOption === options[0] ? options[0] : options[1]);
+
   const handleMovement = () => {
-    setIsLeft(!isLeft);
-    setPosition(isLeft ? "0%" : "43%");
-    setOption(isLeft ? options[0] : options[1]);
+    if(formOption === options[0]) {
+       setFormOption(options[1]); 
+       setIsLeft(false);
+       setPosition("46%");
+       setOption(options[1]);
+    }
+    else {
+      setFormOption(options[0]);
+      setIsLeft(true);
+      setPosition("-2%");
+      setOption(options[0]);
+    } 
+    setSwitchOption(!switchOption);
+    setPosition(!switchOption ? "0%" : "43%");
+    setOption(!switchOption ? options[0] : options[1]);
   };
+
   return (
     <>
       <Box
@@ -22,12 +44,25 @@ export const ToggleSwitch = ({ options }: ToggleSwitchProps) => {
         h="40px"
         boxShadow=" 0px 4px 4px rgba(0, 0, 0, 0.25);"
         position="relative"
+        onClick={handleMovement}
       >
         <HStack w="100%" h="100%">
-          <Flex w="50%" h="100%" justifyContent="center" alignItems="center">
+          <Flex
+            fontSize="sm"
+            w="50%"
+            h="100%"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Text as="label">{options[0]}</Text>
           </Flex>
-          <Flex w="50%" h="100%" justifyContent="center" alignItems="center">
+          <Flex
+            fontSize="sm"
+            w="50%"
+            h="100%"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Text as="label">{options[1]}</Text>
           </Flex>
           <Flex
@@ -40,8 +75,8 @@ export const ToggleSwitch = ({ options }: ToggleSwitchProps) => {
             borderRadius="50px"
             justifyContent="center"
             alignItems="center"
-            onClick={handleMovement}
             transition="ease .5s"
+            fontSize="md"
           >
             <Text color="white" fontWeight="bold">
               {option}

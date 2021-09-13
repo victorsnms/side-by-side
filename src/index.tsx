@@ -2,14 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { AppProvider } from "./providers";
 import { BrowserRouter } from "react-router-dom";
-// import App from "./App";
-import { Routes } from "./routes";
+import {App} from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AppProvider>
-        <Routes/>
+        <App />
       </AppProvider>
     </BrowserRouter>
   </React.StrictMode>,
