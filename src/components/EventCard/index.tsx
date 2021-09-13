@@ -6,10 +6,10 @@ import Image from "../../assets/images/bluecuporigin.png";
 
 export const EventCard = () => {
   return (
-    <Box w="280px" h="150px" borderRadius="10px" bgImage={Image} bgSize="cover">
+    <Box w="370px" h="190px" borderRadius="10px" bgImage={Image} bgSize="cover">
       <Flex
-        w="280px"
-        h="150px"
+        w="370px"
+        h="190px"
         direction="column"
         justify="space-between"
         borderRadius="10px"

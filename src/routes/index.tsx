@@ -1,5 +1,6 @@
 import { Switch } from "react-router";
 import { Dashboard } from "../pages/Dashboard";
+import { EventsList } from "../pages/EventsList";
 import Home from "../pages/Home";
 import { Info } from "../pages/Info";
 import { JoinUsForms } from "../pages/JoinUsForms";
@@ -22,5 +23,6 @@ export const Routes = () => (
     <Route path="/info" component={Info} isPrivate />
     <Route exact path="/joinUs" component={JoinUsForms} />
     <Route exact path="/map" component={Dashboard} isPrivate/>
+    <Route exact path="/events" component={EventsList} />
   </Switch>
 );
