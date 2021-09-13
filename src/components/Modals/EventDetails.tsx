@@ -10,6 +10,7 @@ import {
   Box,
   Text,
   Flex,
+  Button
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -25,7 +26,7 @@ export const EventDetails = ({marker}:EventDetailsProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <button onClick={onOpen}>Show details</button>
+      <ButtonForms width={["100px","100px","100px"]} type={undefined} onClick={onOpen} color={"gray.60"} backgroundColor={"green.300"} h={4} fontSize={"12px"}>Show details</ButtonForms>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
