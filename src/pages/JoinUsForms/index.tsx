@@ -76,7 +76,7 @@ export const JoinUsForms = () => {
               <Text mt="12px" fontSize="16px" mb="2em">
                 Already have an account?{" "}
                 <Link
-                  onClick={() => setFormOption("login")}
+                  onClick={() => setFormOption("Login")}
                   color="red.500"
                   textDecoration="underline"
                 >
@@ -92,7 +92,7 @@ export const JoinUsForms = () => {
               <Text mt="12px" fontSize="16px" mb="2em">
                 Don't have an account?{" "}
                 <Link
-                  onClick={() => setFormOption("signup")}
+                  onClick={() => setFormOption("Sign up")}
                   color="red.500"
                   textDecoration="underline"
                 >

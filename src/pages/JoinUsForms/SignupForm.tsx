@@ -80,7 +80,7 @@ export const SignupForm = () => {
       </VStack>
 
       <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
-        <ButtonForms children={"Signup"} width={["262px"]} type="submit" />
+        <ButtonForms children={"Sign up"} width={["262px"]} type="submit" />
       </Box>
     </Center>
   );
