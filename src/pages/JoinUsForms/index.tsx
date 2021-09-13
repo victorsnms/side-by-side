@@ -1,8 +1,7 @@
 import { ToggleSwitch } from "../../components/ToggleSwitch";
 import ImageDesktop from "../../assets/images/image-joinpage.svg";
-import { Flex, Center, Box, Image, Text } from "@chakra-ui/react";
+import { Flex, Center, Box, Image, Text, Link } from "@chakra-ui/react";
 import { SignupForm } from "./SignupForm";
-import { Link } from "@chakra-ui/react";
 import { LoginForm } from "./LoginForm";
 import { useFormContext } from "../../providers/FormContext";
 import { useState } from "react";
