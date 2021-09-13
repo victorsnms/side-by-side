@@ -12,8 +12,9 @@ import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
 import { DrawerForms } from "../../components/Modals/DrawerForms";
 import { DashboardMenu } from "../../components/DashboardMenu";
-import { Box, VStack, Icon, Text } from "@chakra-ui/react";
+import { Box, IconButton, Icon, Text } from "@chakra-ui/react";
 import { EventDetails } from "../../components/Modals/EventDetails";
+import { BiHome } from "react-icons/bi";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -84,6 +85,24 @@ export const Dashboard = () => {
     mapRef.current = map;
   }, []);
 
+  //Pan to
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(15);
+  }, []);
+
+  const getUserLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        panTo({
+          lat: position.coords.latitude,
+          ng: position.coords.longitude,
+        });
+      },
+      () => null
+    );
+  };
+
   useEffect(() => {
     loadMarkers(accessToken);
   }, []);
@@ -107,6 +126,7 @@ export const Dashboard = () => {
         clickableIcons={false}
       >
         <DashboardMenu />
+        <Locate panTo={panTo} />
         {markers.map((marker) => (
           <Marker
             key={marker.created_at}
@@ -159,4 +179,33 @@ export const Dashboard = () => {
       </GoogleMap>
     </div>
   );
+
+  function Locate({ panTo }) {
+    return (
+      <IconButton
+        aria-label="Show modals"
+        colorScheme="white"
+        color="green.300"
+        borderRadius="100%"
+        position="absolute"
+        top="18%"
+        right="10%"
+        bg="white"
+        zIndex="7"
+        onClick={() => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              panTo({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              });
+            },
+            () => null
+          );
+        }}
+      >
+        <Icon as={BiHome} fontSize="2xl" />
+      </IconButton>
+    );
+  }
 };
