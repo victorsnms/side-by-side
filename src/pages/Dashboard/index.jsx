@@ -159,7 +159,7 @@ export const Dashboard = () => {
               ) : (
                 <></>
               )}
-              {selected.type === "Event" ? (
+              {selected.type === "event" ? (
                 <EventDetails marker={selected} />
               ) : null}
             </Box>
