@@ -77,9 +77,35 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
         { name: name, email: email, id: idUser, image_url: image_url },
       ],
     };
+    const {
+      address,
+      contact,
+      created_at,
+      date,
+      description,
+      end_time,
+      lat,
+      lng,
+      picture_url: data_picture_url,
+      start_time,
+      title,
+    } = newData;
+    const filteredData = {
+      address: address,
+      contact: contact,
+      created_at: created_at,
+      date: date,
+      description: description,
+      end_time: end_time,
+      lat: lat,
+      lng: lng,
+      picture_url: data_picture_url,
+      start_time: start_time,
+      title: title,
+    };
     createMarker(newData, accessToken);
     if (newData.type === "event") {
-      updateMyEvents(id, accessToken, newData, my_events);
+      updateMyEvents(id, accessToken, filteredData, my_events);
     }
   };
 
