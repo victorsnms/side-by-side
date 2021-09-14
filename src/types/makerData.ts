@@ -1,5 +1,3 @@
-import { User } from "./userData";
-
 export interface Participants {
   name: string;
   id?: number;

@@ -10,7 +10,6 @@ import {
   Box,
   Text,
   Flex,
-  Button
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -18,17 +17,29 @@ import { RiGroupFill } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { Marker } from "../../types/makerData";
 
-interface EventDetailsProps extends Marker{
-  marker:Marker
+interface EventDetailsProps extends Marker {
+  marker: Marker;
 }
 
-export const EventDetails = ({marker}:EventDetailsProps) => {
+export const EventDetails = ({ marker }: EventDetailsProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <ButtonForms  marginLeft={"2px"} marginBottom={"2px"} width={["100px","100px","100px"]} type={undefined} onClick={onOpen} color={"gray.60"} backgroundColor={"green.300"} h={4} fontSize={"12px"}>Show details</ButtonForms>
+      <ButtonForms
+        marginLeft={"2px"}
+        marginBottom={"2px"}
+        width={["100px", "100px", "100px"]}
+        type={undefined}
+        onClick={onOpen}
+        color={"gray.60"}
+        backgroundColor={"green.300"}
+        h={4}
+        fontSize={"12px"}
+      >
+        Show details
+      </ButtonForms>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay bg="green.70"/>
+        <ModalOverlay bg="green.70" />
         <ModalContent>
           <ModalHeader padding={0}>
             <Box
@@ -74,7 +85,11 @@ export const EventDetails = ({marker}:EventDetailsProps) => {
           <ModalBody color={"gray.400"}>{marker.description}</ModalBody>
 
           <ModalFooter justifyContent={"center"}>
-            <ButtonForms width={["250px","250px","250px"]} type={undefined} onClick={onClose}>
+            <ButtonForms
+              width={["250px", "250px", "250px"]}
+              type={undefined}
+              onClick={onClose}
+            >
               Join
             </ButtonForms>
           </ModalFooter>

@@ -1,4 +1,3 @@
-
 interface IInfo {
     title : string
     content : string

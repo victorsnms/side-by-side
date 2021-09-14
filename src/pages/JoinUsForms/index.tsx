@@ -3,12 +3,22 @@ import CoolImage from "../../assets/images/image-joinpage.png";
 import { Flex, Center, Box, Image, Text, Link } from "@chakra-ui/react";
 import { SignupForm } from "./SignupForm";
 import { LoginForm } from "./LoginForm";
-import { useFormContext } from "../../providers/FormContext";
-import { useState } from "react";
+import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
+import { useEffect } from "react";
 
 export const JoinUsForms = () => {
-  const { formOption, setFormOption } = useFormContext();
-  const [switchOption, setSwitchOption] = useState(false);
+  const {
+    formOption,
+    setOptions,
+    setFormOption,
+  } = useToggleSwitchContext();
+
+  useEffect(() => {
+    setOptions(["Login", "Sign up"]);
+    if(formOption === undefined) {
+      setFormOption("Login");
+    }
+  }, []);
 
   return (
     <Flex
@@ -62,11 +72,7 @@ export const JoinUsForms = () => {
           textAlign="center"
         >
           <Flex justifyContent="center">
-            <ToggleSwitch
-              options={["Login", "Sign up"]}
-              setSwitchOption={setSwitchOption}
-              switchOption={switchOption}
-            />
+            <ToggleSwitch />
           </Flex>
 
           {formOption === "Sign up" && (
