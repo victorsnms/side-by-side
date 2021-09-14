@@ -1,5 +1,5 @@
 import { ToggleSwitch } from "../../components/ToggleSwitch";
-import ImageDesktop from "../../assets/images/image-joinpage.svg";
+import CoolImage from "../../assets/images/image-joinpage.png";
 import { Flex, Center, Box, Image, Text, Link } from "@chakra-ui/react";
 import { SignupForm } from "./SignupForm";
 import { LoginForm } from "./LoginForm";
@@ -33,7 +33,7 @@ export const JoinUsForms = () => {
               </Box>
 
               <Image
-                src={ImageDesktop}
+                src={CoolImage}
                 alt="Illustration form page"
                 w={["200px", "240px", "240", "490px", "580px"]}
                 opacity="85%"
@@ -41,7 +41,7 @@ export const JoinUsForms = () => {
             </>
           ) : (
             <Image
-              src={ImageDesktop}
+              src={CoolImage}
               alt="Illustration form page"
               w="220px"
               mt="4vh"
