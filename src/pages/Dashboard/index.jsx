@@ -40,7 +40,7 @@ export const Dashboard = () => {
   });
   const [selected, setSelected] = useState(null);
   const [inputMarker, setInputMarker] = useState([]);
-  const { markers, createMarker, loadMarkers } = useMarkers();
+  const { markers, loadMarkers } = useMarkers();
   const { accessToken } = useAuth();
 
   //Mock: markers
@@ -91,18 +91,6 @@ export const Dashboard = () => {
     mapRef.current.setZoom(15);
   }, []);
 
-  const getUserLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        panTo({
-          lat: position.coords.latitude,
-          ng: position.coords.longitude,
-        });
-      },
-      () => null
-    );
-  };
-
   useEffect(() => {
     loadMarkers(accessToken);
   }, []);
@@ -112,7 +100,10 @@ export const Dashboard = () => {
 
   return (
     <Box position="relative">
-      <DrawerForms isDisable={inputMarker.length === 0} inputMarker={inputMarker}/>
+      <DrawerForms
+        isDisable={inputMarker.length === 0}
+        inputMarker={inputMarker}
+      />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}
@@ -153,8 +144,16 @@ export const Dashboard = () => {
                 {selected.type === "WasteCollection" ? "Working" : null}Time:{" "}
                 {selected.start_time} - {selected.end_time}
               </Text>
-              <Text>Contact:{selected.contact}</Text>
-              {selected.description ? <h3>{selected.description}</h3> : <></>}
+              <Text>Contact: {selected.contact}</Text>
+              {selected.description ? (
+                <h3>
+                  {selected.description.length <= 30
+                    ? selected.description
+                    : selected.description.slice(0, 30) + "..."}
+                </h3>
+              ) : (
+                <></>
+              )}
               {selected.materials_type ? (
                 <Text>Collecting: {selected.materials_type.join(", ")}</Text>
               ) : (
