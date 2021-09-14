@@ -62,13 +62,13 @@ export const JoinUsForms = () => {
           pt={{ lg: "2.5em" }}
           textAlign="center"
         >
-          <Box pl={{ lg: "2em" }}>
+          <Flex justifyContent="center">
             <ToggleSwitch
               options={["Login", "Sign up"]}
               setSwitchOption={setSwitchOption}
               switchOption={switchOption}
             />
-          </Box>
+          </Flex>
 
           {formOption === "Sign up" && (
             <>
