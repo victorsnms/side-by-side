@@ -4,6 +4,7 @@ import { FormProvider } from "./FormContext";
 import { theme } from "../styles/theme";
 import { AuthProvider } from "./AuthContext";
 import { MarkersProvider } from "./MarkersContext";
+import { UserProvider } from "./UserContext";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -11,10 +12,12 @@ interface AppProviderProps {
 
 export const AppProvider = ({ children }: AppProviderProps) => (
   <AuthProvider>
-    <FormProvider>
-      <MarkersProvider>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
-      </MarkersProvider>
-    </FormProvider>
+      <FormProvider>
+        <MarkersProvider>
+    <UserProvider>
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+    </UserProvider>
+        </MarkersProvider>
+      </FormProvider>
   </AuthProvider>
 );
