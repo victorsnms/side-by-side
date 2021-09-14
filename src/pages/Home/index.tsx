@@ -23,13 +23,13 @@ const Home = () => {
   return (
     <Flex direction="column">
       <HomeMenu />
-      <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
+      <Parallax y={[-40, 40]} tagOuter="figure">
         <Flex
           direction="column"
           justifyContent="center"
           w="100%"
-          h={["50vh", "60vh", "70vh", "80vh"]}
-          bg="gray.100"
+          h={["65vh", "74vh", "83vh", "92vh"]}
+          bg="white"
           pl={["40px", "50px", "60px", "70px"]}
           bgImage={backgroundPlastic}
           backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
@@ -64,6 +64,7 @@ const Home = () => {
         </Flex>
       </Parallax>
       <Center
+        zIndex="1"
         w="100%"
         py="10"
         bg="white"
@@ -72,7 +73,7 @@ const Home = () => {
       >
         RECYCLING
       </Center>
-      <Flex mb="20" textAlign={["center", "center", "left"]} direction="column">
+      <Flex zIndex="1" mb="20" textAlign={["center", "center", "left"]} direction="column">
         <Flex
           px="20"
           bg="white"
@@ -95,6 +96,7 @@ const Home = () => {
         <Flex
           px="20"
           mt="50px"
+          bg="gray.50"
           justifyContent="space-around"
           direction={["column-reverse", "column-reverse", "row"]}
         >
@@ -112,8 +114,9 @@ const Home = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
+      <Parallax y={[-40, 40]} tagOuter="figure">
       <Flex
+        
         direction="column"
         justifyContent="center"
         w="100%"
@@ -121,7 +124,7 @@ const Home = () => {
         bg="gray.100"
         pl={["40px", "50px", "60px", "70px"]}
         bgImage={backgroundCup}
-        backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
+        backgroundSize={["200%", "180%", "165%", "140%, 110%"]}
         bgPosition="center"
         bgRepeat="no-repeat"
       >
@@ -138,31 +141,33 @@ const Home = () => {
         </Text>
       </Flex>
       </Parallax>
-      <Flex py="100px" alignItems="center" direction="column">
-        <Text fontSize={["2xl", "2xl", "3xl"]}>Salve o planeta!</Text>
-        <Button
-          mt="6"
-          w={["250px", "300px", "350px", "400px"]}
-          fontSize={["xl", "xl", "2xl"]}
-          fontWeight="500"
-          bg="green.300"
-          color="black"
-          h="45px"
-          borderRadius="10px"
-          _hover={{ bg: "green.300", color: "green.400" }}
-          _focus={{}}
-          onClick={() => sendTo("Sign up")}
+      <Flex flexDirection="column" zIndex="1">
+        <Flex py="100px" alignItems="center" direction="column" bg="gray.50">
+          <Text fontSize={["2xl", "2xl", "3xl"]}>Salve o planeta!</Text>
+          <Button
+            mt="6"
+            w={["250px", "300px", "350px", "400px"]}
+            fontSize={["xl", "xl", "2xl"]}
+            fontWeight="500"
+            bg="green.300"
+            color="black"
+            h="45px"
+            borderRadius="10px"
+            _hover={{ bg: "green.300", color: "green.400" }}
+            _focus={{}}
+            onClick={() => sendTo("Sign up")}
+          >
+            Join us
+          </Button>
+        </Flex>
+        <Center
+          h={["15vh", "14vh", "13vh", "12vh"]}
+          fontSize={["sm", "md", "lg"]}
+          bg="white"
         >
-          Join us
-        </Button>
+          &copy;Copyright 2021 Echologys Brasil SA. All rights reserved
+        </Center>
       </Flex>
-      <Center
-        h={["15vh", "14vh", "13vh", "12vh"]}
-        fontSize={["sm", "md", "lg"]}
-        bg="white"
-      >
-        &copy;Copyright 2021 Echologys Brasil SA. All rights reserved
-      </Center>
     </Flex>
   );
 };
