@@ -9,6 +9,7 @@ import {
 } from "react";
 import { api } from "../services/api";
 import { Marker } from "../types/makerData";
+import { User } from "../types/userData";
 
 interface MarkersProviderProps {
   children: ReactNode;
@@ -18,6 +19,7 @@ interface MarkersContextData {
   markers: Marker[];
   createMarker: (data: Marker, accessToken: string) => Promise<void>;
   loadMarkers: (accessToken: string) => Promise<void>;
+  updateMyEvents: (id: () => string, accessToken: string, data: Marker) => void;
 }
 
 const MarkersContext = createContext<MarkersContextData>(
@@ -51,7 +53,7 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
 
   const createMarker = useCallback(
     async (data: Marker, accessToken: string) => {
-      api
+      await api
         .post("/markers", data, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
@@ -63,12 +65,28 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     []
   );
 
-  // const joinInEvent = useCallback((
-  //   api.patch("users")
-  // ) => {},[])
+  const updateMyEvents = useCallback(
+    (id: () => string, accessToken: string, data) => {
+      console.log(data);
+      api
+        .patch(
+          `/users/${id}`,
+          { my_events: data },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((response: AxiosResponse<User>) => console.log(response))
+        .catch((err) => console.log(err));
+    },
+    []
+  );
 
+  
   return (
-    <MarkersContext.Provider value={{ markers, createMarker, loadMarkers }}>
+    <MarkersContext.Provider
+      value={{ markers, createMarker, loadMarkers, updateMyEvents }}
+    >
       {children}
     </MarkersContext.Provider>
   );

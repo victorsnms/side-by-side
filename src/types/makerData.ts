@@ -1,5 +1,12 @@
 import { User } from "./userData";
 
+export interface Participants {
+  name: string;
+  id?: number;
+  image_url: string;
+  email: string;
+}
+
 export interface Marker {
   type: string;
     title: string;
@@ -13,7 +20,7 @@ export interface Marker {
     materials_type?: string[];
     description?: string;
     picture_url?: string;
-    participants?: User[];
+    participants?: Participants[];
     date?: string;
     id?: number
   }
