@@ -32,7 +32,7 @@ const Home = () => {
           bg="white"
           pl={["40px", "50px", "60px", "70px"]}
           bgImage={backgroundPlastic}
-          backgroundSize={["200%", "180%", "150%", "130%, 100%"]}
+          backgroundSize={["210%", "180%", "165%", "140%, 110%"]}
           bgPosition="center"
           bgRepeat="no-repeat"
         >
@@ -73,7 +73,7 @@ const Home = () => {
       >
         RECYCLING
       </Center>
-      <Flex zIndex="1" mb="20" textAlign={["center", "center", "left"]} direction="column">
+      <Flex  bg="gray.50" zIndex="1" mb="20" textAlign={["center", "center", "left"]} direction="column">
         <Flex
           px="20"
           bg="white"
@@ -124,7 +124,7 @@ const Home = () => {
         bg="gray.100"
         pl={["40px", "50px", "60px", "70px"]}
         bgImage={backgroundCup}
-        backgroundSize={["200%", "180%", "165%", "140%, 110%"]}
+        backgroundSize={["210%", "180%", "165%", "140%, 110%"]}
         bgPosition="center"
         bgRepeat="no-repeat"
       >
