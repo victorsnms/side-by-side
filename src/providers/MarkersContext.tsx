@@ -8,8 +8,8 @@ import {
   useCallback,
 } from "react";
 import { api } from "../services/api";
-import { Marker } from "../types/makerData";
-import { User } from "../types/userData";
+import { Marker, Participants } from "../types/makerData";
+import { MyEvent, User } from "../types/userData";
 
 interface MarkersProviderProps {
   children: ReactNode;
@@ -22,8 +22,14 @@ interface MarkersContextData {
   updateMyEvents: (
     id: () => string,
     accessToken: string,
-    data: Marker,
-    my_events: Marker[]
+    data: MyEvent,
+    my_events: MyEvent[]
+  ) => void;
+  updateParticipants: (
+    id: () => string,
+    accessToken: string,
+    data: User,
+    participants: Participants[]
   ) => void;
 }
 
@@ -71,7 +77,7 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
   );
 
   const updateMyEvents = useCallback(
-    (id: () => string, accessToken: string, data, my_events: Marker[]) => {
+    (id: () => string, accessToken: string, data, my_events: MyEvent[]) => {
       const newData = [data, ...my_events];
       api
         .patch(
@@ -87,9 +93,26 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     []
   );
 
+  const updateParticipants = useCallback(
+    (id: () => string, accessToken: string, data, participants: Participants[]) => {
+      const newData = [data, ...participants];
+      api
+        .patch(
+          `/markers/${id}`,
+          { participants: newData },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((response: AxiosResponse<User>) => console.log(response))
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
   return (
     <MarkersContext.Provider
-      value={{ markers, createMarker, loadMarkers, updateMyEvents }}
+      value={{ markers, createMarker, loadMarkers, updateMyEvents, updateParticipants }}
     >
       {children}
     </MarkersContext.Provider>
