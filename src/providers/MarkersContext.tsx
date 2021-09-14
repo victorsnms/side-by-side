@@ -73,7 +73,6 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
   const updateMyEvents = useCallback(
     (id: () => string, accessToken: string, data, my_events: Marker[]) => {
       const newData = [data, ...my_events];
-      console.log(newData, data, my_events);
       api
         .patch(
           `/users/${id}`,
