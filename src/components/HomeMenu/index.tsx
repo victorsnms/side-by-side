@@ -14,6 +14,9 @@ const HomeMenu = () => {
 
     return(
         <Flex 
+            position="absolute"
+            w="100%"
+            zIndex="1"
             bg="green.300" 
             h={["15vh", "14vh", "13vh", "12vh"]} 
             pl={["10px", "20px", "30px"]}>
