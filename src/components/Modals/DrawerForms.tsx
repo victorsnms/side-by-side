@@ -31,17 +31,16 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
     isLeft
   } = useToggleSwitchContext();
 
-  setOptions(["Event", "Wast Point"]);
-
   useEffect(() => {
-    setIsLeft(!isLeft);
-  }, []);
+    setOptions(["Event", "Wast Point"]);
+  }, [])
 
   const handleClick = () => {
     setFormOption("Event");
     setIsLeft(!isLeft);
     onOpen();
   };
+
   return (
     <>
       <ButtonAdd onClick={handleClick} disabled={isDisable} />

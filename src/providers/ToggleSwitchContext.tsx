@@ -25,7 +25,7 @@ export const ToggleSwitchProvider = ({
   children,
 }: ToggleSwitchProviderProps) => {
   const [options, setOptions] = useState<string[]>([]);
-  const [formOption, setFormOption] = useState<string>(options[0]);
+  const [formOption, setFormOption] = useState<string>("");
   const [isLeft, setIsLeft] = useState<boolean>(
     formOption === options[0] ? true : false
   );
