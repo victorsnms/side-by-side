@@ -1,11 +1,13 @@
 import { EventCard } from "../../components/EventCard";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { Flex, Box, Heading } from "@chakra-ui/layout";
+import { BottomMenu } from "../../components/BottomMenu";
 
 export const EventsList = () => {
+  const isMobile = window.innerWidth < 768;
   return (
     <Box pl="125px" w="100vw" h="100vh" overflowX="hidden">
-      <DashboardMenu />
+      {isMobile ? <BottomMenu /> : <DashboardMenu />}
       <Box
         display="flex"
         flexDirection="column"
