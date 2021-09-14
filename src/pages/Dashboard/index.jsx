@@ -120,7 +120,7 @@ export const Dashboard = () => {
             key={marker.created_at}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
-              url: marker.type === "Event" ? "/event.png" : "/wastecol.png",
+              url: marker.type === "event" ? "/event.png" : "/wastecol.png",
               scaledSize: new window.google.maps.Size(30, 30),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
@@ -141,7 +141,7 @@ export const Dashboard = () => {
                 {selected.title}
               </Text>
               <Text>
-                {selected.type === "WasteCollection" ? "Working" : null}Time:{" "}
+                {selected.type === "waste collection" ? "Working" : null}Time:{" "}
                 {selected.start_time} - {selected.end_time}
               </Text>
               <Text>Contact: {selected.contact}</Text>
@@ -159,7 +159,7 @@ export const Dashboard = () => {
               ) : (
                 <></>
               )}
-              {selected.type === "Event" ? (
+              {selected.type === "event" ? (
                 <EventDetails marker={selected} />
               ) : null}
             </Box>
