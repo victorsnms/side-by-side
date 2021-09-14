@@ -2,10 +2,12 @@ import { Flex, Accordion, Heading } from "@chakra-ui/react"
 import { InfoDropDown } from "../../components/InfoDropDown"
 import { DashboardMenu } from '../../components/DashboardMenu'
 import { infos } from "../../utils/infos"
+import { BottomMenu } from "../../components/BottomMenu"
 
 export const Info = () => {
+  const isMobile = window.innerWidth < 768;
   return <Flex minH='100vh' h='auto' justifyContent='space-between'>
-    <DashboardMenu />
+    {isMobile ? <BottomMenu /> : <DashboardMenu />}
     <Flex 
       
       alignItems='center' 

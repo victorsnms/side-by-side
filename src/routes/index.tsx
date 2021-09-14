@@ -28,7 +28,7 @@ export const Routes = () => {
       <Route path="/info" component={Info} isPrivate />
       <Route exact path="/joinUs" component={JoinUsForms} />
       <Route exact path="/map" component={Dashboard} isPrivate/>
-      <Route exact path="/events" component={EventsList} />
+      <Route exact path="/events" component={EventsList} isPrivate/>
       <Route component={PageNotFound} isPrivate={!!accessToken} />
     </Switch>
   );
