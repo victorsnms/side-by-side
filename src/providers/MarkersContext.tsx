@@ -19,7 +19,12 @@ interface MarkersContextData {
   markers: Marker[];
   createMarker: (data: Marker, accessToken: string) => Promise<void>;
   loadMarkers: (accessToken: string) => Promise<void>;
-  updateMyEvents: (id: () => string, accessToken: string, data: Marker) => void;
+  updateMyEvents: (
+    id: () => string,
+    accessToken: string,
+    data: Marker,
+    my_events: Marker[]
+  ) => void;
 }
 
 const MarkersContext = createContext<MarkersContextData>(
@@ -66,12 +71,13 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
   );
 
   const updateMyEvents = useCallback(
-    (id: () => string, accessToken: string, data) => {
-      console.log(data);
+    (id: () => string, accessToken: string, data, my_events: Marker[]) => {
+      const newData = [data, ...my_events];
+      console.log(newData, data, my_events);
       api
         .patch(
           `/users/${id}`,
-          { my_events: data },
+          { my_events: newData },
           {
             headers: { Authorization: `Bearer ${accessToken}` },
           }
@@ -82,7 +88,6 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     []
   );
 
-  
   return (
     <MarkersContext.Provider
       value={{ markers, createMarker, loadMarkers, updateMyEvents }}

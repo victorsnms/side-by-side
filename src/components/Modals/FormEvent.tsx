@@ -66,7 +66,7 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
 
   const eventSubmit = (data: EventDataForm) => {
     const { picture_url } = data;
-    const { email, image_url, name, id: idUser } = userData;
+    const { email, image_url, name, id: idUser, my_events } = userData;
     const newData = {
       ...data,
       ...inputMarker[0],
@@ -79,7 +79,7 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
     };
     createMarker(newData, accessToken);
     if (newData.type === "event") {
-      updateMyEvents(id, accessToken, newData);
+      updateMyEvents(id, accessToken, newData, my_events);
     }
   };
 
