@@ -1,12 +1,4 @@
-import {
-  HStack,
-  VStack,
-  Box,
-  Text,
-  Flex,
-  Avatar,
-  Icon,
-} from "@chakra-ui/react";
+import { HStack, Box, Text, Flex, Avatar, Icon } from "@chakra-ui/react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { RiShieldFill, RiMapFill } from "react-icons/ri";
@@ -22,7 +14,7 @@ export const UserInfo = () => {
         w="70%"
         h="136px"
         borderRadius="12px"
-        justifyContent={["center","center","center","flex-end"]}
+        justifyContent={["center", "center", "center", "flex-end"]}
         alignItems={["center", "center", "flex-start", "flex-start"]}
       >
         <Box
@@ -48,22 +40,29 @@ export const UserInfo = () => {
           flexDirection="column"
           mt="1rem"
           w={["100%", "100%", "60%", "60%"]}
-          pl={["0","0","0","2rem","0"]}
-
-
+          pl={["0", "0", "0", "2rem", "0"]}
         >
           <Text
             as="h1"
             fontSize={["1rem", "1rem", "2rem", "2rem"]}
-            textAlign={["center","center","left","left"]}
+            textAlign={["center", "center", "left", "left"]}
           >
             <b>Kenzinho Ecológico</b>
           </Text>
-          <Text as="h2" fontSize="12px" textAlign={["center","center","left","left"]}>
+          <Text
+            as="h2"
+            fontSize="12px"
+            textAlign={["center", "center", "left", "left"]}
+          >
             <Icon as={FaMapMarkerAlt} /> Brasil, América do Sul
           </Text>
         </Flex>
-        <HStack position={["absolute","absolute","absolute","relative"]} bottom="0" right={["none","none","5%","none"]} transform="translateY(50%)">
+        <HStack
+          position={["absolute", "absolute", "absolute", "relative"]}
+          bottom="0"
+          right={["none", "none", "5%", "none"]}
+          transform="translateY(50%)"
+        >
           <Box as={BoxBadges} name="Level" count="10" icon={AiFillStar}></Box>
           <Box as={BoxBadges} name="Badges" count="1" icon={RiShieldFill}></Box>
           <Box as={BoxBadges} name="Level" count="10" icon={RiMapFill}></Box>

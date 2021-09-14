@@ -1,43 +1,9 @@
 import { Box, HStack, Text, Flex } from "@chakra-ui/react";
-import { useState, Dispatch} from "react";
-import { useFormContext } from "../../providers/FormContext";
+import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 
-interface ToggleSwitchProps {
-  options: string[];
-  setSwitchOption: Dispatch<React.SetStateAction<boolean>>;
-  switchOption: boolean;
-}
-
-export const ToggleSwitch = ({
-  options,
-  setSwitchOption,
-  switchOption,
-}: ToggleSwitchProps) => {
-  const { formOption, setFormOption } = useFormContext();
-  const [isLeft, setIsLeft] = useState(
-    formOption === options[0] ? true : false
-  );
-  const [position, setPosition] = useState(isLeft ? "-2%" : "46%");
-  const [option, setOption] = useState(
-    formOption === options[0] ? options[0] : options[1]
-  );
-
-  const handleMovement = () => {
-    if (formOption === options[0]) {
-      setFormOption(options[1]);
-      setIsLeft(false);
-      setPosition("46%");
-      setOption(options[1]);
-    } else {
-      setFormOption(options[0]);
-      setIsLeft(true);
-      setPosition("-2%");
-      setOption(options[0]);
-    }
-    setSwitchOption(!switchOption);
-    setPosition(!switchOption ? "0%" : "43%");
-    setOption(!switchOption ? options[0] : options[1]);
-  };
+export const ToggleSwitch = () => {
+  const { options, formOption, position, handleMovement } =
+    useToggleSwitchContext();
 
   return (
     <>
@@ -47,7 +13,7 @@ export const ToggleSwitch = ({
         h="40px"
         boxShadow=" 0px 4px 4px rgba(0, 0, 0, 0.25);"
         position="relative"
-        onClick={handleMovement}
+        onClick={() => handleMovement()}
       >
         <HStack w="100%" h="100%">
           <Flex
@@ -82,7 +48,7 @@ export const ToggleSwitch = ({
             fontSize="md"
           >
             <Text color="white" fontWeight="bold">
-              {option}
+              {formOption}
             </Text>
           </Flex>
         </HStack>
