@@ -6,77 +6,77 @@ interface IInfo {
 
 export const infos: Array<IInfo> = [
     {
-        title: 'Embalagem reciclável vs reciclada',
-        content: `Antes de tudo, uma embalagem reciclável é uma embalagem que pode passar pelo processo de reciclagem e se tornar matéria-prima para indústria novamente.
+        title: 'Recyclable vs recycled packaging',
+        content: `'Before all, a recyclable pachkaging is a pachkaging  that can go thru the process of recycling and become raw material for industry again.
 
-        Nesse sentido, precisamos esclarecer que nem toda embalagem reciclável (que vem com aquele símbolo da reciclagem) é de fato reciclada!
+        In this way, we need to explain that not all recyclable packaging (that comes with the recyclable symbol) is in the matter of fact recycled!
         
-        Acontece que existem processos de reciclagem para muitos dos tipos de materiais utilizados em embalagens. A grande questão, é que muitos desses processos são extremamente caros e acabam não justificando o valor da reciclagem.
+        It happens to exist recycling precesses to many different kinds of packaging utilized materials. The big question, is that many of those are extremely expencive and end up not worthing the recycling.
         
-        Além disso, muitas vezes, o processo de reciclagem resulta em um material de baixa qualidade, o que acaba não compensando`
+        Beyond that, many times, the recycling process results in a low quality material, what ends up not compensating`
     },
     {
-        title: `Embalagens plásticas`,
-        content: `Quando falamos das embalagens plásticas, precisamos ter em mente que existem 7 tipos de plásticos utilizados na fabricação (PET, PEAD, PEBD, PVC, PP, PS, Outros).
+        title: `Plastic packages`,
+        content: `When we speek of plastic packages, we need to have in mind that there are 7 kinds of plastics used in manufacturing (PET, PEAD, PEBD, PVC, PP, PS, Others).
 
-        Com exceção da categoria Outros, todos os demais possuem algum tipo de processo no qual é possível a reciclagem. No entanto, nem todos são reciclados por conta da baixa qualidade do material resultante ou pelo custo do processo.`
+        With the Others cathegory as an exception, all the others have some kind of process in which the recycling is possible. However, based on the process costs and lack of quality in the material, not all of them are recycled.`
     },
     {
-        title: `Embalagens recicladas`,
-        content: `PET (Polietileno tereftalato): O mesmo das garrafas de refrigerante.
-        Reciclagem depende do tipo de embalagem
-        PVC (Policloreto de Vinila): Compõe as tubulações de água e esgoto.
-        PEBD (Polietileno Baixa Densidade): Pode ser encontrado em brinquedos e peças de computadores.
-        PEAD (Polietileno de Alta Densidade): Utilizado para compor as sacolas plásticas de supermercado.`
+        title: `Recycled packaging`,
+        content: `PET (Polyethylene terephthalate): The same as the soda bottles.
+        Recycling depends on the kind of packaging
+        PVC (Polyvinyl chloride): Makes up the water and sewage pipes.
+        PEBD (Low Density Polyethylene): It can be found in toys and computer parts.
+        PEAD (High density polyethylene): Used to compose plastic supermarket bags.`
     },
     {
-        title: `Embalagens não recicladas`,
-        content: `PP (Propileno): Está presente em embalagens para alimentos congelados.
-        PS (Poliestireno): Compõe os famosos descartáveis.
-        Outros: Dentro desta categoria encontra-se o BOPP, tipo de material que compõe embalagens de alimentos laminadas como batata palha, barra de cereal, salgadinhos.`
+        title: `Non-recycled packaging`,
+        content: `PP (Propylene): It is present in frozen food packaging.
+        PS (Polystyrene): Makes up the famous disposables.
+        Others: Within this category is the BOPP, type of material that composes laminated food packaging such as straw potatoes, cereal bars, snacks.`
     },
     {
-        title: `Embalagens de vidro`,
-        content: `O vidro por muito tempo foi considerado um material super sustentável, dada que a sua reutilização é infinita até… se quebrar!
+        title: `Glass packaging`,
+        content: `Glass has long been considered a super sustainable material, since its reuse is infinite until… it breaks!
 
-        O vidro quebrado ainda é um desafio para cooperativas, visto que há um custo da coleta e triagem, por conta do risco de acidentes dos cooperados, que não compensa tanto ao compararmos com o valor recebido pela venda do material.`
+        Broken glass is still a challenge for co-ops, as there is a cost of collection and sorting, on account of the risk of accidents of the members, which doesn't pay as much when compared to the value received from the sale of the material.`
     },
     {
-        title: `Embalagens de papel`,
-        content: `A taxa de reciclagem de embalagens de papel é uma das maiores dentre os materiais reciclados.
+        title: `Paper packaging`,
+        content: `The recycling rate for paper packaging is one of the highest among recycled materials.
 
-        Além disso, o papel possui um tempo de decomposição de no máximo 100 anos, um número muito menor do que quando comparado com outros grupos, onde, por exemplo, o plástico chega a 500 anos para se decompor.
+        In addition, the paper has a maximum decomposition time of 100 years, a much smaller number than when compared to other groups, where, for exemple, plastic takes 500 years to decompose.
         
-        Ambos os fatos tornam as embalagens feitas com esse tipo de material muito mais sustentável, pelo alto nível de reciclabilidade (até caixas de pizzas podem ser recicladas) e pelo curto tempo de decomposição.`
+        Both facts make packaging made with this type of material much more sustainable, by the high level of recyclability (even pizza boxes can be recycled) and by the short decomposition time.`
     },
     {
-        title: `Embalagens de metal`,
-        content: `Dentro da categoria metal existem diversos tipos (aço, alumínio, cobre e outros). Esse tipo de material é extremamente reciclável e reciclado, por possuir um baixo custo no processo de reciclagem e por resultar em uma matéria prima de qualidade.
+        title: `Metal packaging`,
+        content: `Within the metal category there are several types (steel, aluminum, copper and others). This type of material is extremely recyclable and recycled, for having a low cost in the recycling process and for resulting in a quality raw material.
 
-        Atualmente, latas de alumínio e de aço possuem uma margem de reciclagem superior a 90% e 60%, respectivamente.
+        Currently, aluminum and steel cans have a recycling margin greater than 90% and 60%, respectively.
         
-        Esses números fazem bem não só para o meio ambiente, como também para a economia.`
+        These numbers are good not only for the environment, but also for the economy.`
     },
     {
-        title: `Decomposição leva tempo!`,
-        content: `Papel	De 3 a 6 meses
-        Tecido	De 6 meses a 1 ano
-        Filtro de cigarro	Mais de 5 anos
-        Madeira pintada	Mais de 13 anos
-        Náilon	Mais de 20 anos
-        Metal	Mais de 100 anos
-        Alumínio	Mais de 200 anos
-        Plástico	Mais de 400 anos
-        Vidro	Mais de 1000 anos
-        Borracha	Tempo indeterminado`
+        title: `Decomposition takes time!`,
+        content: `Paper  From 3 to 6 months
+        Fabric  From 6 months to 1 year
+        Cigarette filter  More than 5 years
+        Painted wood  More than 13 years
+        nylon  20+ years
+        Metal  over 100 years
+        Aluminum  Over 200 years
+        Plastic  Over 400 years
+        Glass  More than 1000 years
+        rubber  indefinite time`
     },
     {
-        title: `Quais são os materiais que não podem ser reciclados?`,
-        content: `Lixo Orgânico: restos de comida, cascas de legumes, frutas, cascas de ovos, etc.
-        Os chamados Rejeitos: lenços, papel higiênico, absorventes e guardanapos de papel sujos, fotografias, espuma, acrílico, espelhos, cerâmica, porcelana, tijolos etc.
-        Resíduos contaminantes específicos como pilhas e baterias.
-        Resíduos hospitalares: algodão, seringas, agulhas, gaze, ataduras etc.
-        Lixo químico ou tóxico: embalagens de agrotóxicos, latas de verniz, solventes, inseticidas, etc.`
+        title: `What are the materials that cannot be recycled?`,
+        content: `Organic waste: food scraps, vegetable peels, fruits, egg peels, etc.
+        The so-called Tailings: tissues, toilet paper, absorbents and dirty paper napkins, photographs, foam, acrylic, mirrors, ceramics, porcelain, bricks etc.
+        Specific contaminating waste such as cells and batteries.
+        Hospital waste: cotton, syringes, needles, gauze, bandages etc.
+        Chemical or toxic waste: pesticide containers, varnish cans, solvents, insecticides, etc.`
     }
 ]
 
