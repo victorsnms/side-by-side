@@ -75,6 +75,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         description,
         picture_url,
         id: eventId,
+        participants
       } = marker;
       const eventFilteredData = {
         address: address,
@@ -89,6 +90,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         start_time: start_time,
         title: title,
         id: eventId,
+        particiants: participants
       };
 
       const eventData = [eventFilteredData, ...my_events];
