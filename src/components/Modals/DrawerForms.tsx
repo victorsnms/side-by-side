@@ -19,23 +19,18 @@ interface DrawerFormProps extends InputMarker {
   isDisable: boolean;
 }
 
-
-
 export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = window.innerWidth < 768;
   const position = isMobile ? "bottom" : "left";
 
-  const {
-    setFormOption,
-    setOptions,
-    setIsLeft,
-    isLeft
-  } = useToggleSwitchContext();
+  const { setFormOption, setOptions, setIsLeft, isLeft } =
+    useToggleSwitchContext();
 
   useEffect(() => {
     setOptions(["Event", "Wast Point"]);
-  }, [])
+    setIsLeft(true);
+  }, [isLeft]);
 
   const handleClick = () => {
     setFormOption("Event");
@@ -64,10 +59,13 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
             <ToggleSwitch />
           </DrawerHeader>
           <DrawerBody>
-            {!isLeft ? (
+            {isLeft ? (
               <FormEvent inputMarker={inputMarker} onClose={onClose} />
             ) : (
-              <FormWasteCollection inputMarker={inputMarker} onClose={onClose} />
+              <FormWasteCollection
+                inputMarker={inputMarker}
+                onClose={onClose}
+              />
             )}
           </DrawerBody>
         </DrawerContent>
