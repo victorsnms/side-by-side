@@ -5,15 +5,26 @@ import { BottomMenu } from "../../components/BottomMenu";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
+import { useLocation } from "../../providers/LocationContext";
+import { haversine } from "../../utils/haversine";
 
 export const EventsList = () => {
-  const isMobile = window.innerWidth < 992;
+  const isMobile = window.innerWidth < 768;
   const { allEvents, displayEvents } = useMarkers();
   const { accessToken } = useAuth();
+  const { location, setLocation } = useLocation();
+
+  const { lat: userLat, lng: userLng } = location;
 
   useEffect(() => {
     displayEvents(accessToken);
-  }, [])
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  }, []);
 
   return (
     <Box pl={{ base: "0", lg: "125px" }} w="90vw" h="100vh" m="0 auto">
@@ -25,7 +36,7 @@ export const EventsList = () => {
           textTransform="uppercase"
           fontSize="2xl"
         >
-          Events List
+          Near Events
         </Heading>
 
         <Flex
@@ -37,18 +48,16 @@ export const EventsList = () => {
           mb={{ base: "110px", lg: "0" }}
         >
           {allEvents &&
-            allEvents.map((event, index) => (
-              <Box key={index} m={{ base: "0.2em 0", lg: "0.5em" }}>
-                <EventCard
-                  picture_url={event.picture_url}
-                  title={event.title}
-                  date={event.date}
-                  start_time={event.start_time}
-                  end_time={event.end_time}
-                  participants={event.participants}
-                />
-              </Box>
-            ))}
+            allEvents
+              .filter(
+                (event) =>
+                  haversine(userLat, userLng, event.lat, event.lng) < 100 //events under 100km
+              )
+              .map((event, index) => (
+                <Box key={index} m={{ base: "0.2em 0", lg: "0.5em" }}>
+                  <EventCard marker={event} />
+                </Box>
+              ))}
         </Flex>
       </Box>
     </Box>

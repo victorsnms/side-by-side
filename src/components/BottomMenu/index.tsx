@@ -44,7 +44,7 @@ export const BottomMenu = () => {
                     to='/dashboard'
                 >
                     <Icon fontSize='3xl' as={BiHome}/> 
-                    <Text fontSize='sm'>Home</Text>
+                    <Text fontSize='sm'>Profile</Text>
                 </ListItem>
                 <ListItem 
                     textAlign='center' 

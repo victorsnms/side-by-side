@@ -2,34 +2,30 @@ import { Text, Flex, Box, Heading } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BiCalendarAlt } from "react-icons/bi";
 import { MdGroup } from "react-icons/md";
-import { Participants } from "../../types/makerData";
+import { Marker } from "../../types/makerData";
+import { useEventDetails } from "../../providers/EventDetailsContext";
+import { EventDetails } from "../Modals/EventDetails";
 
 interface EventCardProps {
-  picture_url?: string;
-  title: string;
-  date?: string;
-  start_time: string;
-  end_time: string;
-  participants?: Participants[];
+  marker: Marker;
 }
 
-export const EventCard = ({
-  picture_url,
-  title,
-  date,
-  start_time,
-  end_time,
-  participants,
-}: EventCardProps) => {
+export const EventCard = ({ marker }: EventCardProps) => {
+  const { selectedEvent, event } = useEventDetails();
+
   return (
     <Box
       w={{ base: "95vw", lg: "370px" }}
       maxW="370px"
       h={{ base: "30vh", lg: "190px" }}
       borderRadius="10px"
-      bgImage={picture_url}
+      bgImage={marker.picture_url}
       bgSize="cover"
+      onClick={() => selectedEvent(marker)}
+      _hover={{ border: "1px", borderColor: "brown.200", cursor: "pointer" }}
     >
+      <EventDetails marker={event} />
+
       <Flex
         w={{ base: "95vw", lg: "370px" }}
         maxW="370px"
@@ -39,26 +35,29 @@ export const EventCard = ({
         borderRadius="10px"
         bgColor="gray.300"
         p="10px 15px"
+        _hover={{ border: "1px", borderColor: "brown.200", cursor: "pointer" }}
       >
         <Heading as="h4" fontSize={{ base: "26px" }} color="white">
-          {title}
+          {marker.title}
         </Heading>
 
         <Flex color="white" justify="space-between" fontSize={{ base: "18px" }}>
           <Flex direction="column">
             <Flex align="center">
               <BiCalendarAlt />
-              <Text pl="0.2em">{date}</Text>
+              <Text pl="0.2em">{marker.date}</Text>
             </Flex>
             <Flex align="center">
               <AiOutlineClockCircle />
               <Text pl="0.2em">
-                {start_time} - {end_time}
+                {marker.start_time} - {marker.end_time}
               </Text>
             </Flex>
           </Flex>
           <Flex align="center" alignSelf="flex-end">
-            <Text pr="0.2em">{participants ? participants.length : "0"}</Text>
+            <Text pr="0.2em">
+              {marker.participants ? marker.participants.length : "0"}
+            </Text>
             <MdGroup />
           </Flex>
         </Flex>

@@ -125,6 +125,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
       picture_url: data_picture_url,
       start_time,
       title,
+      participants
     } = newData;
     const filteredData = {
       address: address,
@@ -138,6 +139,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
       picture_url: data_picture_url,
       start_time: start_time,
       title: title,
+      participants: participants
     };
     setIsLoading.on();
     createMarker(newData, accessToken);

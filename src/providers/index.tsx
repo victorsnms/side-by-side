@@ -6,21 +6,27 @@ import { MarkersProvider } from "./MarkersContext";
 import { ModalProvider } from "./ModalProviders";
 import { UserProvider } from "./UserContext";
 import { ToggleSwitchProvider } from "./ToggleSwitchContext";
+import { LocationProvider } from "./LocationContext";
+import { EventDetailsProvider } from "./EventDetailsContext";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => (
-        <ModalProvider>
-  <AuthProvider>
-    <MarkersProvider>
-      <UserProvider>
-        <ToggleSwitchProvider>
-          <ChakraProvider theme={theme}>{children}</ChakraProvider>
-        </ToggleSwitchProvider>
-      </UserProvider>
-    </MarkersProvider>
-  </AuthProvider>
-        </ModalProvider>
+  <ModalProvider>
+    <AuthProvider>
+      <MarkersProvider>
+        <UserProvider>
+          <LocationProvider>
+            <ToggleSwitchProvider>
+              <EventDetailsProvider>
+                <ChakraProvider theme={theme}>{children}</ChakraProvider>
+              </EventDetailsProvider>
+            </ToggleSwitchProvider>
+          </LocationProvider>
+        </UserProvider>
+      </MarkersProvider>
+    </AuthProvider>
+  </ModalProvider>
 );

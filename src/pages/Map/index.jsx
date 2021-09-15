@@ -16,6 +16,9 @@ import { Box, IconButton, Icon, Text } from "@chakra-ui/react";
 import { EventDetails } from "../../components/Modals/EventDetails";
 import { BiHome } from "react-icons/bi";
 import { BottomMenu } from "../../components/BottomMenu";
+import { useLocation } from "../../providers/LocationContext";
+import { ButtonForms } from "../../components/ButtonForms";
+import { useEventDetails } from "../../providers/EventDetailsContext";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -24,18 +27,18 @@ const mapContainerStyle = {
   width: "100vw",
   height: "100vh",
 };
-const center = {
-  lat: -25.42836,
-  lng: -49.27325,
-};
+// const center = {
+//   lat: -25.42836,
+//   lng: -49.27325,
+// };
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
   zoomControlOptions: {
-    position: 3
-   }
-};
+    position: 3,
+  }
+}
 
 export const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -46,6 +49,8 @@ export const Map = () => {
   const [inputMarker, setInputMarker] = useState([]);
   const { markers, loadMarkers } = useMarkers();
   const { accessToken } = useAuth();
+  const { location, setLocation } = useLocation();
+  const { onOpen } = useEventDetails();
 
   const isMobile = window.innerWidth < 768;
 
@@ -74,6 +79,12 @@ export const Map = () => {
 
   useEffect(() => {
     loadMarkers(accessToken);
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
   }, []);
 
   if (loadError) return <div>Error loading maps"</div>;
@@ -88,7 +99,7 @@ export const Map = () => {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}
-        center={center}
+        center={location}
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}
@@ -96,9 +107,9 @@ export const Map = () => {
       >
         {isMobile ? <BottomMenu /> : <DashboardMenu />}
         <Locate panTo={panTo} />
-        {markers.map((marker) => (
+        {markers.map((marker,index) => (
           <Marker
-            key={marker.created_at}
+            key={index}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: marker.type === "event" ? "/event.png" : "/wastecol.png",
@@ -141,9 +152,26 @@ export const Map = () => {
                 <></>
               )}
               {selected.type === "event" ? (
-                <EventDetails marker={selected} />
+                <>
+                  <EventDetails marker={selected} />
+                  <ButtonForms
+                    marginLeft={"2px"}
+                    marginBottom={"2px"}
+                    marginTop={"5px"}
+                    width={["100px", "100px", "100px"]}
+                    type={undefined}
+                    onClick={onOpen}
+                    color={"gray.60"}
+                    backgroundColor={"green.300"}
+                    h={4}
+                    fontSize={"12px"}
+                  >
+                    Show details
+                  </ButtonForms>
+                </>
               ) : null}
             </Box>
+
           </InfoWindow>
         ) : null}
 
