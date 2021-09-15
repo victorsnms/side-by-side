@@ -4,7 +4,7 @@ const BadgesDisplay = () => {
 
 
     return(
-        <Flex mt={["10%", "5%", "2%"]} flexDirection="column" textAlign="center">
+        <Flex mt={["5%", "5%", "0%"]} flexDirection="column" textAlign="center">
             <Text fontSize={["xl", "2xl", "3xl", "4xl"]} pt="5%" fontWeight="bold">BADGES</Text>
             <Flex
                 flexWrap="wrap"
