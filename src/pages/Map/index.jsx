@@ -16,6 +16,8 @@ import { Box, IconButton, Icon, Text } from "@chakra-ui/react";
 import { EventDetails } from "../../components/Modals/EventDetails";
 import { BiHome } from "react-icons/bi";
 import { BottomMenu } from "../../components/BottomMenu";
+import { ButtonForms } from "../../components/ButtonForms";
+import { useEventDetails } from "../../providers/EventDetailsContext";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -34,7 +36,7 @@ const options = {
   zoomControl: true,
   zoomControlOptions: {
     position: 3
-   }
+  }
 };
 
 export const Map = () => {
@@ -46,6 +48,7 @@ export const Map = () => {
   const [inputMarker, setInputMarker] = useState([]);
   const { markers, loadMarkers } = useMarkers();
   const { accessToken } = useAuth();
+  const { onOpen } = useEventDetails();
 
   const isMobile = window.innerWidth < 768;
 
@@ -141,9 +144,26 @@ export const Map = () => {
                 <></>
               )}
               {selected.type === "event" ? (
-                <EventDetails marker={selected} />
+                <>
+                  <EventDetails marker={selected} />
+                  <ButtonForms
+                    marginLeft={"2px"}
+                    marginBottom={"2px"}
+                    marginTop={"5px"}
+                    width={["100px", "100px", "100px"]}
+                    type={undefined}
+                    onClick={onOpen}
+                    color={"gray.60"}
+                    backgroundColor={"green.300"}
+                    h={4}
+                    fontSize={"12px"}
+                  >
+                    Show details
+                  </ButtonForms>
+                </>
               ) : null}
             </Box>
+
           </InfoWindow>
         ) : null}
 

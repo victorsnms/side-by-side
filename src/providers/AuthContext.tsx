@@ -9,7 +9,6 @@ import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
 import { User } from "../types/userData";
 import { AxiosResponse } from "axios";
-import { useModal } from "./ModalProviders";
 
 interface AuthProviderProps {
   children: ReactNode;
