@@ -16,9 +16,9 @@ import { Box, IconButton, Icon, Text } from "@chakra-ui/react";
 import { EventDetails } from "../../components/Modals/EventDetails";
 import { BiHome } from "react-icons/bi";
 import { BottomMenu } from "../../components/BottomMenu";
+import { useLocation } from "../../providers/LocationContext";
 import { ButtonForms } from "../../components/ButtonForms";
 import { useEventDetails } from "../../providers/EventDetailsContext";
-import { useLocation } from "../../providers/LocationContext";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -37,8 +37,8 @@ const options = {
   zoomControl: true,
   zoomControlOptions: {
     position: 3,
-  },
-};
+  }
+}
 
 export const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -49,8 +49,8 @@ export const Map = () => {
   const [inputMarker, setInputMarker] = useState([]);
   const { markers, loadMarkers } = useMarkers();
   const { accessToken } = useAuth();
-  const { onOpen } = useEventDetails();
   const { location, setLocation } = useLocation();
+  const { onOpen } = useEventDetails();
 
   const isMobile = window.innerWidth < 768;
 
