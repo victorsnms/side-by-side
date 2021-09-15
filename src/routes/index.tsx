@@ -8,6 +8,7 @@ import { JoinUsForms } from "../pages/JoinUsForms";
 import { useAuth } from "../providers/AuthContext";
 import { Route } from "./Routes";
 import Profile from "../pages/Profile";
+import Badges from "../pages/Badges";
 
 // Import your component here
 //<Route exact path="/" />
@@ -30,6 +31,7 @@ export const Routes = () => {
       <Route exact path="/joinUs" component={JoinUsForms} />
       <Route exact path="/map" component={Map} isPrivate/>
       <Route exact path="/events" component={EventsList} isPrivate/>
+      <Route exact path="/badges" component={Badges} isPrivate/>
       <Route component={PageNotFound} isPrivate={!!accessToken} />
     </Switch>
   );
