@@ -5,7 +5,6 @@ import {
   Input as ChakraInput,
   Box,
   HStack,
-  FormErrorMessage,
   Icon,
   useBoolean,
   useDisclosure,
@@ -13,10 +12,9 @@ import {
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { Input } from "../Input";
-import { AiFillShop, AiOutlineCalendar } from "react-icons/ai";
-import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
+import { AiFillShop } from "react-icons/ai";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { RiContactsBookFill, RiTimeLine, RiRecycleFill } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { useState } from "react";
