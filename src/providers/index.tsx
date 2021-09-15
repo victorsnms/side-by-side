@@ -4,12 +4,14 @@ import { FormProvider } from "./FormContext";
 import { theme } from "../styles/theme";
 import { AuthProvider } from "./AuthContext";
 import { MarkersProvider } from "./MarkersContext";
+import { ModalProvider } from "./ModalProviders";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => (
+        <ModalProvider>
   <AuthProvider>
     <FormProvider>
       <MarkersProvider>
@@ -17,4 +19,5 @@ export const AppProvider = ({ children }: AppProviderProps) => (
       </MarkersProvider>
     </FormProvider>
   </AuthProvider>
+        </ModalProvider>
 );

@@ -1,11 +1,11 @@
 //necessita passar para o app provider
-import { AxiosResponse } from "axios";
 import {
   createContext,
   useContext,
   useState,
   ReactNode,
   useCallback,
+  Dispatch,
 } from "react";
 import { api } from "../services/api";
 import { Marker } from "../types/makerData";
@@ -16,7 +16,7 @@ interface MarkersProviderProps {
 
 interface MarkersContextData {
   markers: Marker[];
-  createMarker: (data: Marker, accessToken: string) => Promise<void>;
+  setMarkers: Dispatch<React.SetStateAction<Marker[]>>;
   loadMarkers: (accessToken: string) => Promise<void>;
 }
 
@@ -49,26 +49,8 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     }
   }, []);
 
-  const createMarker = useCallback(
-    async (data: Marker, accessToken: string) => {
-      api
-        .post("/markers", data, {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        })
-        .then((response: AxiosResponse<Marker>) =>
-          setMarkers((oldMarkers) => [...oldMarkers, response.data])
-        )
-        .catch((err) => console.log(err));
-    },
-    []
-  );
-
-  // const joinInEvent = useCallback((
-  //   api.patch("users")
-  // ) => {},[])
-
   return (
-    <MarkersContext.Provider value={{ markers, createMarker, loadMarkers }}>
+    <MarkersContext.Provider value={{ markers, setMarkers, loadMarkers }}>
       {children}
     </MarkersContext.Provider>
   );

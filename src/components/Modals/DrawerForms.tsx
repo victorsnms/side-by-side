@@ -20,6 +20,8 @@ interface DrawerFormProps extends InputMarker {
   isDisable: boolean;
 }
 
+
+
 export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const options = ["Event", "Wast Point"];
@@ -63,9 +65,9 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
           </DrawerHeader>
           <DrawerBody>
             {!switchOption ? (
-              <FormEvent inputMarker={inputMarker} />
+              <FormEvent inputMarker={inputMarker} onClose={onClose} />
             ) : (
-              <FormWasteCollection inputMarker={inputMarker} />
+              <FormWasteCollection inputMarker={inputMarker} onClose={onClose} />
             )}
           </DrawerBody>
         </DrawerContent>
