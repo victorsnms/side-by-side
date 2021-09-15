@@ -20,6 +20,11 @@ import { FaImage, FaUser } from "react-icons/fa";
 import { AiOutlineUser } from "react-icons/ai";
 import { api } from "../../services/api";
 
+interface Data {
+  name: string;
+  image_url: string;
+}
+
 export const EditProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = window.innerWidth < 768;
@@ -35,8 +40,6 @@ export const EditProfile = () => {
 
   const eventSchema = yup.object().shape({
     name: yup.string().required("Event name required"),
-    address: yup.string().required("Eventa address required"),
-    contact: yup.string().required("Email or cellphone required"),
     image_url: yup.string().url("Url image invalid").required("Image required"),
   });
 
@@ -46,13 +49,18 @@ export const EditProfile = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(eventSchema) });
 
-  const onSubmitFunction = data => {
-      api.patch(`/users/${id}`, )
-  }
+  const onSubmitFunction = (data:Data) => {
+      api.patch(`/users/${id}`, data,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+       ).then((response) => console.log(response.data)).catch((_) => console.log("modal de error"))
+  };
 
   return (
     <>
       <ButtonAdd onClick={onOpen} />
+      
 
       <Drawer
         isOpen={isOpen}
@@ -88,13 +96,6 @@ export const EditProfile = () => {
               {...register("image_url")}
               error={errors.image_url}
               value={image_url}
-            />
-            <Input
-              icon={FaImage}
-              placeholder="Your address"
-              {...register("address")}
-              error={errors.address}
-              value={address}
             />
 </VStack>
            </Flex>
