@@ -82,7 +82,6 @@ export const Map = () => {
         lng: position.coords.longitude,
       });
     });
-    console.log(location);
   }, []);
 
   if (loadError) return <div>Error loading maps"</div>;
