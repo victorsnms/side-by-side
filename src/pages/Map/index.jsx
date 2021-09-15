@@ -107,9 +107,9 @@ export const Map = () => {
       >
         {isMobile ? <BottomMenu /> : <DashboardMenu />}
         <Locate panTo={panTo} />
-        {markers.map((marker) => (
+        {markers.map((marker,index) => (
           <Marker
-            key={marker.created_at}
+            key={index}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: marker.type === "event" ? "/event.png" : "/wastecol.png",

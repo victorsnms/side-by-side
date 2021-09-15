@@ -48,7 +48,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
   useEffect(() => {
     getUser(id, accessToken);
   }, []);
-  console.log(marker)
+
   const handleSubmit = () => {
     //updates event participants and user events
     if (marker.participants !== undefined) {
@@ -75,7 +75,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         description,
         picture_url,
         id: eventId,
-        participants
+        participants,
       } = marker;
       const eventFilteredData = {
         address: address,
@@ -90,7 +90,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         start_time: start_time,
         title: title,
         id: eventId,
-        particiants: participants
+        particiants: participants,
       };
 
       const eventData = [eventFilteredData, ...my_events];
@@ -148,7 +148,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         onClose={onErrorClose}
         message="Slow down, you already participate in this group. But you can have a WORLD of options"
       />
-      
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="green.70" />
         <ModalContent>
