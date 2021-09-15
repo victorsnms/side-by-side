@@ -38,7 +38,6 @@ export const UserInfo = () => {
             _hover={{
               filter:"grayscale(70%)"
             }}
-            ml="500px"
             overflow="hidden"
           >
             <EditProfile/>
