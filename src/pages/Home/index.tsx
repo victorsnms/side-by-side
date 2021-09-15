@@ -145,9 +145,9 @@ const Home = () => {
               mt="6"
               w={["250px", "300px", "350px", "400px"]}
               fontSize={["xl", "xl", "2xl"]}
-              fontWeight="500"
+              fontWeight="bold"
               bg="green.300"
-              color="black"
+              color="white"
               h="45px"
               borderRadius="10px"
               _hover={{ bg: "green.300", color: "green.400" }}
