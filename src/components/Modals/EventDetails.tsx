@@ -172,7 +172,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             <ButtonForms
               width={["250px", "250px", "250px"]}
               type={undefined}
-              onClick={onClose}
+              onClick={handleClick}
             >
               Join
             </ButtonForms>
