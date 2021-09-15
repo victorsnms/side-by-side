@@ -47,8 +47,8 @@ const useAuth = () => {
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>(() => {
-    const accessToken = localStorage.getItem("@Foobar:accessToken");
-    const id = localStorage.getItem("@Foobar:id");
+    const accessToken = localStorage.getItem("@SideBySide:accessToken");
+    const id = localStorage.getItem("@SideBySide:id");
     if (accessToken && id) {
       return { accessToken, id: JSON.parse(id) };
     }
@@ -63,16 +63,16 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       
       const { accessToken } = response.data;
       const { sub: id } = jwt_decode<string>(accessToken);
-      localStorage.setItem("@Foobar:accessToken", accessToken);
-      localStorage.setItem("@Foobar:id", JSON.stringify(id));
+      localStorage.setItem("@SideBySide:accessToken", accessToken);
+      localStorage.setItem("@SideBySide:id", JSON.stringify(id));
       setData({ accessToken, id });
     },
     []
   );
 
   const signOut = useCallback(() => {
-    localStorage.removeItem("@Foobar:accessToken");
-    localStorage.removeItem("@Foobar:id");
+    localStorage.removeItem("@SideBySide:accessToken");
+    localStorage.removeItem("@SideBySide:id");
 
     setData({} as AuthContextData);
   }, []);
