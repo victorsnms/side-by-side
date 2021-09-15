@@ -1,15 +1,12 @@
-interface IBadge {
-    achieved: boolean
-}
 
 export default interface IAllBadges {
-    join:
-    waste:
-    event:
-    first:
-    secon:
-    third:
-    fourth:
-    fifth:
-    sixth:
+    join: boolean
+    waste: boolean
+    event: boolean
+    first: boolean
+    second: boolean
+    third: boolean
+    fourth: boolean
+    fifth: boolean
+    sixth: boolean
 }
