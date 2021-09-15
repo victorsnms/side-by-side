@@ -143,6 +143,7 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
           placeholder="Date"
           error={errors.date}
           {...register("date")}
+          type="date"
         />
         <HStack>
           <Input
@@ -150,12 +151,14 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
             placeholder="Starts at:"
             error={errors.start_time}
             {...register("start_time")}
+            type="time"
           />
           <Input
             icon={RiTimeLine}
             placeholder="Ends at:"
             error={errors.end_time}
             {...register("end_time")}
+            type="time"
           />
         </HStack>
         <Textarea

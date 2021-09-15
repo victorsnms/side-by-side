@@ -61,7 +61,20 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
               switchOption={switchOption}
             />
           </DrawerHeader>
-          <DrawerBody>
+          <DrawerBody
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+                borderRadius: "8px",
+                backgroundColor: `rgba(72, 135, 136, 0.5)`,
+                marginRight: "30px  "
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: `#488788`,
+                borderRadius: "8px",
+              },
+            }}
+          >
             {!switchOption ? (
               <FormEvent inputMarker={inputMarker} />
             ) : (

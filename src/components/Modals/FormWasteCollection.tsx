@@ -33,12 +33,11 @@ interface WCDataForm {
   end_time: string;
 }
 
-export const FormWasteCollection = ({inputMarker}:InputMarker) => {
+export const FormWasteCollection = ({ inputMarker }: InputMarker) => {
   const [materialsType, setMaterialsType] = useState<string[]>([]);
   const [hasntMaterial, setHasntMaterial] = useBoolean();
-  const {accessToken} = useAuth();
-  const {createMarker} = useMarkers()
- 
+  const { accessToken } = useAuth();
+  const { createMarker } = useMarkers();
 
   const eventSchema = yup.object().shape({
     title: yup.string().required("Waste colection name required"),
@@ -56,19 +55,16 @@ export const FormWasteCollection = ({inputMarker}:InputMarker) => {
 
   const wasteCollectionSubmit = (data: WCDataForm) => {
     if (materialsType.length === 0) {
-     return setHasntMaterial.on();
-    } 
+      return setHasntMaterial.on();
+    }
     setHasntMaterial.off();
-    const newData ={
+    const newData = {
       type: "waste collection",
       materialsType: materialsType,
       ...inputMarker[0],
       ...data,
-
-    }
-    createMarker(newData,accessToken)
-
-  
+    };
+    createMarker(newData, accessToken);
   };
 
   return (
@@ -105,17 +101,25 @@ export const FormWasteCollection = ({inputMarker}:InputMarker) => {
             placeholder="Open at:"
             error={errors.start_time}
             {...register("start_time")}
+            type="time"
           />
           <Input
             icon={RiTimeLine}
             placeholder="Close at:"
             error={errors.end_time}
             {...register("end_time")}
+            type="time"
+            css={{
+              "input[type='time']::-webkit-calendar-picker-indicator": {
+                background: "none",
+                color: "transparent",
+              },
+            }}
           />
         </HStack>
         <Flex flexDirection="column">
           <HStack pl="12px" mb="12px">
-        <Icon as={RiRecycleFill} color="gray.200"/>
+            <Icon as={RiRecycleFill} color="gray.200" />
             <Text
               as="label"
               children="Choose the types:"
