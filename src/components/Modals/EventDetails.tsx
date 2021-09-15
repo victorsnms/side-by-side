@@ -10,7 +10,6 @@ import {
   Box,
   Text,
   Flex,
-  Button,
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -173,7 +172,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             <ButtonForms
               width={["250px", "250px", "250px"]}
               type={undefined}
-              onClick={handleClick}
+              onClick={onClose}
             >
               Join
             </ButtonForms>

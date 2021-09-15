@@ -4,7 +4,6 @@ import {
   Text,
   HStack,
   Box,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { Input } from "../Input";
 import { useForm } from "react-hook-form";
