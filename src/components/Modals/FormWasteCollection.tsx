@@ -7,6 +7,7 @@ import {
   HStack,
   Icon,
   useBoolean,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -18,9 +19,14 @@ import { RiContactsBookFill, RiTimeLine, RiRecycleFill } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { useState } from "react";
 import { OptionsMaterialsType } from "../OptionsMaterialsTypes";
-import { InputMarker } from "../../types/makerData";
+import { WCDefaultData } from "../../utils/WCDefaultData";
+import { InputMarker, Marker } from "../../types/makerData";
 import { useAuth } from "../../providers/AuthContext";
 import { useMarkers } from "../../providers/MarkersContext";
+import { AxiosResponse } from "axios";
+import { api } from "../../services/api";
+import { ModalSuccess } from "./ModalSuccess";
+import { ModalError } from "./ModalError";
 
 interface WCDataForm {
   title: string;
@@ -30,11 +36,26 @@ interface WCDataForm {
   end_time: string;
 }
 
-export const FormWasteCollection = ({ inputMarker }: InputMarker) => {
+interface FormWCProps extends InputMarker {
+  onClose: () => void
+}
+
+export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
   const [materialsType, setMaterialsType] = useState<string[]>([]);
   const [hasntMaterial, setHasntMaterial] = useBoolean();
   const { accessToken } = useAuth();
-  const { createMarker } = useMarkers();
+  const { setMarkers } = useMarkers();
+  const [isLoading, setIsLoading] = useBoolean();
+  const {
+    isOpen: isSuccessOpen,
+    onClose: onSuccessClose,
+    onOpen: onSuccessOpen,
+  } = useDisclosure();
+  const {
+    isOpen: isErrorOpen,
+    onClose: onErrorClose,
+    onOpen: onErrorOpen,
+  } = useDisclosure();
 
   const eventSchema = yup.object().shape({
     title: yup.string().required("Waste colection name required"),
@@ -50,6 +71,22 @@ export const FormWasteCollection = ({ inputMarker }: InputMarker) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(eventSchema) });
 
+  const createMarker = async (data: Marker, accessToken: string) => {
+    api
+      .post("/markers", data, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response: AxiosResponse<Marker>) => {
+        setIsLoading.off();
+        setMarkers((oldMarkers) => [...oldMarkers, response.data]);
+        onSuccessOpen();
+      })
+      .catch((_) => {
+        setIsLoading.off();
+        onErrorOpen();
+      });
+  };
+
   const wasteCollectionSubmit = (data: WCDataForm) => {
     if (materialsType.length === 0) {
       return setHasntMaterial.on();
@@ -61,83 +98,107 @@ export const FormWasteCollection = ({ inputMarker }: InputMarker) => {
       ...inputMarker[0],
       ...data,
     };
+    setIsLoading.on();
     createMarker(newData, accessToken);
   };
 
+  const handleClick = () => {
+    onSuccessClose()
+    onClose()
+  }
+
   return (
-    <Flex
-      as="form"
-      justifyContent="center"
-      onSubmit={handleSubmit(wasteCollectionSubmit)}
-    >
-      <VStack spacing="5" h="100%" w="100%">
-        <Text as="p" color="green.400">
-          Create a new Waste Point
-        </Text>
-        <Input
-          icon={AiFillShop}
-          placeholder="Local name"
-          {...register("title")}
-          error={errors.title}
-        />
-        <Input
-          icon={FaMapMarkerAlt}
-          placeholder="Address"
-          error={errors.address}
-          {...register("address")}
-        />
-        <Input
-          icon={RiContactsBookFill}
-          placeholder="Contact"
-          error={errors.contact}
-          {...register("contact")}
-        />
-        <HStack>
+    <>
+      <ModalSuccess
+        isOpen={isSuccessOpen}
+        message="Congratulations, you created an wast collection. Have you already separated yours wastes? Let's go."
+        onClose={handleClick}
+      />
+      <ModalError
+        isOpen={isErrorOpen}
+        onClose={onErrorClose}
+        message="Something weird happened.
+        Keep calm and try again"
+      />
+      <Flex
+        as="form"
+        justifyContent="center"
+        onSubmit={handleSubmit(wasteCollectionSubmit)}
+      >
+        <VStack spacing="5" h="100%" w="100%">
+          <Text as="p" color="green.400">
+            Create a new Waste Point
+          </Text>
           <Input
-            icon={RiTimeLine}
-            placeholder="Open at:"
-            error={errors.start_time}
-            {...register("start_time")}
+            icon={AiFillShop}
+            placeholder="Local name"
+            {...register("title")}
+            error={errors.title}
           />
           <Input
-            icon={RiTimeLine}
-            placeholder="Close at:"
-            error={errors.end_time}
-            {...register("end_time")}
+            icon={FaMapMarkerAlt}
+            placeholder="Address"
+            error={errors.address}
+            {...register("address")}
           />
-        </HStack>
-        <Flex flexDirection="column">
-          <HStack pl="12px" mb="12px">
-            <Icon as={RiRecycleFill} color="gray.200" />
-            <Text
-              as="label"
-              children="Choose the types:"
-              alignSelf="flex-start"
-              color="gray.200"
+          <Input
+            icon={RiContactsBookFill}
+            placeholder="Contact"
+            error={errors.contact}
+            {...register("contact")}
+          />
+          <HStack>
+            <Input
+              icon={RiTimeLine}
+              placeholder="Open at:"
+              error={errors.start_time}
+              {...register("start_time")}
             />
-            {hasntMaterial && (
-              <Text
-                mt="-2px"
-                mb={{ lg: "-8px" }}
-                children="Material type is required"
-                color="red.500"
-                fontSize="sm"
-              />
-            )}
+            <Input
+              icon={RiTimeLine}
+              placeholder="Close at:"
+              error={errors.end_time}
+              {...register("end_time")}
+            />
           </HStack>
+          <Flex flexDirection="column">
+            <HStack pl="12px" mb="12px">
+              <Icon as={RiRecycleFill} color="gray.200" />
+              <Text
+                as="label"
+                children="Choose the types:"
+                alignSelf="flex-start"
+                color="gray.200"
+              />
+              {hasntMaterial && (
+                <Text
+                  mt="-2px"
+                  mb={{ lg: "-8px" }}
+                  children="Material type is required"
+                  color="red.500"
+                  fontSize="sm"
+                />
+              )}
+            </HStack>
 
-          <OptionsMaterialsType
-            setMaterialsType={setMaterialsType}
-            materialsType={materialsType}
-          />
-        </Flex>
+            <OptionsMaterialsType
+              setMaterialsType={setMaterialsType}
+              materialsType={materialsType}
+            />
+          </Flex>
 
-        <Box flex="1" width="100%" textAlign="center">
-          <ButtonForms type="submit" width={["75%", "75%"]} mt="2rem">
-            Create
-          </ButtonForms>
-        </Box>
-      </VStack>
-    </Flex>
+          <Box flex="1" width="100%" textAlign="center">
+            <ButtonForms
+              isLoading={isLoading}
+              type="submit"
+              width={["75%", "75%"]}
+              mt="2rem"
+            >
+              Create
+            </ButtonForms>
+          </Box>
+        </VStack>
+      </Flex>
+    </>
   );
 };

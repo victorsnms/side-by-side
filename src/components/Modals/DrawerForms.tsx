@@ -19,6 +19,8 @@ interface DrawerFormProps extends InputMarker {
   isDisable: boolean;
 }
 
+
+
 export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = window.innerWidth < 768;
@@ -63,9 +65,9 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
           </DrawerHeader>
           <DrawerBody>
             {!isLeft ? (
-              <FormEvent inputMarker={inputMarker} />
+              <FormEvent inputMarker={inputMarker} onClose={onClose} />
             ) : (
-              <FormWasteCollection inputMarker={inputMarker} />
+              <FormWasteCollection inputMarker={inputMarker} onClose={onClose} />
             )}
           </DrawerBody>
         </DrawerContent>
