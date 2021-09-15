@@ -48,7 +48,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
   useEffect(() => {
     getUser(id, accessToken);
   }, []);
-
+  console.log(marker)
   const handleSubmit = () => {
     //updates event participants and user events
     if (marker.participants !== undefined) {

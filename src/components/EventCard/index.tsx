@@ -1,4 +1,4 @@
-import { Text, Flex, Box, Heading, Button } from "@chakra-ui/react";
+import { Text, Flex, Box, Heading } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BiCalendarAlt } from "react-icons/bi";
 import { MdGroup } from "react-icons/md";
@@ -11,7 +11,7 @@ interface EventCardProps {
 }
 
 export const EventCard = ({ marker }: EventCardProps) => {
-  const { onOpen } = useEventDetails();
+  const { selectedEvent, event } = useEventDetails();
 
   return (
     <Box
@@ -21,10 +21,10 @@ export const EventCard = ({ marker }: EventCardProps) => {
       borderRadius="10px"
       bgImage={marker.picture_url}
       bgSize="cover"
-      onClick={onOpen}
+      onClick={() => selectedEvent(marker)}
       _hover={{ border: "1px", borderColor: "brown.200", cursor: "pointer" }}
     >
-      <EventDetails marker={marker} />
+      <EventDetails marker={event} />
 
       <Flex
         w={{ base: "95vw", lg: "370px" }}
