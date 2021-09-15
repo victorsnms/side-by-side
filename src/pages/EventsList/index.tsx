@@ -7,7 +7,7 @@ import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
 
 export const EventsList = () => {
-  const isMobile = window.innerWidth < 992;
+  const isMobile = window.innerWidth < 768;
   const { allEvents, displayEvents } = useMarkers();
   const { accessToken } = useAuth();
 

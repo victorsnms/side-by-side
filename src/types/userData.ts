@@ -1,3 +1,4 @@
+import IAllBadges from "./badgesData";
 import { Marker } from "./makerData";
 
 export interface User {
@@ -6,10 +7,10 @@ export interface User {
   image_url: string;
   password: string;
   email: string;
-  badges: string[];
+  badges: IAllBadges;
   my_events: MyEvent[];
   experience: number;
   places: Marker[];
 }
 
-export interface MyEvent extends Omit<Marker, "participants" | "type"> {}
+export interface MyEvent extends Omit<Marker, "type"> {}

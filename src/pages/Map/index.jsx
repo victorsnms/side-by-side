@@ -18,6 +18,7 @@ import { BiHome } from "react-icons/bi";
 import { BottomMenu } from "../../components/BottomMenu";
 import { ButtonForms } from "../../components/ButtonForms";
 import { useEventDetails } from "../../providers/EventDetailsContext";
+import { useLocation } from "../../providers/LocationContext";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -26,17 +27,17 @@ const mapContainerStyle = {
   width: "100vw",
   height: "100vh",
 };
-const center = {
-  lat: -25.42836,
-  lng: -49.27325,
-};
+// const center = {
+//   lat: -25.42836,
+//   lng: -49.27325,
+// };
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
   zoomControlOptions: {
-    position: 3
-  }
+    position: 3,
+  },
 };
 
 export const Map = () => {
@@ -49,6 +50,7 @@ export const Map = () => {
   const { markers, loadMarkers } = useMarkers();
   const { accessToken } = useAuth();
   const { onOpen } = useEventDetails();
+  const { location, setLocation } = useLocation();
 
   const isMobile = window.innerWidth < 768;
 
@@ -77,6 +79,12 @@ export const Map = () => {
 
   useEffect(() => {
     loadMarkers(accessToken);
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
   }, []);
 
   if (loadError) return <div>Error loading maps"</div>;
@@ -91,7 +99,7 @@ export const Map = () => {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}
-        center={center}
+        center={location}
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}

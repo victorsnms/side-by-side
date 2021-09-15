@@ -30,7 +30,7 @@ export const DashboardMenu = () => {
       <VStack spacing="5">
         <Box textAlign="center" as={Link} to="/dashboard">
           <Icon fontSize="3xl" as={BiHome} />
-          <Text>Home</Text>
+          <Text>Profile</Text>
         </Box>
         <Box textAlign="center" as={Link} to="/info">
           <Icon fontSize="3xl" as={BiBookOpen} />

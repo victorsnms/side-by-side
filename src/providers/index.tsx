@@ -7,6 +7,7 @@ import { ModalProvider } from "./ModalProviders";
 import { UserProvider } from "./UserContext";
 import { ToggleSwitchProvider } from "./ToggleSwitchContext";
 import { EventDetailsProvider } from "./EventDetailsContext";
+import { LocationProvider } from "./LocationContext";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -17,11 +18,13 @@ export const AppProvider = ({ children }: AppProviderProps) => (
     <AuthProvider>
       <MarkersProvider>
         <UserProvider>
+          <LocationProvider>
           <ToggleSwitchProvider>
             <EventDetailsProvider>
               <ChakraProvider theme={theme}>{children}</ChakraProvider>
             </EventDetailsProvider>
           </ToggleSwitchProvider>
+          </LocationProvider>
         </UserProvider>
       </MarkersProvider>
     </AuthProvider>

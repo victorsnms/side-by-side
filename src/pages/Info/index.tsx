@@ -29,7 +29,7 @@ export const Info = () => {
         </Heading>
         <Accordion w={{ base: "90vw", lg: "85%" }} allowToggle>
           {infos.map(({ title, content }) => (
-            <InfoDropDown w="100%" title={title} content={content} />
+            <InfoDropDown w="100%" title={title} content={content} key={title}/>
           ))}
         </Accordion>
       </Flex>
