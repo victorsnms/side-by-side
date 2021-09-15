@@ -10,8 +10,7 @@ import {
   Box,
   Text,
   Flex,
-  Button,
-  useBoolean
+  useBoolean,
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -24,13 +23,14 @@ import { useAuth } from "../../providers/AuthContext";
 import { api } from "../../services/api";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
+import { useEventDetails } from "../../providers/EventDetailsContext";
 
-interface EventDetailsProps extends Marker {
+interface EventDetailsProps {
   marker: Marker;
 }
 
 export const EventDetails = ({ marker }: EventDetailsProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useEventDetails();
   const { getUser, userData } = useUser();
   const { accessToken, id } = useAuth();
   const [isLoading, setIsLoading] = useBoolean();
@@ -52,7 +52,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
   const handleSubmit = () => {
     //updates event participants and user events
     if (marker.participants !== undefined) {
-      setIsLoading.on()
+      setIsLoading.on();
       const { email, image_url, name, id: idUser, my_events } = userData;
       const userFilteredData = {
         name: name,
@@ -107,12 +107,12 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             }
           )
           .then((_) => {
-            setIsLoading.off()
-            onSuccessOpen()
+            setIsLoading.off();
+            onSuccessOpen();
           })
           .catch((_) => {
-            setIsLoading.off()
-            onErrorOpen()
+            setIsLoading.off();
+            onErrorOpen();
           });
 
         api
@@ -125,17 +125,16 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
           )
           .catch((_) => console.log("Erro ao utilizar my_event"));
       } else {
-        onErrorOpen()
-        setIsLoading.off()
+        onErrorOpen();
+        setIsLoading.off();
       }
     }
   };
 
   const handleClick = () => {
-    onSuccessClose()
-    onClose()
-  }
-
+    onSuccessClose();
+    onClose();
+  };
 
   return (
     <>
@@ -149,19 +148,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         onClose={onErrorClose}
         message="Slow down, you already participate in this group. But you can have a WORLD of options"
       />
-      <ButtonForms
-        marginLeft={"2px"}
-        marginBottom={"2px"}
-        width={["100px", "100px", "100px"]}
-        type={undefined}
-        onClick={onOpen}
-        color={"gray.60"}
-        backgroundColor={"green.300"}
-        h={4}
-        fontSize={"12px"}
-      >
-        Show details
-      </ButtonForms>
+      
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="green.70" />
         <ModalContent>

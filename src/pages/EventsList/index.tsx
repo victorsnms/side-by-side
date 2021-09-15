@@ -13,7 +13,7 @@ export const EventsList = () => {
 
   useEffect(() => {
     displayEvents(accessToken);
-  }, [])
+  }, []);
 
   return (
     <Box pl={{ base: "0", lg: "125px" }} w="90vw" h="100vh" m="0 auto">
@@ -39,14 +39,7 @@ export const EventsList = () => {
           {allEvents &&
             allEvents.map((event, index) => (
               <Box key={index} m={{ base: "0.2em 0", lg: "0.5em" }}>
-                <EventCard
-                  picture_url={event.picture_url}
-                  title={event.title}
-                  date={event.date}
-                  start_time={event.start_time}
-                  end_time={event.end_time}
-                  participants={event.participants}
-                />
+                <EventCard marker={event} />
               </Box>
             ))}
         </Flex>
