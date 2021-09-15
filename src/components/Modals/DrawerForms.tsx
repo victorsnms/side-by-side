@@ -29,7 +29,8 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
 
   useEffect(() => {
     setOptions(["Event", "Wast Point"]);
-  }, []);
+    setIsLeft(true);
+  }, [isLeft]);
 
   const handleClick = () => {
     setFormOption("Event");
