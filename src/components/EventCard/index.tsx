@@ -2,37 +2,62 @@ import { Text, Flex, Box, Heading } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BiCalendarAlt } from "react-icons/bi";
 import { MdGroup } from "react-icons/md";
-import Image from "../../assets/images/bluecuporigin.png";
+import { Marker } from "../../types/makerData";
+import { useEventDetails } from "../../providers/EventDetailsContext";
+import { EventDetails } from "../Modals/EventDetails";
 
-export const EventCard = () => {
+interface EventCardProps {
+  marker: Marker;
+}
+
+export const EventCard = ({ marker }: EventCardProps) => {
+  const { selectedEvent, event } = useEventDetails();
+
   return (
-    <Box w="370px" h="190px" borderRadius="10px" bgImage={Image} bgSize="cover">
+    <Box
+      w={{ base: "95vw", lg: "370px" }}
+      maxW="370px"
+      h={{ base: "30vh", lg: "190px" }}
+      borderRadius="10px"
+      bgImage={marker.picture_url}
+      bgSize="cover"
+      onClick={() => selectedEvent(marker)}
+      _hover={{ border: "1px", borderColor: "brown.200", cursor: "pointer" }}
+    >
+      <EventDetails marker={event} />
+
       <Flex
-        w="370px"
-        h="190px"
+        w={{ base: "95vw", lg: "370px" }}
+        maxW="370px"
+        h={{ base: "30vh", lg: "190px" }}
         direction="column"
         justify="space-between"
         borderRadius="10px"
         bgColor="gray.300"
-        p="10px"
+        p="10px 15px"
+        _hover={{ border: "1px", borderColor: "brown.200", cursor: "pointer" }}
       >
-        <Heading as="h4" fontSize="18px" color="white">
-          Limpeza Praia Fubáz
+        <Heading as="h4" fontSize={{ base: "26px" }} color="white">
+          {marker.title}
         </Heading>
 
-        <Flex color="white" justify="space-between" fontSize="14px">
+        <Flex color="white" justify="space-between" fontSize={{ base: "18px" }}>
           <Flex direction="column">
             <Flex align="center">
-              <BiCalendarAlt /> 
-              <Text pl="0.2em">18/09/2021</Text>
+              <BiCalendarAlt />
+              <Text pl="0.2em">{marker.date}</Text>
             </Flex>
             <Flex align="center">
-              <AiOutlineClockCircle /> 
-              <Text pl="0.2em">8h - 13h</Text>
+              <AiOutlineClockCircle />
+              <Text pl="0.2em">
+                {marker.start_time} - {marker.end_time}
+              </Text>
             </Flex>
           </Flex>
           <Flex align="center" alignSelf="flex-end">
-            <Text pr="0.2em">150</Text>
+            <Text pr="0.2em">
+              {marker.participants ? marker.participants.length : "0"}
+            </Text>
             <MdGroup />
           </Flex>
         </Flex>

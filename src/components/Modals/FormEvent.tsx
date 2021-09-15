@@ -5,6 +5,7 @@ import {
   HStack,
   Box,
   useDisclosure,
+  useBoolean,
 } from "@chakra-ui/react";
 import { Input } from "../Input";
 import { useForm } from "react-hook-form";
@@ -20,11 +21,15 @@ import { RiContactsBookFill, RiTimeLine } from "react-icons/ri";
 import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
 import { eventDefaultData } from "../../utils/eventDefaultData";
-import { InputMarker } from "../../types/makerData";
-import { useMarkers } from "../../providers/MarkersContext";
+import { InputMarker, Marker } from "../../types/makerData";
 import { useAuth } from "../../providers/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import { api } from "../../services/api";
+import { AxiosResponse } from "axios";
+import { ModalSuccess } from "./ModalSuccess";
+import { ModalError } from "./ModalError";
 import { useUser } from "../../providers/UserContext";
+import { useMarkers } from "../../providers/MarkersContext";
 
 interface EventDataForm {
   title: string;
@@ -37,11 +42,26 @@ interface EventDataForm {
   picture_url?: string;
 }
 
-export const FormEvent = ({ inputMarker }: InputMarker) => {
+interface FormEventProps extends InputMarker {
+  onClose: () => void;
+}
+
+export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
   const { picture_url_default, type } = eventDefaultData;
-  const { createMarker, updateMyEvents } = useMarkers();
+  const { setMarkers, updateMyEvents } = useMarkers();
   const { accessToken, id } = useAuth();
   const { getUser, userData } = useUser();
+  const [isLoading, setIsLoading] = useBoolean();
+  const {
+    isOpen: isSuccessOpen,
+    onClose: onSuccessClose,
+    onOpen: onSuccessOpen,
+  } = useDisclosure();
+  const {
+    isOpen: isErrorOpen,
+    onClose: onErrorClose,
+    onOpen: onErrorOpen,
+  } = useDisclosure();
 
   useEffect(() => {
     getUser(id, accessToken);
@@ -63,6 +83,22 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(eventSchema) });
+
+  const createMarker = async (data: Marker, accessToken: string) => {
+    api
+      .post("/markers", data, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response: AxiosResponse<Marker>) => {
+        setIsLoading.off();
+        setMarkers((oldMarkers) => [...oldMarkers, response.data]);
+        onSuccessOpen();
+      })
+      .catch((_) => {
+        setIsLoading.off();
+        onErrorOpen();
+      });
+  };
 
   const eventSubmit = (data: EventDataForm) => {
     const { picture_url } = data;
@@ -89,6 +125,7 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
       picture_url: data_picture_url,
       start_time,
       title,
+      participants,
     } = newData;
     const filteredData = {
       address: address,
@@ -102,84 +139,111 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
       picture_url: data_picture_url,
       start_time: start_time,
       title: title,
+      participants: participants,
     };
+    setIsLoading.on();
     createMarker(newData, accessToken);
     if (newData.type === "event") {
       updateMyEvents(id, accessToken, filteredData, my_events);
     }
   };
 
-  return (
-    <Flex
-      as="form"
-      justifyContent="center"
-      onSubmit={handleSubmit(eventSubmit)}
-    >
-      <VStack spacing="5" h="100%">
-        <Text as="p" color="green.400">
-          Create a new Event
-        </Text>
+  const handleClick = () => {
+    onSuccessClose();
+    onClose();
+  };
 
-        <Input
-          icon={AiFillShop}
-          placeholder="Event name"
-          {...register("title")}
-          error={errors.title}
-        />
-        <Input
-          icon={FaMapMarkerAlt}
-          placeholder="Address"
-          error={errors.address}
-          {...register("address")}
-        />
-        <Input
-          icon={RiContactsBookFill}
-          placeholder="Contact"
-          error={errors.contact}
-          {...register("contact")}
-        />
-        <Input
-          icon={AiOutlineCalendar}
-          placeholder="Date"
-          error={errors.date}
-          {...register("date")}
-          type="date"
-        />
-        <HStack>
+  return (
+    <>
+      <ModalSuccess
+        isOpen={isSuccessOpen}
+        message="Well Done, you created an event feel proud. Share and invite friends."
+        onClose={handleClick}
+      />
+      <ModalError
+        isOpen={isErrorOpen}
+        onClose={onErrorClose}
+        message="Something weird happened.
+        Keep calm and try again"
+      />
+      <Flex
+        as="form"
+        justifyContent="center"
+        onSubmit={handleSubmit(eventSubmit)}
+      >
+        <VStack spacing="5" h="100%">
+          <Text as="p" color="green.400">
+            Create a new Event
+          </Text>
+
           <Input
-            icon={RiTimeLine}
-            placeholder="Starts at:"
-            error={errors.start_time}
-            {...register("start_time")}
-            type="time"
+            icon={AiFillShop}
+            placeholder="Event name"
+            {...register("title")}
+            error={errors.title}
           />
           <Input
-            icon={RiTimeLine}
-            placeholder="Ends at:"
-            error={errors.end_time}
-            {...register("end_time")}
-            type="time"
+            icon={FaMapMarkerAlt}
+            placeholder="Address"
+            error={errors.address}
+            {...register("address")}
           />
-        </HStack>
-        <Textarea
-          icon={AiOutlineAlignLeft}
-          placeholder="Description..."
-          error={errors.description}
-          {...register("description")}
-          h="5rem"
-        />
-        <Input
-          icon={FaRegImage}
-          placeholder="Cover picture url"
-          error={errors.picture_url}
-          {...register("picture_url")}
-        />
-        <Box flex="1" width="100%" textAlign="center">
-          <ButtonForms type="submit" width={["75%", "75%"]} mt="2rem">
-            Create
-          </ButtonForms>
-        </Box>
-      </VStack>
-    </Flex>
+          <Input
+            icon={RiContactsBookFill}
+            placeholder="Contact"
+            error={errors.contact}
+            {...register("contact")}
+          />
+          <Input
+            icon={AiOutlineCalendar}
+            placeholder="Date"
+            error={errors.date}
+            {...register("date")}
+            type="date"
+            sx={{
+              "&::-webkit-calendar-picker-indicator": {
+                background: "none",
+              },
+            }}
+          />
+          <HStack>
+            <Input
+              icon={RiTimeLine}
+              placeholder="Starts at:"
+              error={errors.start_time}
+              {...register("start_time")}
+              type="time"
+              sx={{
+                "&::-webkit-calendar-picker-indicator": {
+                  background: "none",
+                },
+              }}
+            />
+            <Input
+              icon={RiTimeLine}
+              placeholder="Ends at:"
+              error={errors.end_time}
+              {...register("end_time")}
+              type="time"
+              sx={{
+                "&::-webkit-calendar-picker-indicator": {
+                  background: "none",
+                },
+              }}
+            />
+          </HStack>
+          <Box flex="1" width="100%" textAlign="center">
+            <ButtonForms
+              isLoading={isLoading}
+              type="submit"
+              width={["75%", "75%"]}
+              mt="2rem"
+            >
+              Create
+            </ButtonForms>
+          </Box>
+        </VStack>
+      </Flex>
+    </>
   );
 };

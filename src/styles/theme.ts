@@ -52,6 +52,17 @@ export const theme = extendTheme({
       body: {
         bg: "gray.50",
         color: "black",
+        "&::-webkit-scrollbar": {
+          width: "10px",
+          borderRadius: "8px",
+          backgroundColor: `rgba(72, 135, 136, 0.5)`,
+          marginRight: "30px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: `#488788`,
+          borderRadius: "8px",
+          width:"8px  "
+        },
       },
     },
   },

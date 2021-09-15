@@ -7,9 +7,8 @@ import {
   DrawerHeader,
   useDisclosure,
 } from "@chakra-ui/react";
-
-import { useState, useEffect } from "react";
-import { useFormContext } from "../../providers/FormContext";
+import { useEffect } from "react";
+import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 import { InputMarker } from "../../types/makerData";
 import { ButtonAdd } from "../ButtomAdd";
 import { ToggleSwitch } from "../ToggleSwitch";
@@ -22,21 +21,22 @@ interface DrawerFormProps extends InputMarker {
 
 export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const options = ["Event", "Wast Point"];
   const isMobile = window.innerWidth < 768;
   const position = isMobile ? "bottom" : "left";
 
-  const [switchOption, setSwitchOption] = useState(false);
-  const { setFormOption } = useFormContext();
+  const { setFormOption, setOptions, setIsLeft, isLeft } =
+    useToggleSwitchContext();
+
   useEffect(() => {
-    setSwitchOption(true);
+    setOptions(["Event", "Wast Point"]);
   }, []);
 
   const handleClick = () => {
     setFormOption("Event");
-    setSwitchOption(false);
+    setIsLeft(!isLeft);
     onOpen();
   };
+
   return (
     <>
       <ButtonAdd onClick={handleClick} disabled={isDisable} />
@@ -55,11 +55,7 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
         >
           <DrawerCloseButton />
           <DrawerHeader alignSelf="center">
-            <ToggleSwitch
-              options={options}
-              setSwitchOption={setSwitchOption}
-              switchOption={switchOption}
-            />
+            <ToggleSwitch />
           </DrawerHeader>
           <DrawerBody
             sx={{
@@ -67,7 +63,7 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
                 width: "8px",
                 borderRadius: "8px",
                 backgroundColor: `rgba(72, 135, 136, 0.5)`,
-                marginRight: "30px  "
+                marginRight: "30px  ",
               },
               "&::-webkit-scrollbar-thumb": {
                 backgroundColor: `#488788`,
@@ -75,10 +71,13 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
               },
             }}
           >
-            {!switchOption ? (
-              <FormEvent inputMarker={inputMarker} />
+            {!isLeft ? (
+              <FormEvent inputMarker={inputMarker} onClose={onClose} />
             ) : (
-              <FormWasteCollection inputMarker={inputMarker} />
+              <FormWasteCollection
+                inputMarker={inputMarker}
+                onClose={onClose}
+              />
             )}
           </DrawerBody>
         </DrawerContent>

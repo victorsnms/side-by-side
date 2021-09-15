@@ -6,7 +6,6 @@ import {
   ReactNode,
 } from "react";
 import { api } from "../services/api";
-import jwt_decode from "jwt-decode";
 import { User } from "../types/userData";
 import { AxiosResponse } from "axios";
 import { Marker } from "../types/makerData";

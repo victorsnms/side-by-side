@@ -6,12 +6,12 @@ import backgroundPlastic from "../../assets/images/plastic.png";
 import backgroundCup from "../../assets/images/bluecup.png";
 import homeMap from "../../assets/images/homemap.svg";
 import homeTaggedMap from "../../assets/images/hometaggedmap.svg";
-import { useFormContext } from "../../providers/FormContext";
 import { useHistory } from "react-router";
 import { Parallax } from 'react-scroll-parallax';
+import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 
 const Home = () => {
-  const { setFormOption } = useFormContext();
+  const { setFormOption } = useToggleSwitchContext();
   const history = useHistory();
 
   const sendTo = (path: string) => {
@@ -81,8 +81,10 @@ const Home = () => {
         >
           <Flex justifyContent="center" direction="column">
             <Text fontSize="3xl">Find collection points</Text>
-            <Text maxW="300px">Search for the precise places to disposal
-                  each of your espicific wastes.</Text>
+            <Text maxW="300px">
+              Search for the precise places to disposal each of your espicific
+              wastes.
+            </Text>
           </Flex>
           <Image
             src={homeTaggedMap}
@@ -104,8 +106,9 @@ const Home = () => {
           />
           <Flex justifyContent="center" direction="column">
             <Text fontSize="3xl">Register new points</Text>
-            <Text maxW="300px">Contribute to our network, 
-              by adding known collection points.</Text>  
+            <Text maxW="300px">
+              Contribute to our network, by adding known collection points.
+            </Text>
           </Flex>
         </Flex>
       </Flex>
@@ -142,9 +145,9 @@ const Home = () => {
               mt="6"
               w={["250px", "300px", "350px", "400px"]}
               fontSize={["xl", "xl", "2xl"]}
-              fontWeight="500"
+              fontWeight="bold"
               bg="green.300"
-              color="black"
+              color="white"
               h="45px"
               borderRadius="10px"
               _hover={{ bg: "green.300", color: "green.400" }}
