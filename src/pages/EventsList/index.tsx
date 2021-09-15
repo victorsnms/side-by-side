@@ -16,15 +16,14 @@ export const EventsList = () => {
   }, [])
 
   return (
-    <Box pl={{ base: "0", lg: "125px" }} w="100vw" h="100vh" overflowX="hidden">
+    <Box pl={{ base: "0", lg: "125px" }} w="90vw" h="100vh" m="0 auto">
       {isMobile ? <BottomMenu /> : <DashboardMenu />}
       <Box display="flex" flexDirection="column" alignItems="center">
         <Heading
           as="h2"
-          textAlign="center"
-          fontSize="24px"
-          color="black"
-          m="1em 0"
+          m="5.5rem 0 4rem"
+          textTransform="uppercase"
+          fontSize="2xl"
         >
           Events List
         </Heading>
