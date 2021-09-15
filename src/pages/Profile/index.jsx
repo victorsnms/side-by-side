@@ -17,7 +17,7 @@ const Profile = () => {
             {isMobile ? <BottomMenu /> : <DashboardMenu />}
             <Flex flexDirection="column">
                 <Flex>
-                    <Center ml="5" fontSize="2xl" color="green.400">LOGO</Center>
+                {isMobile ? <Center ml="5" fontSize="2xl" color="green.400">LOGO</Center> : <></>}
                     <Spacer/>
                     <Button
                         fontSize={["lg", "xl", "2xl"]}
