@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { theme } from "../styles/theme";
 import { AuthProvider } from "./AuthContext";
 import { MarkersProvider } from "./MarkersContext";
+import { ModalProvider } from "./ModalProviders";
 import { UserProvider } from "./UserContext";
 import { ToggleSwitchProvider } from "./ToggleSwitchContext";
 
@@ -11,6 +12,7 @@ interface AppProviderProps {
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => (
+        <ModalProvider>
   <AuthProvider>
     <MarkersProvider>
       <UserProvider>
@@ -20,4 +22,5 @@ export const AppProvider = ({ children }: AppProviderProps) => (
       </UserProvider>
     </MarkersProvider>
   </AuthProvider>
+        </ModalProvider>
 );

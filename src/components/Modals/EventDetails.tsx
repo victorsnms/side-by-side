@@ -10,6 +10,8 @@ import {
   Box,
   Text,
   Flex,
+  Button,
+  useBoolean
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -20,6 +22,8 @@ import { useEffect } from "react";
 import { useUser } from "../../providers/UserContext";
 import { useAuth } from "../../providers/AuthContext";
 import { api } from "../../services/api";
+import { ModalSuccess } from "./ModalSuccess";
+import { ModalError } from "./ModalError";
 
 interface EventDetailsProps extends Marker {
   marker: Marker;
@@ -29,14 +33,26 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUser, userData } = useUser();
   const { accessToken, id } = useAuth();
+  const [isLoading, setIsLoading] = useBoolean();
+  const {
+    isOpen: isSuccessOpen,
+    onClose: onSuccessClose,
+    onOpen: onSuccessOpen,
+  } = useDisclosure();
+  const {
+    isOpen: isErrorOpen,
+    onClose: onErrorClose,
+    onOpen: onErrorOpen,
+  } = useDisclosure();
 
   useEffect(() => {
     getUser(id, accessToken);
   }, []);
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     //updates event participants and user events
     if (marker.participants !== undefined) {
+      setIsLoading.on()
       const { email, image_url, name, id: idUser, my_events } = userData;
       const userFilteredData = {
         name: name,
@@ -77,7 +93,6 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
 
       const eventData = [eventFilteredData, ...my_events];
 
-      console.log("event", eventData);
       if (
         !marker.participants.some((user) => user.id === userFilteredData.id)
       ) {
@@ -89,8 +104,14 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
               headers: { Authorization: `Bearer ${accessToken}` },
             }
           )
-          .then((_) => console.log("Modal de que você entrou no grupo"))
-          .catch((_) => console.log("Algo deu errado"));
+          .then((_) => {
+            setIsLoading.off()
+            onSuccessOpen()
+          })
+          .catch((_) => {
+            setIsLoading.off()
+            onErrorOpen()
+          });
 
         api
           .patch(
@@ -100,15 +121,32 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
               headers: { Authorization: `Bearer ${accessToken}` },
             }
           )
-          .catch((_) => console.log("Erro ao utilizar my_even"));
+          .catch((_) => console.log("Erro ao utilizar my_event"));
       } else {
-        console.log("Você já está no grupo");
+        onErrorOpen()
+        setIsLoading.off()
       }
     }
   };
 
+  const handleClick = () => {
+    onSuccessClose()
+    onClose()
+  }
+
+
   return (
     <>
+      <ModalSuccess
+        isOpen={isSuccessOpen}
+        message=" ¡Vale!, you are part of an event now. Get ready for this adventure."
+        onClose={handleClick}
+      />
+      <ModalError
+        isOpen={isErrorOpen}
+        onClose={onErrorClose}
+        message="Slow down, you already participate in this group. But you can have a WORLD of options"
+      />
       <ButtonForms
         marginLeft={"2px"}
         marginBottom={"2px"}
@@ -172,7 +210,8 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             <ButtonForms
               width={["250px", "250px", "250px"]}
               type={undefined}
-              onClick={onClose}
+              onClick={handleSubmit}
+              isLoading={isLoading}
             >
               Join
             </ButtonForms>

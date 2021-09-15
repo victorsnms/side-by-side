@@ -6,6 +6,7 @@ import {
   useState,
   ReactNode,
   useCallback,
+  Dispatch,
 } from "react";
 import { api } from "../services/api";
 import { Marker, Participants } from "../types/makerData";
@@ -17,7 +18,7 @@ interface MarkersProviderProps {
 
 interface MarkersContextData {
   markers: Marker[];
-  createMarker: (data: Marker, accessToken: string) => Promise<void>;
+  setMarkers: Dispatch<React.SetStateAction<Marker[]>>;
   loadMarkers: (accessToken: string) => Promise<void>;
   updateMyEvents: (
     id: () => string,
@@ -131,12 +132,12 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     <MarkersContext.Provider
       value={{
         markers,
-        createMarker,
         loadMarkers,
         updateMyEvents,
         updateParticipants,
         displayEvents,
-        allEvents
+        allEvents,
+        setMarkers
       }}
     >
       {children}
