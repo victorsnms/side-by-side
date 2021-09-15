@@ -22,13 +22,14 @@ import { ButtonForms } from "../ButtonForms";
 import { Textarea } from "../TextareaForms";
 import { eventDefaultData } from "../../utils/eventDefaultData";
 import { InputMarker, Marker } from "../../types/makerData";
-import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect, useCallback } from "react";
 import { api } from "../../services/api";
 import { AxiosResponse } from "axios";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
+import { useUser } from "../../providers/UserContext";
+import { useMarkers } from "../../providers/MarkersContext";
 
 interface EventDataForm {
   title: string;
@@ -47,8 +48,9 @@ interface FormEventProps extends InputMarker {
 
 export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
   const { picture_url_default, type } = eventDefaultData;
-  const { setMarkers } = useMarkers();
-  const { getUser, userData, accessToken } = useAuth();
+  const { setMarkers, updateMyEvents } = useMarkers();
+  const { accessToken, id } = useAuth();
+  const { getUser, userData } = useUser();
   const [isLoading, setIsLoading] = useBoolean();
   const {
     isOpen: isSuccessOpen,
@@ -60,8 +62,9 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
     onClose: onErrorClose,
     onOpen: onErrorOpen,
   } = useDisclosure();
+
   useEffect(() => {
-    getUser();
+    getUser(id, accessToken);
   }, []);
 
   const eventSchema = yup.object().shape({
@@ -99,16 +102,48 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
 
   const eventSubmit = (data: EventDataForm) => {
     const { picture_url } = data;
+    const { email, image_url, name, id: idUser, my_events } = userData;
     const newData = {
       ...data,
       ...inputMarker[0],
       type: type,
       picture_url:
         picture_url?.length !== 0 ? picture_url : picture_url_default,
-      participants: [userData],
+      participants: [
+        { name: name, email: email, id: idUser, image_url: image_url },
+      ],
+    };
+    const {
+      address,
+      contact,
+      created_at,
+      date,
+      description,
+      end_time,
+      lat,
+      lng,
+      picture_url: data_picture_url,
+      start_time,
+      title,
+    } = newData;
+    const filteredData = {
+      address: address,
+      contact: contact,
+      created_at: created_at,
+      date: date,
+      description: description,
+      end_time: end_time,
+      lat: lat,
+      lng: lng,
+      picture_url: data_picture_url,
+      start_time: start_time,
+      title: title,
     };
     setIsLoading.on();
     createMarker(newData, accessToken);
+    if (newData.type === "event") {
+      updateMyEvents(id, accessToken, filteredData, my_events);
+    }
   };
 
   const handleClick = () => {

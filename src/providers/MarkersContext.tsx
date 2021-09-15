@@ -1,4 +1,5 @@
 //necessita passar para o app provider
+import { AxiosResponse } from "axios";
 import {
   createContext,
   useContext,
@@ -8,7 +9,8 @@ import {
   Dispatch,
 } from "react";
 import { api } from "../services/api";
-import { Marker } from "../types/makerData";
+import { Marker, Participants } from "../types/makerData";
+import { MyEvent, User } from "../types/userData";
 
 interface MarkersProviderProps {
   children: ReactNode;
@@ -18,6 +20,18 @@ interface MarkersContextData {
   markers: Marker[];
   setMarkers: Dispatch<React.SetStateAction<Marker[]>>;
   loadMarkers: (accessToken: string) => Promise<void>;
+  updateMyEvents: (
+    id: () => string,
+    accessToken: string,
+    data: MyEvent,
+    my_events: MyEvent[]
+  ) => void;
+  updateParticipants: (
+    id: () => string,
+    accessToken: string,
+    data: User,
+    participants: Participants[]
+  ) => void;
 }
 
 const MarkersContext = createContext<MarkersContextData>(
@@ -49,8 +63,58 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     }
   }, []);
 
+  const createMarker = useCallback(
+    async (data: Marker, accessToken: string) => {
+      await api
+        .post("/markers", data, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        .then((response: AxiosResponse<Marker>) =>
+          setMarkers((oldMarkers) => [...oldMarkers, response.data])
+        )
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
+  const updateMyEvents = useCallback(
+    (id: () => string, accessToken: string, data, my_events: MyEvent[]) => {
+      const newData = [data, ...my_events];
+      api
+        .patch(
+          `/users/${id}`,
+          { my_events: newData },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((response: AxiosResponse<User>) => console.log(response))
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
+  const updateParticipants = useCallback(
+    (id: () => string, accessToken: string, data, participants: Participants[]) => {
+      const newData = [data, ...participants];
+      api
+        .patch(
+          `/markers/${id}`,
+          { participants: newData },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((response: AxiosResponse<User>) => console.log(response))
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
   return (
-    <MarkersContext.Provider value={{ markers, setMarkers, loadMarkers }}>
+    <MarkersContext.Provider
+      value={{ markers, loadMarkers, updateMyEvents, updateParticipants, setMarkers }}
+    >
       {children}
     </MarkersContext.Provider>
   );
