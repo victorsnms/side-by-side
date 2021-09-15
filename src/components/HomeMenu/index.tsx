@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout";
-import { useFormContext } from "../../providers/FormContext";
 import { useHistory } from "react-router";
+import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 
 const HomeMenu = () => {
-    const { setFormOption } = useFormContext();
+    const { setFormOption } = useToggleSwitchContext();
     const history = useHistory();
 
     const sendTo = (path: string) => {
@@ -14,6 +14,9 @@ const HomeMenu = () => {
 
     return(
         <Flex 
+            position="absolute"
+            w="100%"
+            zIndex="1"
             bg="green.300" 
             h={["15vh", "14vh", "13vh", "12vh"]} 
             pl={["10px", "20px", "30px"]}>

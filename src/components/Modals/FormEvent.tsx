@@ -4,7 +4,6 @@ import {
   Text,
   HStack,
   Box,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { Input } from "../Input";
 import { useForm } from "react-hook-form";
@@ -24,6 +23,7 @@ import { InputMarker } from "../../types/makerData";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
+import { useUser } from "../../providers/UserContext";
 
 interface EventDataForm {
   title: string;
@@ -38,10 +38,12 @@ interface EventDataForm {
 
 export const FormEvent = ({ inputMarker }: InputMarker) => {
   const { picture_url_default, type } = eventDefaultData;
-  const { createMarker } = useMarkers();
-  const { getUser, userData, accessToken } = useAuth();
+  const { createMarker, updateMyEvents } = useMarkers();
+  const { accessToken, id } = useAuth();
+  const { getUser, userData } = useUser();
+
   useEffect(() => {
-    getUser();
+    getUser(id, accessToken);
   }, []);
 
   const eventSchema = yup.object().shape({
@@ -62,18 +64,48 @@ export const FormEvent = ({ inputMarker }: InputMarker) => {
   } = useForm({ resolver: yupResolver(eventSchema) });
 
   const eventSubmit = (data: EventDataForm) => {
-    const {
-      picture_url,
-    } = data;
+    const { picture_url } = data;
+    const { email, image_url, name, id: idUser, my_events } = userData;
     const newData = {
       ...data,
       ...inputMarker[0],
       type: type,
       picture_url:
         picture_url?.length !== 0 ? picture_url : picture_url_default,
-      participants: [userData],
+      participants: [
+        { name: name, email: email, id: idUser, image_url: image_url },
+      ],
     };
-    createMarker(newData,accessToken);
+    const {
+      address,
+      contact,
+      created_at,
+      date,
+      description,
+      end_time,
+      lat,
+      lng,
+      picture_url: data_picture_url,
+      start_time,
+      title,
+    } = newData;
+    const filteredData = {
+      address: address,
+      contact: contact,
+      created_at: created_at,
+      date: date,
+      description: description,
+      end_time: end_time,
+      lat: lat,
+      lng: lng,
+      picture_url: data_picture_url,
+      start_time: start_time,
+      title: title,
+    };
+    createMarker(newData, accessToken);
+    if (newData.type === "event") {
+      updateMyEvents(id, accessToken, filteredData, my_events);
+    }
   };
 
   return (

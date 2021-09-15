@@ -15,6 +15,7 @@ import { DashboardMenu } from "../../components/DashboardMenu";
 import { Box, IconButton, Icon, Text } from "@chakra-ui/react";
 import { EventDetails } from "../../components/Modals/EventDetails";
 import { BiHome } from "react-icons/bi";
+import { BottomMenu } from "../../components/BottomMenu";
 
 //consts to avoid re-renders
 const libraries = ["places"];
@@ -31,9 +32,12 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
+  zoomControlOptions: {
+    position: 3
+   }
 };
 
-export const Dashboard = () => {
+export const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -43,30 +47,7 @@ export const Dashboard = () => {
   const { markers, loadMarkers } = useMarkers();
   const { accessToken } = useAuth();
 
-  //Mock: markers
-  // [
-  //   {
-  //     lat: -25.41410596566802,
-  //     lng: -49.28868879508972,
-  //     time: new Date(),
-  //     type: "Event",
-  //     title: "Ponto A",
-  //   },
-  //   {
-  //     lat: -25.414351799555913,
-  //     lng: -49.24346097325786,
-  //     time: new Date(),
-  //     type: "Wastecol",
-  //     title: "Ponto B",
-  //   },
-  //   {
-  //     lat: -25.431392761944345,
-  //     lng: -49.268089429855344,
-  //     time: new Date(),
-  //     type: "Event",
-  //     title: "Ponto C",
-  //   },
-  // ]
+  const isMobile = window.innerWidth < 768;
 
   //onClick
   const onMapClick = useCallback((event) => {
@@ -113,14 +94,14 @@ export const Dashboard = () => {
         onLoad={onMapLoad}
         clickableIcons={false}
       >
-        <DashboardMenu />
+        {isMobile ? <BottomMenu /> : <DashboardMenu />}
         <Locate panTo={panTo} />
         {markers.map((marker) => (
           <Marker
             key={marker.created_at}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
-              url: marker.type === "Event" ? "/event.png" : "/wastecol.png",
+              url: marker.type === "event" ? "/event.png" : "/wastecol.png",
               scaledSize: new window.google.maps.Size(30, 30),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
@@ -141,7 +122,7 @@ export const Dashboard = () => {
                 {selected.title}
               </Text>
               <Text>
-                {selected.type === "WasteCollection" ? "Working" : null}Time:{" "}
+                {selected.type === "waste collection" ? "Working" : null}Time:{" "}
                 {selected.start_time} - {selected.end_time}
               </Text>
               <Text>Contact: {selected.contact}</Text>
@@ -159,7 +140,7 @@ export const Dashboard = () => {
               ) : (
                 <></>
               )}
-              {selected.type === "Event" ? (
+              {selected.type === "event" ? (
                 <EventDetails marker={selected} />
               ) : null}
             </Box>
@@ -184,8 +165,8 @@ export const Dashboard = () => {
         color="green.300"
         borderRadius="100%"
         position="absolute"
-        top="18%"
-        right="10%"
+        bottom="18%"
+        right="5%"
         bg="white"
         zIndex="7"
         onClick={() => {
