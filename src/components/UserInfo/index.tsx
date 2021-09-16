@@ -4,8 +4,11 @@ import { AiFillStar } from "react-icons/ai";
 import { RiShieldFill, RiMapFill } from "react-icons/ri";
 import { BoxBadges } from "./layouts/BoxBadges";
 import { EditProfile } from "../Modals/EditProfile";
+import { useUser } from "../../providers/UserContext";
 
 export const UserInfo = () => {
+  const { userData: user } = useUser()
+
   return (
     <Flex w="100%" justifyContent="center">
       <Flex
@@ -33,7 +36,7 @@ export const UserInfo = () => {
           <Avatar
             w={["103px", "103px", "176px", "176px"]}
             h={["103px", "103px", "176px", "176px"]}
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+            src={user.image_url}
             borderRadius="50%"
             position="relative"
             _hover={{
@@ -56,13 +59,14 @@ export const UserInfo = () => {
             fontSize={["1rem", "1rem", "1.5rem", "1.8rem","2rem"]}
             textAlign={["center", "center", "left", "left"]}
           >
-            <b>Kenzinho Ecológico</b>
+            <b>{user.name}</b>
           </Text>
           <Text
             as="h2"
             fontSize="12px"
             textAlign={["center", "center", "left", "left"]}
           >
+            {/* TODO */}
             <Icon as={FaMapMarkerAlt} /> Brasil, América do Sul
           </Text>
         </Flex>
@@ -72,9 +76,25 @@ export const UserInfo = () => {
           right={["none", "none", "5%", "none"]}
           transform="translateY(50%)"
         >
-          <Box as={BoxBadges} name="Level" count="10" icon={AiFillStar}></Box>
-          <Box as={BoxBadges} name="Badges" count="1" icon={RiShieldFill}></Box>
-          <Box as={BoxBadges} name="Level" count="10" icon={RiMapFill}></Box>
+          <Box 
+            as={BoxBadges} 
+            name="Level" 
+            // TODO
+            count={`${0}`}
+            icon={AiFillStar}
+          ></Box>
+          <Box 
+            as={BoxBadges} 
+            name="Badges" 
+            count={`${Object.values(user.badges).filter(badge => badge).length}`} 
+            icon={RiShieldFill}
+          ></Box>
+          <Box 
+            as={BoxBadges} 
+            name="Places" 
+            count={`${user.my_events.length}`} 
+            icon={RiMapFill}
+          ></Box>
         </HStack>
       </Flex>
     </Flex>
