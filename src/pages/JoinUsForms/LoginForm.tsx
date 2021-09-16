@@ -17,7 +17,11 @@ interface IFormValues {
 
 export const LoginForm = () => {
   const { signIn } = useAuth();
-  const {isOpen: isSuccessOpen, onClose: onSuccessClose, onOpen:onSuccessOpen, } = useDisclosure();
+  const {
+    isOpen: isSuccessOpen,
+    onClose: onSuccessClose,
+    onOpen: onSuccessOpen,
+  } = useDisclosure();
   const formSchema = yup.object().shape({
     email: yup.string().required("Required field").email("Invalid email"),
     password: yup.string().required("Required field"),
@@ -31,40 +35,46 @@ export const LoginForm = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const handleSignUp = (data: IFormValues,) => {
-    signIn(data)
+  const handleSignUp = (data: IFormValues) => {
+    signIn(data);
   };
 
   return (
     <>
-    <ModalSuccess isOpen={isSuccessOpen} message="Are you ready. Let's save the planet together" onClose={onSuccessClose}/>
-    <Center
-      as="form"
-      flexDirection="column"
-      onSubmit={handleSubmit(handleSignUp)}
-    >
-      <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
-        <Input
-          icon={AiOutlineMail}
-          placeholder="Email"
-          w={["262px", "350px"]}
-          error={errors.email}
-          {...register("email")}
-        />
-        <Input
-          type="password"
-          icon={RiLockPasswordLine}
-          placeholder="Password"
-          w={["262px", "350px"]}
-          error={errors.password}
-          {...register("password")}
-        />
-      </VStack>
+      <ModalSuccess
+        isOpen={isSuccessOpen}
+        message="Are you ready. Let's save the planet together"
+        onClose={onSuccessClose}
+      />
+      <Center
+        as="form"
+        flexDirection="column"
+        onSubmit={handleSubmit(handleSignUp)}
+        flex="1"
+        transition="ease-in all .5s"
+      >
+        <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
+          <Input
+            icon={AiOutlineMail}
+            placeholder="Email"
+            w={["262px", "350px"]}
+            error={errors.email}
+            {...register("email")}
+          />
+          <Input
+            type="password"
+            icon={RiLockPasswordLine}
+            placeholder="Password"
+            w={["262px", "350px"]}
+            error={errors.password}
+            {...register("password")}
+          />
+        </VStack>
 
-      <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
-        <ButtonForms children={"Login"} width={["262px"]} type="submit" />
-      </Box>
-    </Center>
+        <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
+          <ButtonForms children={"Login"} width={["262px"]} type="submit" />
+        </Box>
+      </Center>
     </>
   );
 };
