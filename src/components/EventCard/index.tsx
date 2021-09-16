@@ -4,7 +4,7 @@ import { BiCalendarAlt } from "react-icons/bi";
 import { MdGroup } from "react-icons/md";
 import { Marker } from "../../types/makerData";
 import { useEventDetails } from "../../providers/EventDetailsContext";
-import { EventDetails } from "../Modals/EventDetails";
+import { NearEventDetails } from "../Modals/NearEventDetails";
 
 interface EventCardProps {
   marker: Marker;
@@ -24,7 +24,7 @@ export const EventCard = ({ marker }: EventCardProps) => {
       onClick={() => selectedEvent(marker)}
       _hover={{ border: "1px", borderColor: "brown.200", cursor: "pointer" }}
     >
-      <EventDetails marker={event} />
+      <NearEventDetails marker={event} />
 
       <Flex
         w={{ base: "95vw", lg: "370px" }}
