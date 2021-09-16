@@ -13,6 +13,9 @@ import { SignupForm } from "./SignupForm";
 import { LoginForm } from "./LoginForm";
 import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 import { useEffect } from "react";
+import LogoImg from "../../assets/images/group.png";
+import LogoImgMobile from "../../assets/images/logo-joinus.png";
+import { Link as LinkRouter } from "react-router-dom";
 
 export const JoinUsForms = () => {
   const display = useBreakpointValue({ base: "none", lg: "block" });
@@ -21,10 +24,10 @@ export const JoinUsForms = () => {
 
   useEffect(() => {
     setOptions(["Login", "Sign up"]);
-    if (formOption === undefined) {
+    if (formOption === "") {
       setFormOption("Login");
     }
-  }, []);
+  }, [formOption]);
 
   return (
     <Flex
@@ -33,17 +36,15 @@ export const JoinUsForms = () => {
       align="center"
       h={{ lg: "100vh" }}
     >
-      <Center>
+      <Center mt="5vh">
         <Box pr={["0", "0", "0", "3em", "8em"]} display={display}>
-          <Box mb="50px">
-            <Text bgColor="green.300" display="inline">
-              LOGO
+          <LinkRouter to="/">
+            <Text color="green.400" fontWeight="medium" fontSize="45px">SIDE BY SIDE</Text>
+          </LinkRouter>
+          <Box w="400px">
+            <Text fontWeight="bold" fontSize="20px">
+              Search! Create! Recycle! Make the world a cleaner place!
             </Text>
-            <Box w="280px">
-              <Text fontWeight="bold" fontSize="20px">
-                Search! Create! Recycle! Make the world a cleaner place!
-              </Text>
-            </Box>
           </Box>
 
           <Image
@@ -51,11 +52,21 @@ export const JoinUsForms = () => {
             alt="Illustration form page"
             w={["200px", "240px", "240", "490px", "580px"]}
             opacity="85%"
+            mt="5vh"
           />
         </Box>
       </Center>
 
-      <Center>
+      <Center flexDirection="column">
+        <LinkRouter to="/">
+          <Image
+            src={LogoImgMobile}
+            w="110px"
+            mt="2vh"
+            display={{ lg: "none" }}
+          />
+        </LinkRouter>
+
         <Flex
           direction="column"
           justify="center"
@@ -65,6 +76,7 @@ export const JoinUsForms = () => {
           shadow={{ lg: "lg" }}
           pt={{ lg: "2.5em" }}
           textAlign="center"
+          mt={{ base: "-30px", lg: "5vh" }}
         >
           <Flex justify="center" mb={{ base: "2em", lg: "0" }}>
             <ToggleSwitch />
