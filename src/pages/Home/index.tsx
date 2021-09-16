@@ -38,7 +38,7 @@ const Home = () => {
           <Box
             bgColor="gray.300"
             w="100%"
-            h={["65vh", "74vh", "83vh", "97vh"]}
+            h={["65vh", "74vh", "83vh", "100vh"]}
             pl={["40px", "50px", "60px", "80px"]}
             pt={{ base: "110px", lg: "180px" }}
           >

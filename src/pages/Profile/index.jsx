@@ -11,11 +11,13 @@ import { useEffect } from "react";
 import LogoImg from "../../assets/images/marcador-recycle2.png";
 import { MiniMap } from "../../components/MiniMap";
 import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
+import { useUser } from "../../providers/UserContext";
 
 const Profile = () => {
   const { signOut } = useAuth();
   const { location, setLocation } = useLocation();
   const display = useBreakpointValue({ base: "flex", lg: "none" })
+  const { userData: user } = useUser()
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -36,7 +38,7 @@ const Profile = () => {
       </Flex>
 
       <Flex flexDirection="column">
-        <FirstAccessForm />
+        {!user.location && <FirstAccessForm />}
         <Flex>
           <Spacer />
           <Button

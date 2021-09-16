@@ -1,3 +1,4 @@
+import ILocationData from "../components/Modals/FirstAccessForm";
 import IAllBadges from "./badgesData";
 import { Marker } from "./makerData";
 
@@ -11,7 +12,7 @@ export interface User {
   my_events: MyEvent[];
   experience: number;
   places: Marker[];
-  location?: null 
+  location: null | ILocationData
 }
 
 export interface MyEvent extends Omit<Marker, "type"> {}

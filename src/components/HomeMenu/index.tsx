@@ -24,8 +24,8 @@ const HomeMenu = () => {
       h={["15vh", "14vh", "13vh", "12vh"]}
       pl={["10px", "20px", "30px"]}
     >
-      <Center color="white">
-        <Link to="/">
+      <Center color="white" borderRadius="12px">
+        <Link to="/" >
           <Image src={LogoImg} w={{ base: "70px", lg: "100px" }} />
         </Link>
       </Center>
@@ -41,6 +41,7 @@ const HomeMenu = () => {
           _hover={{ bg: "gray.50", color: "green.300" }}
           _focus={{}}
           onClick={() => sendTo("Sign up")}
+          boxShadow="5px 5px 12px 0px rgba(0,0,0,0.5)"
         >
           Sign up
         </Button>
@@ -55,6 +56,7 @@ const HomeMenu = () => {
           _hover={{ color: "green.300", bgColor: "white" }}
           _focus={{}}
           onClick={() => sendTo("Login")}
+          boxShadow="5px 5px 12px 0px rgba(0,0,0,0.5)"
         >
           Login
         </Button>

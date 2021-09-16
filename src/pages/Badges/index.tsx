@@ -31,17 +31,7 @@ const Badges = () => {
       </Flex>
       <BottomMenu />
       <DashboardMenu />
-      <Flex flexDirection="column">
-        <Center
-          display={["block", "block", "none"]}
-          h="50px"
-          justifyContent="left"
-          ml="5"
-          fontSize="2xl"
-          color="green.400"
-        >
-          LOGO
-        </Center>
+      <Flex flexDirection="column" pt="50px">
         <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
           <UserInfo />
           <BadgesDisplay />
