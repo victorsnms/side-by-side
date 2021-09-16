@@ -19,23 +19,18 @@ interface DrawerFormProps extends InputMarker {
   isDisable: boolean;
 }
 
-
-
 export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = window.innerWidth < 768;
   const position = isMobile ? "bottom" : "left";
 
-  const {
-    setFormOption,
-    setOptions,
-    setIsLeft,
-    isLeft
-  } = useToggleSwitchContext();
+  const { setFormOption, setOptions, setIsLeft, isLeft } =
+    useToggleSwitchContext();
 
   useEffect(() => {
     setOptions(["Event", "Wast Point"]);
-  }, [])
+    setIsLeft(true);
+  }, [isLeft]);
 
   const handleClick = () => {
     setFormOption("Event");
@@ -63,11 +58,27 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
           <DrawerHeader alignSelf="center">
             <ToggleSwitch />
           </DrawerHeader>
-          <DrawerBody>
-            {!isLeft ? (
+          <DrawerBody
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+                borderRadius: "8px",
+                backgroundColor: `rgba(72, 135, 136, 0.5)`,
+                marginRight: "30px  ",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: `#488788`,
+                borderRadius: "8px",
+              },
+            }}
+          >
+            {isLeft ? (
               <FormEvent inputMarker={inputMarker} onClose={onClose} />
             ) : (
-              <FormWasteCollection inputMarker={inputMarker} onClose={onClose} />
+              <FormWasteCollection
+                inputMarker={inputMarker}
+                onClose={onClose}
+              />
             )}
           </DrawerBody>
         </DrawerContent>

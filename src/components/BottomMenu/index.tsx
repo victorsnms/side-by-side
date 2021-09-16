@@ -5,6 +5,7 @@ import { BiHome, BiBookOpen, BiMap, BiGroup, BiTrophy } from "react-icons/bi";
 export const BottomMenu = () => {
   return (
     <Box
+      display={["block", "block", "none"]}
       zIndex="100"
       as="nav"
       pos="fixed"

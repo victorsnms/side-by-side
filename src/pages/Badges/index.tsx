@@ -1,4 +1,11 @@
-import { Box, Flex, Image, Text, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Flex,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import BadgesDisplay from "../../components/BadgesDisplay";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
@@ -6,12 +13,10 @@ import { UserInfo } from "../../components/UserInfo";
 import LogoImg from "../../assets/images/marcador-recycle2.png";
 
 const Badges = () => {
-  const isMobile = window.innerWidth < 768;
-  const display = useBreakpointValue({ base: "flex", lg: "none"});
+  const display = useBreakpointValue({ base: "flex", lg: "none" });
 
   return (
     <Box>
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
       <Flex position="absolute" top="14px" left="12px" display={display}>
         <Image src={LogoImg} w="12px" h="18px" mt="2px" opacity="40%" />
         <Text
@@ -24,8 +29,20 @@ const Badges = () => {
           Side by Side
         </Text>
       </Flex>
+      <BottomMenu />
+      <DashboardMenu />
       <Flex flexDirection="column">
-        <Box mt="92px" ml={["2%", "2%", "20%", "10%"]}>
+        <Center
+          display={["block", "block", "none"]}
+          h="50px"
+          justifyContent="left"
+          ml="5"
+          fontSize="2xl"
+          color="green.400"
+        >
+          LOGO
+        </Center>
+        <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
           <UserInfo />
           <BadgesDisplay />
         </Box>

@@ -1,6 +1,13 @@
 import { EventCard } from "../../components/EventCard";
 import { DashboardMenu } from "../../components/DashboardMenu";
-import { Flex, Box, Heading, Image, Text, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Heading,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
@@ -10,11 +17,10 @@ import { haversine } from "../../utils/haversine";
 import LogoImg from "../../assets/images/marcador-recycle2.png";
 
 export const EventsList = () => {
-  const isMobile = window.innerWidth < 768;
   const { allEvents, displayEvents } = useMarkers();
   const { accessToken } = useAuth();
   const { location, setLocation } = useLocation();
-  const display = useBreakpointValue({ base: "flex", lg: "none"})
+  const display = useBreakpointValue({ base: "flex", lg: "none" });
 
   const { lat: userLat, lng: userLng } = location;
 
@@ -30,7 +36,8 @@ export const EventsList = () => {
 
   return (
     <Box pl={{ base: "0", lg: "125px" }} w="90vw" h="100vh" m="0 auto">
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <BottomMenu />
+      <DashboardMenu />
       <Flex position="absolute" top="14px" left="12px" display={display}>
         <Image src={LogoImg} w="12px" h="18px" mt="2px" opacity="40%" />
         <Text

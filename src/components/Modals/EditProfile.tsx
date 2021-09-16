@@ -27,7 +27,7 @@ import { api } from "../../services/api";
 import { ButtonForms } from "../ButtonForms";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
-import {theme} from "../../styles/theme"
+import { theme } from "../../styles/theme";
 
 interface Data {
   name: string;
@@ -60,7 +60,7 @@ export const EditProfile = () => {
 
   const eventSchema = yup.object().shape({
     name: yup.string(),
-    image_url: yup.string(),
+    image_url: yup.string().matches(/^(http?s)/, "Url invalid"),
   });
 
   const {
@@ -109,8 +109,9 @@ export const EditProfile = () => {
           children="Edit profile"
           bg="transparent"
           transition="ease-in .2s all"
-          _hover={{ bgColor: "green.70"}}
-          pb="15px"
+          _hover={{ bgColor: "green.70" }}
+          pb="6px"
+          fontSize={[".7rem", ".7 rem", "1rem", "1rem"]}
         />
       </Flex>
       <ModalSuccess

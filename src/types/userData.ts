@@ -11,6 +11,7 @@ export interface User {
   my_events: MyEvent[];
   experience: number;
   places: Marker[];
+  location?: null 
 }
 
 export interface MyEvent extends Omit<Marker, "type"> {}
