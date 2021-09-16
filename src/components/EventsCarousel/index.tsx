@@ -1,58 +1,74 @@
-import Carousel, { Dots } from "@brainhubeu/react-carousel";
-import "@brainhubeu/react-carousel/lib/style.css";
-import { Box } from "@chakra-ui/layout";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Box, Flex, Button } from "@chakra-ui/react";
+import { useEffect, useRef } from "react";
 import { useAuth } from "../../providers/AuthContext";
 import { useUser } from "../../providers/UserContext";
 import { EventCard } from "../EventCard";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { ButtonCarousel } from "../ButtonCarousel";
 
 export const EventsCarousel = () => {
-  const [value, setValue] = useState(0);
   const { getUser, userData } = useUser();
   const { id, accessToken } = useAuth();
+  const carousel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getUser(id, accessToken);
   }, []);
 
+  const handleBack = () => {
+    if (carousel.current !== null) {
+      carousel.current.scrollLeft -= 325;
+    }
+  };
+
+  const handleForward = () => {
+    if (carousel.current !== null) {
+      carousel.current.scrollLeft += 325;
+    }
+  };
+
   return (
-    <Box w="50vw" mt="40px">
-      <Carousel plugins={['arrows']} itemWidth={250}>
+    <Box w={{ base: "95vw", lg: "70vw" }} mt="40px" mb="2rem">
+      <Flex
+        ref={carousel}
+        wrap="nowrap"
+        overflowX="scroll"
+        overflowY="hidden"
+        scrollBehavior="smooth"
+        sx={{
+          "::-webkit-scrollbar": {
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "white",
+          },
+          "::-webkit-scrollbar-thumb": {
+            backgroundColor: "white",
+            borderRadius: "8px",
+          },
+          scrollBehavior: "smooth",
+        }}
+      >
         {userData.my_events &&
           userData.my_events.map((event, index) => (
+            <Box m="2px 1rem">
               <EventCard key={index} marker={event} />
+            </Box>
           ))}
 
-        {/* <img
-          width="200px"
-          alt="Img1"
-          src="https://www.praias-360.com.br/img-600/ba/salvador/ba-salvador-praia-de-piata-020.jpg"
-        />
-        <img
-          width="200px"
-          alt="Img2"
-          src="https://dicasdonossobrasil.com.br/wp-content/uploads/2018/05/Praia-do-Porto-da-Barra-Forte.jpg"
-        /> */}
-      </Carousel>
-      {/* <Dots
-        value={value}
-        onChange={onChange}
-        thumbnails={[
-          <img
-            width="50px"
-            key={1}
-            className="img-example-small"
-            src="https://www.praias-360.com.br/img-600/ba/salvador/ba-salvador-praia-de-piata-020.jpg"
-          />,
-          <img
-            width="50px"
-            key={12}
-            className="img-example-small"
-            src="https://dicasdonossobrasil.com.br/wp-content/uploads/2018/05/Praia-do-Porto-da-Barra-Forte.jpg"
-          />,
-        ]}
-      /> */}
+        <Flex
+          w={{ base: "95vw", lg: "70vw" }}
+          position="absolute"
+          justify="space-between"
+        >
+          <ButtonCarousel onClick={handleBack}>
+            <IoIosArrowBack />
+          </ButtonCarousel>
+
+          <ButtonCarousel onClick={handleForward}>
+            <IoIosArrowForward />
+          </ButtonCarousel>
+        </Flex>
+      </Flex>
     </Box>
   );
 };

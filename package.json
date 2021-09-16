@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@brainhubeu/react-carousel": "^2.0.4",
     "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11.4.1",
@@ -59,7 +58,6 @@
     ]
   },
   "devDependencies": {
-    "@types/brainhubeu__react-carousel": "^2.0.3",
     "cz-conventional-changelog": "3.3.0"
   },
   "config": {

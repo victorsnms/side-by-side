@@ -30,7 +30,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <Box>
+    <Box w={{ base: "100vw", lg: "85%" }} m="0 auto">
       <BottomMenu />
       <DashboardMenu />
       <Flex position="absolute" top="14px" left="12px" display={display}>
@@ -64,10 +64,6 @@ const Profile = () => {
         </Box>
       </Flex>
 
-      <Box w="75vw" m="0 auto" mt="45px">
-        <Heading as="h3" fontSize="20px" pl="20px">My Events</Heading>
-        <EventsCarousel/>
-      </Box>
       <Flex justifyContent="center">
         <Box
           mt="38px"
@@ -80,6 +76,23 @@ const Profile = () => {
           <MiniMap />
         </Box>
       </Flex>
+
+      <Box
+        w={{ base: "100vw", lg: "80%" }}
+        m="0 auto"
+        mt="45px"
+        mb={{ base: "100px", lg: "50px" }}
+      >
+        <Heading
+          as="h3"
+          fontSize="26px"
+          pl={{ lg: "20px" }}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          My Events
+        </Heading>
+        <EventsCarousel />
+      </Box>
     </Box>
   );
 };
