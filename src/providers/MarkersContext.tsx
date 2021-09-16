@@ -11,6 +11,8 @@ import {
 import { api } from "../services/api";
 import { Marker, Participants } from "../types/makerData";
 import { MyEvent, User } from "../types/userData";
+import { createdAnEvent } from "../utils/Badges/badgesLogic";
+import { useUser } from "./UserContext";
 
 interface MarkersProviderProps {
   children: ReactNode;
@@ -24,7 +26,8 @@ interface MarkersContextData {
     id: () => string,
     accessToken: string,
     data: MyEvent,
-    my_events: MyEvent[]
+    my_events: MyEvent[],
+    user: User
   ) => void;
   updateParticipants: (
     id: () => string,
@@ -84,8 +87,10 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
   );
 
   const updateMyEvents = useCallback(
-    (id: () => string, accessToken: string, data, my_events: MyEvent[]) => {
+    (id: () => string, accessToken: string, data, my_events: MyEvent[], user: User) => {
       const newData = [data, ...my_events];
+
+      user.my_events = newData
       api
         .patch(
           `/users/${id}`,
@@ -94,7 +99,10 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
             headers: { Authorization: `Bearer ${accessToken}` },
           }
         )
-        .then((response: AxiosResponse<User>) => console.log(response))
+        .then((response: AxiosResponse<User>) => {
+          console.log(response)
+          createdAnEvent(user)
+        })
         .catch((err) => console.log(err));
     },
     []

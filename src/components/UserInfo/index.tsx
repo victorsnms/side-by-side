@@ -1,81 +1,143 @@
-import { HStack, Box, Text, Flex, Avatar, Icon } from "@chakra-ui/react";
+import {
+  HStack,
+  Box,
+  Text,
+  Flex,
+  Avatar,
+  Icon,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { RiShieldFill, RiMapFill } from "react-icons/ri";
 import { BoxBadges } from "./layouts/BoxBadges";
 import { EditProfile } from "../Modals/EditProfile";
+import { useUser } from "../../providers/UserContext";
+import { useEffect, useState } from "react";
+import { ModalSuccess } from "../Modals/ModalSuccess";
+import { useCallback } from "react";
+import { useMemo } from "react";
 
 export const UserInfo = () => {
-  return (
-    <Flex w="100%" justifyContent="center">
-      <Flex
-        position="relative"
-        bg="green.300"
-        flexDirection={["column", "column", "row", "row"]}
-        w="70%"
-        h="136px"
-        borderRadius="12px"
-        justifyContent={["center", "center", "center", "flex-end"]}
-        alignItems={["center", "center", "flex-start", "flex-start"]}
-      >
-        <Box
-          position="absolute"
-          right={["50%", "50%", "100%", "100%"]}
-          top="50%"
-          transform={[
-            "translate(50%,-115%)",
-            "translate(50%,-115%)",
-            "translate(50%, -50%)",
-            "translate(50%, -50%)",
-          ]}
-        >
-          <Avatar
-            w={["103px", "103px", "176px", "176px"]}
-            h={["103px", "103px", "176px", "176px"]}
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
-            borderRadius="50%"
-            position="relative"
-            _hover={{
-              filter: "grayscale(70%)",
-            }}
-            overflow="hidden"
-          >
-            <EditProfile />
-          </Avatar>
-        </Box>
+  const { userData: user } = useUser();
+  const [level, setLevel] = useState(1);
+  const {
+    isOpen: isSuccessOpen,
+    onClose: onSuccessClose,
+    onOpen: onSuccessOpen,
+  } = useDisclosure();
 
+  const experiencieCalc = useMemo(() => {
+    return level / user.experience;
+  }, [user.experience, level]);
+
+  useEffect(() => {
+    if (experiencieCalc <= 0.2) {
+      setLevel(level + 1);
+      // onSuccessOpen();
+    }
+  }, [experiencieCalc]);
+
+  return (
+    <>
+      <ModalSuccess
+        isOpen={isSuccessOpen}
+        message="Yuuup, you leveled up sfgsdfgsdfgsdfgsdfgsfdg"
+        onClose={onSuccessClose}
+      />
+      <Flex w="100%" justifyContent="center">
         <Flex
-          flexDirection="column"
-          mt="1rem"
-          w={["100%", "100%", "60%", "60%"]}
-          pl={["0", "0", "0", "2rem", "0"]}
+          position="relative"
+          bg="green.300"
+          flexDirection={["column", "column", "row", "row"]}
+          w="70%"
+          h="136px"
+          borderRadius="12px"
+          justifyContent={["center", "center", "center", "flex-end"]}
+          alignItems={["center", "center", "flex-start", "flex-start"]}
+          pl={["0px", "0px", "16px", "0px", "16px"]}
         >
-          <Text
-            as="h1"
-            fontSize={["1rem", "1rem", "2rem", "2rem"]}
-            textAlign={["center", "center", "left", "left"]}
+          <Box
+            position="absolute"
+            right={["50%", "50%", "100%", "100%"]}
+            top="50%"
+            transform={[
+              "translate(50%,-115%)",
+              "translate(50%,-115%)",
+              "translate(50%, -50%)",
+              "translate(50%, -50%)",
+            ]}
           >
-            <b>Kenzinho Ecológico</b>
-          </Text>
-          <Text
-            as="h2"
-            fontSize="12px"
-            textAlign={["center", "center", "left", "left"]}
+            <Avatar
+              w={["103px", "103px", "176px", "176px"]}
+              h={["103px", "103px", "176px", "176px"]}
+              src={user.image_url}
+              borderRadius="50%"
+              position="relative"
+              _hover={{
+                filter: "grayscale(70%)",
+              }}
+              overflow="hidden"
+            >
+              <EditProfile />
+            </Avatar>
+          </Box>
+
+          <Flex
+            flexDirection="column"
+            mt="1rem"
+            w={["100%", "100%", "60%", "60%"]}
+            pl={["0", "0", "0", "2rem", "0"]}
           >
-            <Icon as={FaMapMarkerAlt} /> Brasil, América do Sul
-          </Text>
+            <Text
+              as="h1"
+              fontSize={["1rem", "1rem", "1.5rem", "1.8rem", "2rem"]}
+              textAlign={["center", "center", "left", "left"]}
+            >
+              <b>{Object.values(user).length !== 0 ? user.name : "user"}</b>
+            </Text>
+            <Text
+              as="h2"
+              fontSize="12px"
+              textAlign={["center", "center", "left", "left"]}
+            >
+              {/* TODO */}
+              <Icon as={FaMapMarkerAlt} /> Brasil, América do Sul
+            </Text>
+          </Flex>
+          <HStack
+            position={["absolute", "absolute", "absolute", "relative"]}
+            bottom="0"
+            right={["none", "none", "5%", "none"]}
+            transform="translateY(50%)"
+          >
+            <Box
+              as={BoxBadges}
+              name="Level"
+              count={level.toString()}
+              icon={AiFillStar}
+            ></Box>
+            <Box
+              as={BoxBadges}
+              name="Badges"
+              count={`${
+                Object.values(user).length !== 0
+                  ? Object.values(user.badges).filter((badge) => badge).length
+                  : 0
+              }`}
+              icon={RiShieldFill}
+            ></Box>
+            <Box
+              as={BoxBadges}
+              name="Places"
+              count={`${
+                Object.values(user).length !== 0 ? user.my_events.length : 0
+              }`}
+              icon={RiMapFill}
+            ></Box>
+          </HStack>
         </Flex>
-        <HStack
-          position={["absolute", "absolute", "absolute", "relative"]}
-          bottom="0"
-          right={["none", "none", "5%", "none"]}
-          transform="translateY(50%)"
-        >
-          <Box as={BoxBadges} name="Level" count="10" icon={AiFillStar}></Box>
-          <Box as={BoxBadges} name="Badges" count="1" icon={RiShieldFill}></Box>
-          <Box as={BoxBadges} name="Level" count="10" icon={RiMapFill}></Box>
-        </HStack>
       </Flex>
-    </Flex>
+    </>
   );
 };

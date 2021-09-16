@@ -9,10 +9,13 @@ import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
 import { MiniMap } from "../../components/MiniMap";
+import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
+import { useUser } from "../../providers/UserContext";
 
 const Profile = () => {
   const { signOut } = useAuth();
   const { location, setLocation } = useLocation();
+  const { userData: user } = useUser()
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -28,6 +31,7 @@ const Profile = () => {
       <BottomMenu />
       <DashboardMenu />
       <Flex flexDirection="column">
+      {!user.location && <FirstAccessForm/>}
         <Flex>
             <Center display={["block", "block", "none"]} ml="5" fontSize="2xl" color="green.400">
               LOGO

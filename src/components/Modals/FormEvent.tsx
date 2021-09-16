@@ -71,11 +71,13 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
     title: yup.string().required("Event name required"),
     address: yup.string().required("Eventa address required"),
     contact: yup.string().required("Email or cellphone required"),
-    start_time: yup.string().required("Event start time required"),
-    end_time: yup.string().required("Event end time required"),
+    start_time: yup.string().required("Start time required"),
+    end_time: yup.string().required("End time required"),
     date: yup.string().required("Event date required"),
     description: yup.string().required("Event description required"),
-    picture_url: yup.string().url("Url image invalid"),
+    picture_url: yup
+      .string()
+      .matches(/^$|(http(s?):)([/|.|\w|\s|-])/g, "Url invalid"),
   });
 
   const {
@@ -144,7 +146,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
     setIsLoading.on();
     createMarker(newData, accessToken);
     if (newData.type === "event") {
-      updateMyEvents(id, accessToken, filteredData, my_events);
+      updateMyEvents(id, accessToken, filteredData, my_events, userData);
     }
   };
 

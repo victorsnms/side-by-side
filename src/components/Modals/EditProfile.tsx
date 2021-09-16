@@ -60,7 +60,7 @@ export const EditProfile = () => {
 
   const eventSchema = yup.object().shape({
     name: yup.string(),
-    image_url: yup.string(),
+    image_url: yup.string().matches(/^(http?s)/, "Url invalid"),
   });
 
   const {
