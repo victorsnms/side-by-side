@@ -20,23 +20,12 @@ import { useMemo } from "react";
 
 export const UserInfo = () => {
   const { userData: user } = useUser();
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(Math.floor(user.experience / 5));
   const {
     isOpen: isSuccessOpen,
     onClose: onSuccessClose,
     onOpen: onSuccessOpen,
   } = useDisclosure();
-
-  const experiencieCalc = useMemo(() => {
-    return level / user.experience;
-  }, [user.experience, level]);
-
-  useEffect(() => {
-    if (experiencieCalc <= 0.2) {
-      setLevel(level + 1);
-      // onSuccessOpen();
-    }
-  }, [experiencieCalc]);
 
   return (
     <>
@@ -114,7 +103,7 @@ export const UserInfo = () => {
             <Box
               as={BoxBadges}
               name="Level"
-              count={level.toString()}
+              count={Math.floor(user.experience / 5).toString()}
               icon={AiFillStar}
             ></Box>
             <Box

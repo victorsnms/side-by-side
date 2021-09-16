@@ -36,32 +36,32 @@ export const allBadges: IAllBadges = {
     },
     first: {
         title: 'Long way to go',
-        txt: 'Join your first event!',
+        txt: 'Joined your first event!',
         img: first,
     },
     second: {
         title: 'Keeper of nature',
-        txt: 'Join your second event!',
+        txt: 'Joined your second event!',
         img: second,
     },
     third: {
         title: 'Getting there',
-        txt: 'Join your fifth event!',
+        txt: 'Joined your fifth event!',
         img: third,
     },
     fourth: {
-        title: 'Care for the envirement',
-        txt: 'Join your eighth event!',
+        title: 'Care for the environment',
+        txt: 'Joined your eighth event!',
         img: fourth,
     },
     fifth: {
         title: 'Award winner',
-        txt: 'Join your twelfth event!',
+        txt: 'Joined your twelfth event!',
         img: fifth,
     },
     sixth: {
         title: 'Capitain Planet',
-        txt: 'Join your fiftieth event!',
+        txt: 'Joined your fifteenth event!',
         img: sixth,
     },
 }
