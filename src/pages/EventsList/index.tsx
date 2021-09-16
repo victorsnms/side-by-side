@@ -9,7 +9,7 @@ import { useLocation } from "../../providers/LocationContext";
 import { haversine } from "../../utils/haversine";
 
 export const EventsList = () => {
-  const isMobile = window.innerWidth < 768;
+  
   const { allEvents, displayEvents } = useMarkers();
   const { accessToken } = useAuth();
   const { location, setLocation } = useLocation();
@@ -28,7 +28,8 @@ export const EventsList = () => {
 
   return (
     <Box pl={{ base: "0", lg: "125px" }} w="90vw" h="100vh" m="0 auto">
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <BottomMenu />
+      <DashboardMenu />
       <Box display="flex" flexDirection="column" alignItems="center">
         <Heading
           as="h2"

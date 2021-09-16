@@ -8,11 +8,11 @@ import Icon from "@chakra-ui/icon";
 import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
+import { MiniMap } from "../../components/MiniMap";
 
 const Profile = () => {
   const { signOut } = useAuth();
   const { location, setLocation } = useLocation();
-  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -25,16 +25,13 @@ const Profile = () => {
 
   return (
     <Box>
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <BottomMenu />
+      <DashboardMenu />
       <Flex flexDirection="column">
         <Flex>
-          {isMobile ? (
-            <Center ml="5" fontSize="2xl" color="green.400">
+            <Center display={["block", "block", "none"]} ml="5" fontSize="2xl" color="green.400">
               LOGO
             </Center>
-          ) : (
-            <></>
-          )}
           <Spacer />
           <Button
             fontSize={["lg", "xl", "2xl"]}
@@ -50,11 +47,23 @@ const Profile = () => {
             p="0"
             justifyContent="right"
           >
-            <Icon fontSize={["3xl", "4xl", "5xl", "5xl"]} as={BiLogOut} />
+            <Icon fontSize="2xl" as={BiLogOut} />
           </Button>
         </Flex>
         <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
           <UserInfo />
+        </Box>
+      </Flex>
+      <Flex justifyContent="center">
+        <Box
+          mt="38px"
+          ml={["2%", "2%", "10%", "10%"]}
+          border={"1px solid black"}
+          w={"65%"}
+          h={"200px"}
+          position={"relative"}
+        >
+          <MiniMap />
         </Box>
       </Flex>
     </Box>

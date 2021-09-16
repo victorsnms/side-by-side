@@ -172,9 +172,10 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
               width={"100%"}
               paddingX={5}
               paddingY={5}
+              height={150}
               color={"gray.60"}
               position={"relative"}
-              borderTopRadius="12px"
+              borderTopRadius="6px"
             >
               <Text fontSize={"1.5rem"}>{marker.title}</Text>
               <Flex direction={"column"} position={"absolute"} bottom={2}>
@@ -191,20 +192,20 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
                   {marker.start_time} - {marker.end_time}
                 </Flex>
               </Flex>
-              <Flex
-                direction={"column"}
-                position={"absolute"}
-                bottom={2}
-                right={4}
-              >
-                <Flex alignItems={"center"} fontSize={"1rem"}>
-                  {marker.participants?.length}
-                  <Box marginLeft={"5px"}>
-                    <RiGroupFill />
-                  </Box>
-                </Flex>
-              </Flex>
             </Box>
+            <Flex
+              direction={"column"}
+              position={"absolute"}
+              bottom={2}
+              right={4}
+            >
+              <Flex alignItems={"center"} fontSize={"1rem"}>
+                {marker.participants?.length}
+                <Box marginLeft={"5px"}>
+                  <RiGroupFill />
+                </Box>
+              </Flex>
+            </Flex>
           </ModalHeader>
           <ModalCloseButton color="gray.60" />
           <ModalBody color={"gray.400"}>{marker.description}</ModalBody>

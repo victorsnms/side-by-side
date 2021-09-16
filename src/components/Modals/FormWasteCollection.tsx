@@ -27,6 +27,8 @@ import { AxiosResponse } from "axios";
 import { api } from "../../services/api";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
+import { createdAWasteCollectionPoint } from "../../utils/Badges/badgesLogic";
+import { useUser } from "../../providers/UserContext";
 
 interface WCDataForm {
   title: string;
@@ -37,7 +39,7 @@ interface WCDataForm {
 }
 
 interface FormWCProps extends InputMarker {
-  onClose: () => void
+  onClose: () => void;
 }
 
 export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
@@ -46,6 +48,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
   const { accessToken } = useAuth();
   const { setMarkers } = useMarkers();
   const [isLoading, setIsLoading] = useBoolean();
+  const { userData } = useUser()
   const {
     isOpen: isSuccessOpen,
     onClose: onSuccessClose,
@@ -79,6 +82,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
       .then((response: AxiosResponse<Marker>) => {
         setIsLoading.off();
         setMarkers((oldMarkers) => [...oldMarkers, response.data]);
+        createdAWasteCollectionPoint(userData)
         onSuccessOpen();
       })
       .catch((_) => {
@@ -103,9 +107,9 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
   };
 
   const handleClick = () => {
-    onSuccessClose()
-    onClose()
-  }
+    onSuccessClose();
+    onClose();
+  };
 
   return (
     <>
@@ -147,20 +151,51 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
             error={errors.contact}
             {...register("contact")}
           />
-          <HStack>
+          <HStack w="100%">
             <Input
               icon={RiTimeLine}
               placeholder="Open at:"
               error={errors.start_time}
               {...register("start_time")}
+              type="time"
+              position="relative"
+              sx={{
+                "&::-webkit-calendar-picker-indicator": {
+                  background: "none",
+                },
+                "&::-webkit-datetime-edit-fields-wrapper": {
+                  color: "gray.200",
+                },
+              }}
+              width={["100%"]}
             />
             <Input
               icon={RiTimeLine}
               placeholder="Close at:"
               error={errors.end_time}
               {...register("end_time")}
+              type="time"
+              sx={{
+                "&::-webkit-calendar-picker-indicator": {
+                  background: "none",
+                },
+                "&::-webkit-datetime-edit-fields-wrapper": {
+                  color: "gray.200",
+                },
+              }}
             />
           </HStack>
+          <Flex flexDirection="column">
+            <HStack pl="12px" mb="12px">
+              <Icon as={RiRecycleFill} color="gray.200" />
+              <Text
+                as="label"
+                children="Choose the types:"
+                alignSelf="flex-start"
+                color="gray.200"
+              />
+            </HStack>
+          </Flex>
           <Flex flexDirection="column">
             <HStack pl="12px" mb="12px">
               <Icon as={RiRecycleFill} color="gray.200" />

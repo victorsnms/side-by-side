@@ -110,7 +110,8 @@ export const EditProfile = () => {
           bg="transparent"
           transition="ease-in .2s all"
           _hover={{ bgColor: "green.70" }}
-          pb="15px"
+          pb="6px"
+          fontSize={[".7rem", ".7 rem", "1rem", "1rem"]}
         />
       </Flex>
       <ModalSuccess
