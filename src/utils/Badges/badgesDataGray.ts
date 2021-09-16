@@ -1,12 +1,12 @@
-import join from '../../assets/badges/0.png'
-import waste from '../../assets/badges/1.png'
-import event from '../../assets/badges/2.png'
-import first from '../../assets/badges/3.png'
-import second from '../../assets/badges/4.png'
-import third from '../../assets/badges/5.png'
-import fourth from '../../assets/badges/6.png'
-import fifth from '../../assets/badges/7.png'
-import sixth from '../../assets/badges/8.png'
+import join from '../../assets/badges/0_b.png'
+import waste from '../../assets/badges/1_b.png'
+import event from '../../assets/badges/2_b.png'
+import first from '../../assets/badges/3_b.png'
+import second from '../../assets/badges/4_b.png'
+import third from '../../assets/badges/5_b.png'
+import fourth from '../../assets/badges/6_b.png'
+import fifth from '../../assets/badges/7_b.png'
+import sixth from '../../assets/badges/8_b.png'
 
 interface IBadge {
     title: string
@@ -18,7 +18,7 @@ interface IAllBadges {
     [key: string]: IBadge
 }
 
-export const allBadges: IAllBadges = {
+export const allBadgesGray: IAllBadges = {
     join: {
         title: 'Join the fight',
         txt: 'Created an account!',
@@ -36,32 +36,32 @@ export const allBadges: IAllBadges = {
     },
     first: {
         title: 'Long way to go',
-        txt: 'Joined your first event!',
+        txt: 'Join your first event!',
         img: first,
     },
     second: {
         title: 'Keeper of nature',
-        txt: 'Joined your second event!',
+        txt: 'Join your second event!',
         img: second,
     },
     third: {
         title: 'Getting there',
-        txt: 'Joined your fifth event!',
+        txt: 'Join your fifth event!',
         img: third,
     },
     fourth: {
-        title: 'Care for the environment',
-        txt: 'Joined your eighth event!',
+        title: 'Care for the envirement',
+        txt: 'Join your eighth event!',
         img: fourth,
     },
     fifth: {
         title: 'Award winner',
-        txt: 'Joined your twelfth event!',
+        txt: 'Join your twelfth event!',
         img: fifth,
     },
     sixth: {
         title: 'Capitain Planet',
-        txt: 'Joined your fifteenth event!',
+        txt: 'Join your fiftieth event!',
         img: sixth,
     },
 }
