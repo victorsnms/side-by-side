@@ -36,11 +36,11 @@ export const UserInfo = () => {
             borderRadius="50%"
             position="relative"
             _hover={{
-              filter:"grayscale(70%)"
+              filter: "grayscale(70%)",
             }}
             overflow="hidden"
           >
-            <EditProfile/>
+            <EditProfile />
           </Avatar>
         </Box>
 
@@ -73,7 +73,7 @@ export const UserInfo = () => {
         >
           <Box as={BoxBadges} name="Level" count="10" icon={AiFillStar}></Box>
           <Box as={BoxBadges} name="Badges" count="1" icon={RiShieldFill}></Box>
-          <Box as={BoxBadges} name="Level" count="10" icon={RiMapFill}></Box>
+          <Box as={BoxBadges} name="Places" count="10" icon={RiMapFill}></Box>
         </HStack>
       </Flex>
     </Flex>

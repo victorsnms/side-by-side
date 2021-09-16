@@ -163,7 +163,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
           <ModalHeader padding={0}>
             <Box
               backgroundImage={`linear-gradient(
-                rgba(0, 0, 0, 0.3), 
+                rgba(0, 0, 0, 0.3),
                 rgba(0, 0, 0, 0.5)
               ), url(${markerUpdated.picture_url})`}
               backgroundRepeat="no-repeat"

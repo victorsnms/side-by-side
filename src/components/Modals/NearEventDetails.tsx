@@ -162,13 +162,19 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
         <ModalContent>
           <ModalHeader padding={0}>
             <Box
-              backgroundImage={marker.picture_url}
+              backgroundImage={`linear-gradient(
+                rgba(0, 0, 0, 0.3), 
+                rgba(0, 0, 0, 0.5)
+              ), url(${marker.picture_url})`}
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundPosition="center"
               width={"100%"}
-              height={150}
               paddingX={5}
               paddingY={5}
               color={"gray.60"}
               position={"relative"}
+              borderTopRadius="12px"
             >
               <Text fontSize={"1.5rem"}>{marker.title}</Text>
               <Flex direction={"column"} position={"absolute"} bottom={2}>

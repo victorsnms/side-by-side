@@ -43,7 +43,7 @@ interface EventDataForm {
 }
 
 interface FormEventProps extends InputMarker {
-  onClose: () => void
+  onClose: () => void;
 }
 
 export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
@@ -75,7 +75,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
     end_time: yup.string().required("Event end time required"),
     date: yup.string().required("Event date required"),
     description: yup.string().required("Event description required"),
-    picture_url: yup.string().url("Url image invalid"),
+    picture_url: yup.string().matches(/^(http?s)/, "Url invalid"),
   });
 
   const {
@@ -92,11 +92,11 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
       .then((response: AxiosResponse<Marker>) => {
         setIsLoading.off();
         setMarkers((oldMarkers) => [...oldMarkers, response.data]);
-        onSuccessOpen()
+        onSuccessOpen();
       })
       .catch((_) => {
-        setIsLoading.off()
-        onErrorOpen()
+        setIsLoading.off();
+        onErrorOpen();
       });
   };
 
@@ -125,7 +125,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
       picture_url: data_picture_url,
       start_time,
       title,
-      participants
+      participants,
     } = newData;
     const filteredData = {
       address: address,
@@ -139,7 +139,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
       picture_url: data_picture_url,
       start_time: start_time,
       title: title,
-      participants: participants
+      participants: participants,
     };
     setIsLoading.on();
     createMarker(newData, accessToken);
@@ -149,10 +149,9 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
   };
 
   const handleClick = () => {
-    onSuccessClose()
-    onClose()
-  }
-
+    onSuccessClose();
+    onClose();
+  };
 
   return (
     <>
