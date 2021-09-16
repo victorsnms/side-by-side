@@ -30,7 +30,7 @@ interface EventDetailsProps {
   marker: Marker;
 }
 
-export const EventDetails = ({ marker }: EventDetailsProps) => {
+export const NearEventDetails = ({ marker }: EventDetailsProps) => {
   const { isOpen, onClose } = useEventDetails();
   const { getUser, userData } = useUser();
   const { accessToken, id } = useAuth();
@@ -45,13 +45,13 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
     onClose: onErrorClose,
     onOpen: onErrorOpen,
   } = useDisclosure();
-  const { markerUpdated, updateEvent } = useMarkers();
+  // const { markerUpdated, updateEvent } = useMarkers();
 
   useEffect(() => {
     getUser(id, accessToken);
-    if (marker.id) {
-      updateEvent(marker.id, accessToken);
-    }
+    // if (marker.id) {
+    //   updateEvent(marker.id, accessToken);
+    // }
   }, []);
 
   const handleSubmit = () => {
@@ -139,9 +139,9 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
   const handleClick = () => {
     onSuccessClose();
     onClose();
-    if (marker.id) {
-      updateEvent(marker.id, accessToken);
-    }
+    // if (marker.id) {
+    //   updateEvent(marker.id, accessToken);
+    // }
   };
 
   return (
@@ -162,7 +162,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         <ModalContent>
           <ModalHeader padding={0}>
             <Box
-              backgroundImage={markerUpdated.picture_url}
+              backgroundImage={marker.picture_url}
               width={"100%"}
               height={150}
               paddingX={5}
@@ -170,19 +170,19 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
               color={"gray.60"}
               position={"relative"}
             >
-              <Text fontSize={"1.5rem"}>{markerUpdated.title}</Text>
+              <Text fontSize={"1.5rem"}>{marker.title}</Text>
               <Flex direction={"column"} position={"absolute"} bottom={2}>
                 <Flex alignItems={"center"} fontSize={"1rem"}>
                   <Box marginRight={"5px"}>
                     <BiCalendarAlt />
                   </Box>
-                  {markerUpdated.date}
+                  {marker.date}
                 </Flex>
                 <Flex alignItems={"center"} fontSize={"1rem"}>
                   <Box marginRight={"5px"}>
                     <FiClock />
                   </Box>
-                  {markerUpdated.start_time} - {markerUpdated.end_time}
+                  {marker.start_time} - {marker.end_time}
                 </Flex>
               </Flex>
               <Flex
@@ -192,7 +192,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
                 right={4}
               >
                 <Flex alignItems={"center"} fontSize={"1rem"}>
-                  {markerUpdated.participants?.length}
+                  {marker.participants?.length}
                   <Box marginLeft={"5px"}>
                     <RiGroupFill />
                   </Box>
@@ -201,7 +201,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             </Box>
           </ModalHeader>
           <ModalCloseButton color="gray.60" />
-          <ModalBody color={"gray.400"}>{markerUpdated.description}</ModalBody>
+          <ModalBody color={"gray.400"}>{marker.description}</ModalBody>
 
           <ModalFooter justifyContent={"center"}>
             <ButtonForms

@@ -34,6 +34,8 @@ interface MarkersContextData {
   ) => void;
   displayEvents: (accessToken: string) => void;
   allEvents: Marker[];
+  updateEvent: (markerId: number, accessToken: string) => void;
+  markerUpdated: Marker;
 }
 
 const MarkersContext = createContext<MarkersContextData>(
@@ -52,6 +54,7 @@ const useMarkers = () => {
 const MarkersProvider = ({ children }: MarkersProviderProps) => {
   const [markers, setMarkers] = useState<Marker[]>([]);
   const [allEvents, setAllEvents] = useState<Marker[]>([]);
+  const [markerUpdated, setMarkerUpdated] = useState<Marker>({} as Marker);
 
   const loadMarkers = useCallback(async (accessToken: string) => {
     try {
@@ -128,6 +131,15 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
       .catch((err) => console.log(err));
   }, []);
 
+  const updateEvent = useCallback((markerId, accessToken) => {
+    api
+      .get(`/markers/${markerId}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response) => setMarkerUpdated(response.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <MarkersContext.Provider
       value={{
@@ -137,7 +149,9 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
         updateParticipants,
         displayEvents,
         allEvents,
-        setMarkers
+        setMarkers,
+        updateEvent,
+        markerUpdated,
       }}
     >
       {children}
