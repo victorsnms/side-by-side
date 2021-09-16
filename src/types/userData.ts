@@ -13,4 +13,4 @@ export interface User {
   places: Marker[];
 }
 
-export interface MyEvent extends Omit<Marker, "type"> {}
+export interface MyEvent extends Marker {}
