@@ -47,7 +47,7 @@ const Profile = () => {
             p="0"
             justifyContent="right"
           >
-            <Icon fontSize={["3xl", "4xl", "5xl", "5xl"]} as={BiLogOut} />
+            <Icon fontSize="2xl" as={BiLogOut} />
           </Button>
         </Flex>
         <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
