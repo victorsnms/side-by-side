@@ -1,6 +1,12 @@
 import { Input } from "../../components/Input";
 import { ButtonForms } from "../../components/ButtonForms";
-import { Center, Box, VStack, useDisclosure, useBoolean } from "@chakra-ui/react";
+import {
+  Center,
+  Box,
+  VStack,
+  useDisclosure,
+  useBoolean,
+} from "@chakra-ui/react";
 import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
@@ -20,7 +26,7 @@ interface IFormValues {
 
 export const SignupForm = () => {
   const { badges, experience, image_url, my_events, places } = userDefaultData;
-  const [isLoading,setIsLoading] = useBoolean()
+  const [isLoading, setIsLoading] = useBoolean();
   const {
     isOpen: isSuccessOpen,
     onClose: onSuccessClose,
@@ -47,7 +53,7 @@ export const SignupForm = () => {
   });
 
   const handleSignUp = (data: IFormValues) => {
-    setIsLoading.on()
+    setIsLoading.on();
     const { name, email, password } = data;
     api
       .post("/register", {
@@ -61,13 +67,12 @@ export const SignupForm = () => {
         places,
       })
       .then((_) => {
-        setIsLoading.off()
-        onSuccessOpen()
+        setIsLoading.off();
+        onSuccessOpen();
       })
       .catch((_) => {
-        onErrorOpen()
-        setIsLoading.off()
-    
+        onErrorOpen();
+        setIsLoading.off();
       });
   };
 
@@ -88,6 +93,7 @@ export const SignupForm = () => {
         as="form"
         flexDirection="column"
         onSubmit={handleSubmit(handleSignUp)}
+        flex="1"
       >
         <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
           <Input
@@ -115,7 +121,12 @@ export const SignupForm = () => {
         </VStack>
 
         <Box mt={["40px", "40px", "40px", "50px"]} textAlign="center">
-          <ButtonForms children={"Sign up"} width={["262px"]} type="submit" isLoading={isLoading} />
+          <ButtonForms
+            children={"Sign up"}
+            width={["262px"]}
+            type="submit"
+            isLoading={isLoading}
+          />
         </Box>
       </Center>
     </>

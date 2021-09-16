@@ -114,7 +114,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
           )
           .then((_) => {
             setIsLoading.off();
-            joinEvents(userData)
+            joinEvents(userData);
             onSuccessOpen();
           })
           .catch((_) => {
@@ -161,44 +161,50 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="green.70" />
-        <ModalContent>
+        <ModalContent borderRadius="6px">
           <ModalHeader padding={0}>
             <Box
-              backgroundImage={markerUpdated.picture_url}
+              backgroundImage={`linear-gradient(
+                rgba(0, 0, 0, 0.3),
+                rgba(0, 0, 0, 0.5)
+              ), url(${markerUpdated.picture_url})`}
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundPosition="center"
               width={"100%"}
               height={150}
               color={"gray.60"}
               position={"relative"}
               bgSize={"cover"}
               bgPosition={"center"}
+              borderTopRadius="6px"
             >
               <Box
-              //gray layer
-              width={"100%"}
-              height={150}
-              paddingX={5}
-              paddingY={5}
-              color={"gray.60"}
-              position={"absolute"}
-              bgSize={"cover"}
-              bgPosition={"center"}
-              bgColor={"gray.300"}
-            >
-              <Text fontSize={"1.5rem"}>{markerUpdated.title}</Text>
-              <Flex direction={"column"} position={"absolute"} bottom={2}>
-                <Flex alignItems={"center"} fontSize={"1rem"}>
-                  <Box marginRight={"5px"}>
-                    <BiCalendarAlt />
-                  </Box>
-                  {markerUpdated.date}
+                //gray layer
+                width={"100%"}
+                height={150}
+                paddingX={5}
+                paddingY={5}
+                color={"gray.60"}
+                position={"absolute"}
+                bgSize={"cover"}
+                bgPosition={"center"}
+              >
+                <Text fontSize={"1.5rem"}>{markerUpdated.title}</Text>
+                <Flex direction={"column"} position={"absolute"} bottom={2}>
+                  <Flex alignItems={"center"} fontSize={"1rem"}>
+                    <Box marginRight={"5px"}>
+                      <BiCalendarAlt />
+                    </Box>
+                    {markerUpdated.date}
+                  </Flex>
+                  <Flex alignItems={"center"} fontSize={"1rem"}>
+                    <Box marginRight={"5px"}>
+                      <FiClock />
+                    </Box>
+                    {markerUpdated.start_time} - {markerUpdated.end_time}
+                  </Flex>
                 </Flex>
-                <Flex alignItems={"center"} fontSize={"1rem"}>
-                  <Box marginRight={"5px"}>
-                    <FiClock />
-                  </Box>
-                  {markerUpdated.start_time} - {markerUpdated.end_time}
-                </Flex>
-              </Flex>
               </Box>
               <Flex
                 direction={"column"}
