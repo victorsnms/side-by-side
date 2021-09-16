@@ -213,7 +213,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
                 right={4}
               >
                 <Flex alignItems={"center"} fontSize={"1rem"}>
-                  {markerUpdated.participants?.length}
+                  {marker.participants?.length}
                   <Box marginLeft={"5px"}>
                     <RiGroupFill />
                   </Box>
@@ -222,7 +222,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             </Box>
           </ModalHeader>
           <ModalCloseButton color="gray.60" />
-          <ModalBody color={"gray.400"}>{markerUpdated.description}</ModalBody>
+          <ModalBody color={"gray.400"}>{marker.description}</ModalBody>
 
           <ModalFooter justifyContent={"center"}>
             <ButtonForms
