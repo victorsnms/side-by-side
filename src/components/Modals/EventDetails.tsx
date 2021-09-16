@@ -25,6 +25,7 @@ import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
 import { useEventDetails } from "../../providers/EventDetailsContext";
 import { useMarkers } from "../../providers/MarkersContext";
+import { joinEvents } from "../../utils/Badges/badgesLogic";
 
 interface EventDetailsProps {
   marker: Marker;
@@ -113,6 +114,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
           )
           .then((_) => {
             setIsLoading.off();
+            joinEvents(userData)
             onSuccessOpen();
           })
           .catch((_) => {

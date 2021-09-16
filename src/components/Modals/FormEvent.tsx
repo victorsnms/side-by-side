@@ -144,7 +144,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
     setIsLoading.on();
     createMarker(newData, accessToken);
     if (newData.type === "event") {
-      updateMyEvents(id, accessToken, filteredData, my_events);
+      updateMyEvents(id, accessToken, filteredData, my_events, userData);
     }
   };
 
