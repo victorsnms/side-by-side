@@ -8,6 +8,7 @@ import Icon from "@chakra-ui/icon";
 import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
+import { MiniMap } from "../../components/MiniMap";
 
 const Profile = () => {
   const { signOut } = useAuth();
@@ -55,6 +56,18 @@ const Profile = () => {
         </Flex>
         <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
           <UserInfo />
+        </Box>
+      </Flex>
+      <Flex justifyContent="center">
+        <Box
+          mt="38px"
+          ml={["2%", "2%", "10%", "10%"]}
+          border={"1px solid black"}
+          w={"65%"}
+          h={"200px"}
+          position={"relative"}
+        >
+          <MiniMap />
         </Box>
       </Flex>
     </Box>
