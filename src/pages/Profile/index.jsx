@@ -9,6 +9,7 @@ import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
 import { MiniMap } from "../../components/MiniMap";
+import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
 
 const Profile = () => {
   const { signOut } = useAuth();
@@ -28,6 +29,7 @@ const Profile = () => {
       <BottomMenu />
       <DashboardMenu />
       <Flex flexDirection="column">
+      <FirstAccessForm/>
         <Flex>
             <Center display={["block", "block", "none"]} ml="5" fontSize="2xl" color="green.400">
               LOGO
