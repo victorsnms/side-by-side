@@ -15,4 +15,4 @@ export interface User {
   location: null | ILocationData
 }
 
-export interface MyEvent extends Omit<Marker, "type"> {}
+export interface MyEvent extends Marker {}

@@ -140,6 +140,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
       start_time: start_time,
       title: title,
       participants: participants,
+      type: type
     };
     setIsLoading.on();
     createMarker(newData, accessToken);
