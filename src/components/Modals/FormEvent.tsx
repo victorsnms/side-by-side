@@ -204,6 +204,9 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
               "&::-webkit-calendar-picker-indicator": {
                 background: "none",
               },
+              "&::-webkit-datetime-edit-fields-wrapper": {
+                color: "gray.200",
+              },
             }}
           />
           <HStack>
@@ -217,6 +220,9 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
                 "&::-webkit-calendar-picker-indicator": {
                   background: "none",
                 },
+                "&::-webkit-datetime-edit-fields-wrapper": {
+                  color: "gray.200",
+                },
               }}
             />
             <Input
@@ -228,6 +234,9 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
               sx={{
                 "&::-webkit-calendar-picker-indicator": {
                   background: "none",
+                },
+                "&::-webkit-datetime-edit-fields-wrapper": {
+                  color: "gray.200",
                 },
               }}
             />

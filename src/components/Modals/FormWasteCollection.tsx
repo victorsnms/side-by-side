@@ -161,7 +161,6 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
                 },
                 "&::-webkit-datetime-edit-fields-wrapper": {
                   color: "gray.200",
-                  backgroundColor: "black",
                 },
               }}
               width={["100%"]}
@@ -175,6 +174,9 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
               sx={{
                 "&::-webkit-calendar-picker-indicator": {
                   background: "none",
+                },
+                "&::-webkit-datetime-edit-fields-wrapper": {
+                  color: "gray.200",
                 },
               }}
             />

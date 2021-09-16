@@ -72,7 +72,7 @@ export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
               },
             }}
           >
-            {!isLeft ? (
+            {isLeft ? (
               <FormEvent inputMarker={inputMarker} onClose={onClose} />
             ) : (
               <FormWasteCollection
