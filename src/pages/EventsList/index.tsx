@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { useLocation } from "../../providers/LocationContext";
 import { haversine } from "../../utils/haversine";
 import LogoImg from "../../assets/images/marcador-recycle2.png";
+import NoNearEventsImg from "../../assets/images/no_near_events.gif";
 
 export const EventsList = () => {
   const { allEvents, displayEvents } = useMarkers();
@@ -68,6 +69,31 @@ export const EventsList = () => {
           align="center"
           mb={{ base: "110px", lg: "0" }}
         >
+          {allEvents &&
+          allEvents.filter(
+            (event) => haversine(userLat, userLng, event.lat, event.lng) < 100 //events under 100km
+          ).length === 0 ? (
+            <Box
+              // backgroundImage={ImageSuccess}
+              w="224px"
+              h="328px"
+              // backgroundRepeat="no-repeat"
+              // backgroundPosition=" center 32px"
+              backgroundColor="gray.50"
+            >
+              <Image
+                src={NoNearEventsImg}
+                alt="find events near you"
+                w="224px"
+                h="224px"
+              />
+              <Text as="p" textAlign="center" margin="16px" fontSize="12px" />
+              No events found nearby, be the first to start an event in the map!
+              <Text />
+            </Box>
+          ) : (
+            <></>
+          )}
           {allEvents &&
             allEvents
               .filter(
