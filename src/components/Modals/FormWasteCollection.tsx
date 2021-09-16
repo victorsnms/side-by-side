@@ -98,7 +98,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
     setHasntMaterial.off();
     const newData = {
       type: "waste collection",
-      materialsType: materialsType,
+      materials_type: materialsType,
       ...inputMarker[0],
       ...data,
     };

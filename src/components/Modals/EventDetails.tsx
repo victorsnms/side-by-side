@@ -164,7 +164,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
         <ModalContent>
           <ModalHeader padding={0}>
             <Box
-              backgroundImage={markerUpdated.picture_url}
+              backgroundImage={marker.picture_url}
               width={"100%"}
               height={150}
               color={"gray.60"}
@@ -184,19 +184,19 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
               bgPosition={"center"}
               bgColor={"gray.300"}
             >
-              <Text fontSize={"1.5rem"}>{markerUpdated.title}</Text>
+              <Text fontSize={"1.5rem"}>{marker.title}</Text>
               <Flex direction={"column"} position={"absolute"} bottom={2}>
                 <Flex alignItems={"center"} fontSize={"1rem"}>
                   <Box marginRight={"5px"}>
                     <BiCalendarAlt />
                   </Box>
-                  {markerUpdated.date}
+                  {marker.date}
                 </Flex>
                 <Flex alignItems={"center"} fontSize={"1rem"}>
                   <Box marginRight={"5px"}>
                     <FiClock />
                   </Box>
-                  {markerUpdated.start_time} - {markerUpdated.end_time}
+                  {marker.start_time} - {marker.end_time}
                 </Flex>
               </Flex>
               </Box>
@@ -207,7 +207,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
                 right={4}
               >
                 <Flex alignItems={"center"} fontSize={"1rem"}>
-                  {markerUpdated.participants?.length}
+                  {marker.participants?.length}
                   <Box marginLeft={"5px"}>
                     <RiGroupFill />
                   </Box>
@@ -216,7 +216,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
             </Box>
           </ModalHeader>
           <ModalCloseButton color="gray.60" />
-          <ModalBody color={"gray.400"}>{markerUpdated.description}</ModalBody>
+          <ModalBody color={"gray.400"}>{marker.description}</ModalBody>
 
           <ModalFooter justifyContent={"center"}>
             <ButtonForms
