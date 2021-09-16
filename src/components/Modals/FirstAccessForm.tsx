@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { ButtonForms } from "../ButtonForms"
 import { IoIosArrowDown } from 'react-icons/io'
 import { useState } from "react"
-import { useEffect } from "toasted-notes/node_modules/@types/react"
+import { useEffect } from "react"
 import { useUser } from "../../providers/UserContext"
 
 const formSchema = yup.object().shape({
@@ -53,7 +53,7 @@ export const FirstAccessForm = () => {
     }
 
     useEffect(() => {
-        if (!user.location)
+        if (!user.location) return
     }, [user])
 
     return <Slide in={isOpen} direction='bottom' style={{ zIndex: 10 }}>

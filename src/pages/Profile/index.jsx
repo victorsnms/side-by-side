@@ -14,6 +14,7 @@ import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
 const Profile = () => {
   const { signOut } = useAuth();
   const { location, setLocation } = useLocation();
+  
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
