@@ -19,6 +19,7 @@ export const BottomMenu = () => {
 
 
     return <Box 
+        display={["block", "block", "none"]}
         zIndex='100'
         as='nav'
         pos='fixed'
@@ -44,13 +45,13 @@ export const BottomMenu = () => {
                     to='/dashboard'
                 >
                     <Icon fontSize='3xl' as={BiHome}/> 
-                    <Text fontSize='sm'>Home</Text>
+                    <Text fontSize='sm'>Profile</Text>
                 </ListItem>
                 <ListItem 
                     textAlign='center' 
                     w='52px' 
                     as={Link} 
-                    to='/dashboard/info'
+                    to='/info'
                 >
                     <Icon fontSize='3xl' as={BiBookOpen}/>
                     <Text fontSize='sm'>Info</Text>
@@ -70,7 +71,7 @@ export const BottomMenu = () => {
                 bg='white'
                 flexDirection='column'
                 as={Link} 
-                to='/dashboard/map'
+                to='/map'
             >
                 <Icon fontSize='5xl' as={BiMap}/>
                 <Text fontSize='md'>Map</Text>
@@ -80,7 +81,7 @@ export const BottomMenu = () => {
                     textAlign='center' 
                     w='52px' 
                     as={Link} 
-                    to='/dashboard/events'
+                    to='/events'
                 >
                     <Icon fontSize='3xl' as={BiGroup}/>
                     <Text fontSize='sm'>Events</Text>
@@ -89,7 +90,7 @@ export const BottomMenu = () => {
                     textAlign='center' 
                     w='52px' 
                     as={Link} 
-                    to='/dashboard/badges'
+                    to='/badges'
                 >
                     <Icon fontSize='3xl' as={BiTrophy}/>
                     <Text fontSize='sm'>Badges</Text>

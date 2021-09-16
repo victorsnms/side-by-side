@@ -5,30 +5,42 @@ import {
   DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
-  useBreakpoint,
   useDisclosure,
-  Button,
 } from "@chakra-ui/react";
-
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
+import { InputMarker } from "../../types/makerData";
+import { ButtonAdd } from "../ButtomAdd";
 import { ToggleSwitch } from "../ToggleSwitch";
 import { FormEvent } from "./FormEvent";
 import { FormWasteCollection } from "./FormWasteCollection";
 
-export const DrawerForms = () => {
+interface DrawerFormProps extends InputMarker {
+  isDisable: boolean;
+}
+
+export const DrawerForms = ({ isDisable, inputMarker }: DrawerFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const options = ["Event", "Wast Point"];
   const isMobile = window.innerWidth < 768;
   const position = isMobile ? "bottom" : "left";
 
-  const [switchOption, setSwitchOption] = useState(true);
+  const { setFormOption, setOptions, setIsLeft, isLeft } =
+    useToggleSwitchContext();
 
   useEffect(() => {
-    setSwitchOption(true);
-  }, []);
+    setOptions(["Event", "Wast Point"]);
+    setIsLeft(true);
+  }, [isLeft]);
+
+  const handleClick = () => {
+    setFormOption("Event");
+    setIsLeft(!isLeft);
+    onOpen();
+  };
+
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <ButtonAdd onClick={handleClick} disabled={isDisable} />
 
       <Drawer
         isOpen={isOpen}
@@ -43,15 +55,31 @@ export const DrawerForms = () => {
           borderTopRadius={["12px", "0"]}
         >
           <DrawerCloseButton />
-          <DrawerHeader>
-            <ToggleSwitch
-              options={options}
-              setSwitchOption={setSwitchOption}
-              switchOption={switchOption}
-            />
+          <DrawerHeader alignSelf="center">
+            <ToggleSwitch />
           </DrawerHeader>
-          <DrawerBody>
-            {switchOption ? <FormEvent /> : <FormWasteCollection />}
+          <DrawerBody
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+                borderRadius: "8px",
+                backgroundColor: `rgba(72, 135, 136, 0.5)`,
+                marginRight: "30px  ",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: `#488788`,
+                borderRadius: "8px",
+              },
+            }}
+          >
+            {isLeft ? (
+              <FormEvent inputMarker={inputMarker} onClose={onClose} />
+            ) : (
+              <FormWasteCollection
+                inputMarker={inputMarker}
+                onClose={onClose}
+              />
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

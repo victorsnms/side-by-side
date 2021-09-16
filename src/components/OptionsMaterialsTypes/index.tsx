@@ -1,8 +1,6 @@
-import { Wrap, WrapItem, Center } from "@chakra-ui/react";
-import { useBoolean } from "@chakra-ui/hooks";
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Wrap } from "@chakra-ui/react";
+import { Dispatch, SetStateAction } from "react";
 import { types } from "../../utils/materialsTypesData";
-import { filter } from "lodash";
 import { MaterialTypeComponent } from "./MaterialTypeComponent";
 
 interface RadioValuesProps {
@@ -10,10 +8,10 @@ interface RadioValuesProps {
   materialsType: string[];
 }
 
-interface OptionsProps extends RadioValuesProps {
-  type: string;
-  index: number;
-}
+// interface OptionsProps extends RadioValuesProps {
+//   type: string;
+//   index: number;
+// }
 
 export const OptionsMaterialsType = ({
   setMaterialsType,
@@ -27,6 +25,7 @@ export const OptionsMaterialsType = ({
           type={type}
           materialsType={materialsType}
           setMaterialsType={setMaterialsType}
+          key={index}
         />
       ))}
     </Wrap>

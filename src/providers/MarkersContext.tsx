@@ -6,9 +6,11 @@ import {
   useState,
   ReactNode,
   useCallback,
+  Dispatch,
 } from "react";
 import { api } from "../services/api";
-import { Marker } from "../types/makerData";
+import { Marker, Participants } from "../types/makerData";
+import { MyEvent, User } from "../types/userData";
 
 interface MarkersProviderProps {
   children: ReactNode;
@@ -16,8 +18,24 @@ interface MarkersProviderProps {
 
 interface MarkersContextData {
   markers: Marker[];
-  createMarker: (data: Marker, accessToken: string) => Promise<void>;
+  setMarkers: Dispatch<React.SetStateAction<Marker[]>>;
   loadMarkers: (accessToken: string) => Promise<void>;
+  updateMyEvents: (
+    id: () => string,
+    accessToken: string,
+    data: MyEvent,
+    my_events: MyEvent[]
+  ) => void;
+  updateParticipants: (
+    id: () => string,
+    accessToken: string,
+    data: User,
+    participants: Participants[]
+  ) => void;
+  displayEvents: (accessToken: string) => void;
+  allEvents: Marker[];
+  updateEvent: (markerId: number, accessToken: string) => void;
+  markerUpdated: Marker;
 }
 
 const MarkersContext = createContext<MarkersContextData>(
@@ -35,6 +53,8 @@ const useMarkers = () => {
 
 const MarkersProvider = ({ children }: MarkersProviderProps) => {
   const [markers, setMarkers] = useState<Marker[]>([]);
+  const [allEvents, setAllEvents] = useState<Marker[]>([]);
+  const [markerUpdated, setMarkerUpdated] = useState<Marker>({} as Marker);
 
   const loadMarkers = useCallback(async (accessToken: string) => {
     try {
@@ -51,7 +71,7 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
 
   const createMarker = useCallback(
     async (data: Marker, accessToken: string) => {
-      api
+      await api
         .post("/markers", data, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
@@ -63,8 +83,77 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
     []
   );
 
+  const updateMyEvents = useCallback(
+    (id: () => string, accessToken: string, data, my_events: MyEvent[]) => {
+      const newData = [data, ...my_events];
+      api
+        .patch(
+          `/users/${id}`,
+          { my_events: newData },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((response: AxiosResponse<User>) => console.log(response))
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
+  const updateParticipants = useCallback(
+    (
+      id: () => string,
+      accessToken: string,
+      data,
+      participants: Participants[]
+    ) => {
+      const newData = [data, ...participants];
+      api
+        .patch(
+          `/markers/${id}`,
+          { participants: newData },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((response: AxiosResponse<User>) => console.log(response))
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
+  const displayEvents = useCallback((accessToken: string) => {
+    api
+      .get(`/markers?type=event`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response: AxiosResponse<Marker[]>) => setAllEvents(response.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const updateEvent = useCallback((markerId, accessToken) => {
+    api
+      .get(`/markers/${markerId}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response) => setMarkerUpdated(response.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
-    <MarkersContext.Provider value={{ markers, createMarker, loadMarkers }}>
+    <MarkersContext.Provider
+      value={{
+        markers,
+        loadMarkers,
+        updateMyEvents,
+        updateParticipants,
+        displayEvents,
+        allEvents,
+        setMarkers,
+        updateEvent,
+        markerUpdated,
+      }}
+    >
       {children}
     </MarkersContext.Provider>
   );

@@ -19,6 +19,7 @@ export const MaterialTypeComponent = ({
   index,
   materialsType,
   setMaterialsType,
+  ...rest
 }: OptionsProps) => {
   const [isChecked, setIsChecked] = useBoolean();
   const [backGround, setBackground] = useState("none");
