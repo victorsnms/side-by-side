@@ -27,6 +27,8 @@ import { AxiosResponse } from "axios";
 import { api } from "../../services/api";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
+import { createdAWasteCollectionPoint } from "../../utils/Badges/badgesLogic";
+import { useUser } from "../../providers/UserContext";
 
 interface WCDataForm {
   title: string;
@@ -46,6 +48,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
   const { accessToken } = useAuth();
   const { setMarkers } = useMarkers();
   const [isLoading, setIsLoading] = useBoolean();
+  const { userData } = useUser()
   const {
     isOpen: isSuccessOpen,
     onClose: onSuccessClose,
@@ -79,6 +82,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
       .then((response: AxiosResponse<Marker>) => {
         setIsLoading.off();
         setMarkers((oldMarkers) => [...oldMarkers, response.data]);
+        createdAWasteCollectionPoint(userData)
         onSuccessOpen();
       })
       .catch((_) => {
