@@ -75,7 +75,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
     end_time: yup.string().required("Event end time required"),
     date: yup.string().required("Event date required"),
     description: yup.string().required("Event description required"),
-    picture_url: yup.string().url("Url image invalid"),
+    picture_url: yup.string().matches(/^(http?s)/, "Url invalid"),
   });
 
   const {

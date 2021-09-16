@@ -7,9 +7,9 @@ import { EditProfile } from "../Modals/EditProfile";
 import { useUser } from "../../providers/UserContext";
 
 export const UserInfo = () => {
-  const { userData: user } = useUser()
+  const { userData: user } = useUser();
 
-  console.log(user)
+  console.log(user);
 
   return (
     <Flex w="100%" justifyContent="center">
@@ -22,7 +22,7 @@ export const UserInfo = () => {
         borderRadius="12px"
         justifyContent={["center", "center", "center", "flex-end"]}
         alignItems={["center", "center", "flex-start", "flex-start"]}
-        pl={["0px","0px","16px","0px","16px"]}
+        pl={["0px", "0px", "16px", "0px", "16px"]}
       >
         <Box
           position="absolute"
@@ -42,11 +42,11 @@ export const UserInfo = () => {
             borderRadius="50%"
             position="relative"
             _hover={{
-              filter:"grayscale(70%)"
+              filter: "grayscale(70%)",
             }}
             overflow="hidden"
           >
-            <EditProfile/>
+            <EditProfile />
           </Avatar>
         </Box>
 
@@ -58,10 +58,10 @@ export const UserInfo = () => {
         >
           <Text
             as="h1"
-            fontSize={["1rem", "1rem", "1.5rem", "1.8rem","2rem"]}
+            fontSize={["1rem", "1rem", "1.5rem", "1.8rem", "2rem"]}
             textAlign={["center", "center", "left", "left"]}
           >
-            <b>{Object.values(user).length !== 0 ? user.name : 'user'}</b>
+            <b>{Object.values(user).length !== 0 ? user.name : "user"}</b>
           </Text>
           <Text
             as="h2"
@@ -78,23 +78,29 @@ export const UserInfo = () => {
           right={["none", "none", "5%", "none"]}
           transform="translateY(50%)"
         >
-          <Box 
-            as={BoxBadges} 
-            name="Level" 
+          <Box
+            as={BoxBadges}
+            name="Level"
             // TODO
             count={`${0}`}
             icon={AiFillStar}
           ></Box>
-          <Box 
-            as={BoxBadges} 
-            name="Badges" 
-            count={`${Object.values(user).length !== 0 ? Object.values(user.badges).filter(badge => badge).length : 0}`} 
+          <Box
+            as={BoxBadges}
+            name="Badges"
+            count={`${
+              Object.values(user).length !== 0
+                ? Object.values(user.badges).filter((badge) => badge).length
+                : 0
+            }`}
             icon={RiShieldFill}
           ></Box>
-          <Box 
-            as={BoxBadges} 
-            name="Places" 
-            count={`${Object.values(user).length !== 0 ? user.my_events.length : 0}`}
+          <Box
+            as={BoxBadges}
+            name="Places"
+            count={`${
+              Object.values(user).length !== 0 ? user.my_events.length : 0
+            }`}
             icon={RiMapFill}
           ></Box>
         </HStack>

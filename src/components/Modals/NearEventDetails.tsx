@@ -162,25 +162,20 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
         <ModalContent>
           <ModalHeader padding={0}>
             <Box
-              backgroundImage={marker.picture_url}
+              backgroundImage={`linear-gradient(
+                rgba(0, 0, 0, 0.3), 
+                rgba(0, 0, 0, 0.5)
+              ), url(${marker.picture_url})`}
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundPosition="center"
               width={"100%"}
+              paddingX={5}
+              paddingY={5}
               height={150}
               color={"gray.60"}
               position={"relative"}
-              bgSize={"cover"}
-              bgPosition={"center"}
-            >
-              <Box
-              //gray layer
-              width={"100%"}
-              height={150}
-              paddingX={5}
-              paddingY={5}
-              color={"gray.60"}
-              position={"absolute"}
-              bgSize={"cover"}
-              bgPosition={"center"}
-              bgColor={"gray.300"}
+              borderTopRadius="6px"
             >
               <Text fontSize={"1.5rem"}>{marker.title}</Text>
               <Flex direction={"column"} position={"absolute"} bottom={2}>
@@ -197,21 +192,20 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
                   {marker.start_time} - {marker.end_time}
                 </Flex>
               </Flex>
-              </Box>
-              <Flex
-                direction={"column"}
-                position={"absolute"}
-                bottom={2}
-                right={4}
-              >
-                <Flex alignItems={"center"} fontSize={"1rem"}>
-                  {marker.participants?.length}
-                  <Box marginLeft={"5px"}>
-                    <RiGroupFill />
-                  </Box>
-                </Flex>
-              </Flex>
             </Box>
+            <Flex
+              direction={"column"}
+              position={"absolute"}
+              bottom={2}
+              right={4}
+            >
+              <Flex alignItems={"center"} fontSize={"1rem"}>
+                {marker.participants?.length}
+                <Box marginLeft={"5px"}>
+                  <RiGroupFill />
+                </Box>
+              </Flex>
+            </Flex>
           </ModalHeader>
           <ModalCloseButton color="gray.60" />
           <ModalBody color={"gray.400"}>{marker.description}</ModalBody>
