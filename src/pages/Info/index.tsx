@@ -5,7 +5,6 @@ import { infos } from "../../utils/infos";
 import { BottomMenu } from "../../components/BottomMenu";
 
 export const Info = () => {
-  const isMobile = window.innerWidth < 992;
 
   return (
     <Flex
@@ -17,7 +16,8 @@ export const Info = () => {
       mb={{ base: "80px", lg: "0" }}
       justifyContent="space-between"
     >
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <BottomMenu />
+      <DashboardMenu />
       <Flex alignItems="center" p="10" w="100%" flexDirection="column">
         <Heading
           as="h2"

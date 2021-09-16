@@ -52,8 +52,6 @@ export const Map = () => {
   const { location, setLocation } = useLocation();
   const { onOpen } = useEventDetails();
 
-  const isMobile = window.innerWidth < 768;
-
   //onClick
   const onMapClick = useCallback((event) => {
     setInputMarker((_) => [
@@ -105,7 +103,8 @@ export const Map = () => {
         onLoad={onMapLoad}
         clickableIcons={false}
       >
-        {isMobile ? <BottomMenu /> : <DashboardMenu />}
+        <BottomMenu />
+        <DashboardMenu />
         <Locate panTo={panTo} />
         {markers.map((marker,index) => (
           <Marker
