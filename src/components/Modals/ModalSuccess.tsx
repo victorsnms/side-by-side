@@ -15,12 +15,16 @@ import {
 import { useEffect } from "react";
 import ImageSuccess from "../../assets/images/flowers-success.svg";
 import { ButtonForms } from "../ButtonForms";
+import { useUser } from "../../providers/UserContext";
+import { useAuth } from "../../providers/AuthContext";
+import { api } from "../../services/api";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   message: string;
   error?: string;
+  countAsExperience?: boolean;
 }
 
 export const ModalSuccess = ({
@@ -28,10 +32,34 @@ export const ModalSuccess = ({
   onClose,
   message,
   error,
+  countAsExperience = false,
 }: ModalProps) => {
+  const { getUser, userData } = useUser();
+  const { accessToken, id } = useAuth();
+  useEffect(() => {
+    getUser(id, accessToken);
+  }, []);
+
+  const updateExperience = () => {
+    onClose();
+    if (countAsExperience) {
+      const { experience } = userData;
+      const newExperience = experience + 1;
+      api
+        .patch(
+          `/users/${id}`,
+          { experience: newExperience },
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        )
+        .then((res) => console.log(res));
+    }
+  };
+
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} trapFocus={false}>
+      <Modal isOpen={isOpen} onClose={updateExperience} trapFocus={false}>
         <ModalOverlay bg="green.70" />
         <ModalContent
           backgroundImage={ImageSuccess}
@@ -67,7 +95,7 @@ export const ModalSuccess = ({
               width={["40%"]}
               h="32px"
               fontSize="14px"
-              onClick={onClose}
+              onClick={updateExperience}
             />
           </ModalFooter>
         </ModalContent>

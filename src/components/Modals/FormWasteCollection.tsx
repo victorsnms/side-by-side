@@ -113,6 +113,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
         isOpen={isSuccessOpen}
         message="Congratulations, you created an wast collection. Have you already separated yours wastes? Let's go."
         onClose={handleClick}
+        countAsExperience={true}
       />
       <ModalError
         isOpen={isErrorOpen}
@@ -125,7 +126,7 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
         justifyContent="center"
         onSubmit={handleSubmit(wasteCollectionSubmit)}
       >
-        <VStack spacing="5" h="100%" w="100%">
+        <VStack spacing="5" h="100%">
           <Text as="p" color="green.400">
             Create a new Waste Point
           </Text>
@@ -181,17 +182,6 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
               }}
             />
           </HStack>
-          <Flex flexDirection="column">
-            <HStack pl="12px" mb="12px">
-              <Icon as={RiRecycleFill} color="gray.200" />
-              <Text
-                as="label"
-                children="Choose the types:"
-                alignSelf="flex-start"
-                color="gray.200"
-              />
-            </HStack>
-          </Flex>
           <Flex flexDirection="column">
             <HStack pl="12px" mb="12px">
               <Icon as={RiRecycleFill} color="gray.200" />

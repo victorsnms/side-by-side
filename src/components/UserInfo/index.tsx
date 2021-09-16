@@ -17,7 +17,6 @@ export const UserInfo = () => {
         borderRadius="12px"
         justifyContent={["center", "center", "center", "flex-end"]}
         alignItems={["center", "center", "flex-start", "flex-start"]}
-        pl={["0px","0px","16px","0px","16px"]}
       >
         <Box
           position="absolute"
@@ -37,11 +36,11 @@ export const UserInfo = () => {
             borderRadius="50%"
             position="relative"
             _hover={{
-              filter:"grayscale(70%)"
+              filter: "grayscale(70%)",
             }}
             overflow="hidden"
           >
-            <EditProfile/>
+            <EditProfile />
           </Avatar>
         </Box>
 
@@ -49,11 +48,11 @@ export const UserInfo = () => {
           flexDirection="column"
           mt="1rem"
           w={["100%", "100%", "60%", "60%"]}
-          pl={["0", "0", "0", "4rem", "0"]}
+          pl={["0", "0", "0", "2rem", "0"]}
         >
           <Text
             as="h1"
-            fontSize={["1rem", "1rem", "1.5rem", "1.8rem","2rem"]}
+            fontSize={["1rem", "1rem", "2rem", "2rem"]}
             textAlign={["center", "center", "left", "left"]}
           >
             <b>Kenzinho Ecológico</b>

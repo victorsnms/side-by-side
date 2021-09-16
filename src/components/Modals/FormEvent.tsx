@@ -159,6 +159,7 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
         isOpen={isSuccessOpen}
         message="Well Done, you created an event feel proud. Share and invite friends."
         onClose={handleClick}
+        countAsExperience={true}
       />
       <ModalError
         isOpen={isErrorOpen}

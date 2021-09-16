@@ -25,9 +25,8 @@ export const MaterialTypeComponent = ({
   const [backGround, setBackground] = useState("none");
   const [color, setColor] = useState("gray.200");
   const [bold, setBold] = useState("");
-  
+
   useEffect(() => {
-    
     setBackground(isChecked ? "green.300" : "none");
     setColor(isChecked ? "white" : "gray.200");
     setBold(isChecked ? "extrabold" : "");
@@ -55,7 +54,13 @@ export const MaterialTypeComponent = ({
       onClick={isAnOption}
       _hover={{ bgColor: isChecked ? "green.400" : "gray.100" }}
     >
-      <Center key={index}as="label" cursor="pointer" color={color} fontWeight={bold}>
+      <Center
+        key={index}
+        as="label"
+        cursor="pointer"
+        color={color}
+        fontWeight={bold}
+      >
         {type}
       </Center>
     </WrapItem>
