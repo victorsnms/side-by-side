@@ -1,13 +1,13 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Center, Flex, Text } from "@chakra-ui/layout";
+import { Center, Flex, Text, Box } from "@chakra-ui/layout";
 import HomeMenu from "../../components/HomeMenu";
-import backgroundPlastic from "../../assets/images/plastic.png";
-import backgroundCup from "../../assets/images/bluecup.png";
+import cover from "../../assets/images/cover.jpg";
+import eventCover from "../../assets/images/eventcover.png";
 import homeMap from "../../assets/images/homemap.svg";
 import homeTaggedMap from "../../assets/images/hometaggedmap.svg";
 import { useHistory } from "react-router";
-import { Parallax } from 'react-scroll-parallax';
+import { Parallax } from "react-scroll-parallax";
 import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 
 const Home = () => {
@@ -27,39 +27,51 @@ const Home = () => {
           direction="column"
           justifyContent="center"
           w="100%"
-          h={["65vh", "74vh", "83vh", "92vh"]}
+          h={["65vh", "74vh", "83vh", "97vh"]}
           bg="white"
-          pl={["40px", "50px", "60px", "70px"]}
-          bgImage={backgroundPlastic}
-          backgroundSize={["210%", "180%", "165%", "140%, 110%"]}
+          bgImage={cover}
+          backgroundSize="cover"
           bgPosition="center"
           bgRepeat="no-repeat"
+          mt={["-38px", "-31px", "-20px"]}
         >
-          <Text fontSize={["2xl", "2xl", "4xl"]} fontWeight="bold" color="white">
-            Find, Recycle, Connect
-          </Text>
-          <Text
-            fontSize={["xl", "xl", "2xl"]}
-            color="white"
-            maxW={["200px", "300px", "350px"]}
+          <Box
+            bgColor="gray.300"
+            w="100%"
+            h={["65vh", "74vh", "83vh", "97vh"]}
+            pl={["40px", "50px", "60px", "80px"]}
+            pt={{ base: "110px", lg: "180px" }}
           >
-            For a cleaner and more sustainable world
-          </Text>
-          <Button
-            mt="6"
-            w="130px"
-            fontSize={["xl", "xl", "2xl"]}
-            fontWeight="500"
-            bg="gray.50"
-            color="green.300"
-            h="45px"
-            borderRadius="10px"
-            _hover={{ bg: "green.300", color: "green.400" }}
-            _focus={{}}
-            onClick={() => sendTo("Sign up")}
-          >
-            Join us
-          </Button>
+            <Text
+              fontSize={["2xl", "2xl", "7xl"]}
+              fontWeight="bold"
+              color="white"
+            >
+              Find, Recycle, Connect
+            </Text>
+            <Text
+              fontSize={["xl", "xl", "3xl"]}
+              color="white"
+              maxW={["200px", "300px", "350px"]}
+            >
+              For a cleaner and more sustainable world
+            </Text>
+            <Button
+              mt="6"
+              w="130px"
+              fontSize={["xl", "xl", "2xl"]}
+              fontWeight="600"
+              bg="gray.50"
+              color="green.300"
+              h="45px"
+              borderRadius="10px"
+              _hover={{ bg: "green.300", color: "white" }}
+              _focus={{}}
+              onClick={() => sendTo("Sign up")}
+            >
+              Join us
+            </Button>
+          </Box>
         </Flex>
       </Parallax>
       <Center
@@ -72,11 +84,18 @@ const Home = () => {
       >
         RECYCLING
       </Center>
-      <Flex bg="gray.50" zIndex="1" mb="20" textAlign={["center", "center", "left"]} direction="column">
+      <Flex
+        bg="gray.50"
+        zIndex="1"
+        mb="20"
+        textAlign={["center", "center", "left"]}
+        direction="column"
+      >
         <Flex
           px="20"
           bg="white"
           justifyContent="space-around"
+          alignItems="center"
           direction={["column", "column", "row"]}
         >
           <Flex justifyContent="center" direction="column">
@@ -97,12 +116,13 @@ const Home = () => {
           mt="50px"
           bg="gray.50"
           justifyContent="space-around"
+          alignItems="center"
           direction={["column-reverse", "column-reverse", "row"]}
         >
           <Image
             src={homeMap}
-            w={["200px", "250px", "300px"]}
-            h={["200px", "250px", "300px"]}
+            w={["240px", "290px", "340px"]}
+            h={["240px", "290px", "340px"]}
           />
           <Flex justifyContent="center" direction="column">
             <Text fontSize="3xl">Register new points</Text>
@@ -117,55 +137,62 @@ const Home = () => {
           direction="column"
           justifyContent="center"
           w="100%"
-          h={["50vh", "60vh", "70vh", "80vh"]}
+          h={["50vh", "60vh", "70vh", "95vh"]}
           bg="gray.100"
-          pl={["40px", "50px", "60px", "70px"]}
-          bgImage={backgroundCup}
-          backgroundSize={["210%", "180%", "165%", "140%, 110%"]}
+          bgImage={eventCover}
+          backgroundSize="cover"
           bgPosition="center"
           bgRepeat="no-repeat"
         >
-          <Text fontSize={["2xl", "2xl", "3xl"]} fontWeight="bold" color="white">
-            EVENTS
-          </Text>
-          <Text
-            fontSize={["xl", "xl", "2xl"]}
-            color="white"
-            maxW={["200px", "300px", "350px"]}
-          >
-            Join the existing events and create new 
-            ones to contribute to cleaning the world.
-          </Text>
+          <Box w="40vw" m="0 auto">
+            <Text
+              fontSize={["2xl", "2xl", "7xl"]}
+              fontWeight="bold"
+              color="white"
+              textAlign="center"
+            >
+              EVENTS
+            </Text>
+            <Text
+              fontSize={["xl", "xl", "4xl"]}
+              color="white"
+              textAlign="center"
+            >
+              Join the existing events and create new ones to contribute to
+              cleaning the world.
+            </Text>
+          </Box>
         </Flex>
       </Parallax>
-        <Flex flexDirection="column" zIndex="1">
-          <Flex py="100px" alignItems="center" direction="column" bg="gray.50">
-            <Text fontSize={["2xl", "2xl", "3xl"]}>Save the planet!</Text>
-            <Button
-              mt="6"
-              w={["250px", "300px", "350px", "400px"]}
-              fontSize={["xl", "xl", "2xl"]}
-              fontWeight="bold"
-              bg="green.300"
-              color="white"
-              h="45px"
-              borderRadius="10px"
-              _hover={{ bg: "green.300", color: "green.400" }}
-              _focus={{}}
-              onClick={() => sendTo("Sign up")}
-            >
-              Join us
-            </Button>
-          </Flex>
-          <Center
-            h={["15vh", "14vh", "13vh", "12vh"]}
-            fontSize={["sm", "md", "lg"]}
-            bg="white"
+      <Flex flexDirection="column" zIndex="1">
+        <Flex py="100px" alignItems="center" direction="column" bg="gray.50">
+          <Text fontSize={["2xl", "2xl", "3xl"]}>Save the planet!</Text>
+          <Button
+            mt="6"
+            w={["250px", "300px", "350px", "400px"]}
+            fontSize={["xl", "xl", "2xl"]}
+            fontWeight="bold"
+            bg="green.300"
+            color="white"
+            h="45px"
+            borderRadius="10px"
+            _hover={{ bgColor: "green.400" }}
+            _focus={{}}
+            onClick={() => sendTo("Sign up")}
           >
-            &copy;Copyright 2021 Echologys Brasil SA. All rights reserved
-          </Center>
-          </Flex>
+            Join us
+          </Button>
         </Flex>
+        <Center
+          h={["15vh", "14vh", "13vh", "12vh"]}
+          fontSize={["xs", "md", "lg"]}
+          bg="white"
+          textAlign="center"
+        >
+          &copy;Copyright 2021 Echologys Brasil SA. All rights reserved
+        </Center>
+      </Flex>
+    </Flex>
   );
 };
 

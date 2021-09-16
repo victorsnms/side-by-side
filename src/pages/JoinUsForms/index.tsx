@@ -14,6 +14,7 @@ import { LoginForm } from "./LoginForm";
 import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 import { useEffect } from "react";
 import LogoImg from "../../assets/images/biglogog.png";
+import { Link as LinkRouter } from "react-router-dom";
 
 export const JoinUsForms = () => {
   const display = useBreakpointValue({ base: "none", lg: "block" });
@@ -36,7 +37,9 @@ export const JoinUsForms = () => {
     >
       <Center>
         <Box pr={["0", "0", "0", "3em", "8em"]} display={display}>
-          <Image src={LogoImg} w="160px" mb="30px" />
+          <LinkRouter to="/">
+            <Image src={LogoImg} w="160px" mb="30px" />
+          </LinkRouter>
 
           <Image
             src={CoolImage}
@@ -48,7 +51,9 @@ export const JoinUsForms = () => {
       </Center>
 
       <Center flexDirection="column">
-        <Image src={LogoImg} w="100px" mt="10vh" display={{ lg: "none" }} />
+        <LinkRouter to="/">
+          <Image src={LogoImg} w="100px" mt="10vh" display={{ lg: "none" }} />
+        </LinkRouter>
 
         <Flex
           direction="column"
