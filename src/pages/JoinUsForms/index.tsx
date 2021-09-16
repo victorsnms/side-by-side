@@ -13,6 +13,7 @@ import { SignupForm } from "./SignupForm";
 import { LoginForm } from "./LoginForm";
 import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 import { useEffect } from "react";
+import LogoImg from "../../assets/images/biglogog.png";
 
 export const JoinUsForms = () => {
   const display = useBreakpointValue({ base: "none", lg: "block" });
@@ -21,10 +22,10 @@ export const JoinUsForms = () => {
 
   useEffect(() => {
     setOptions(["Login", "Sign up"]);
-    if (formOption === undefined) {
+    if (formOption === "") {
       setFormOption("Login");
     }
-  }, []);
+  }, [formOption]);
 
   return (
     <Flex
@@ -35,16 +36,7 @@ export const JoinUsForms = () => {
     >
       <Center>
         <Box pr={["0", "0", "0", "3em", "8em"]} display={display}>
-          <Box mb="50px">
-            <Text bgColor="green.300" display="inline">
-              LOGO
-            </Text>
-            <Box w="280px">
-              <Text fontWeight="bold" fontSize="20px">
-                Search! Create! Recycle! Make the world a cleaner place!
-              </Text>
-            </Box>
-          </Box>
+          <Image src={LogoImg} w="160px" mb="30px" />
 
           <Image
             src={CoolImage}
@@ -55,7 +47,9 @@ export const JoinUsForms = () => {
         </Box>
       </Center>
 
-      <Center>
+      <Center flexDirection="column">
+        <Image src={LogoImg} w="100px" mt="10vh" display={{ lg: "none" }} />
+
         <Flex
           direction="column"
           justify="center"
@@ -65,6 +59,7 @@ export const JoinUsForms = () => {
           shadow={{ lg: "lg" }}
           pt={{ lg: "2.5em" }}
           textAlign="center"
+          mt={{ base: "-30px" }}
         >
           <Flex justify="center" mb={{ base: "2em", lg: "0" }}>
             <ToggleSwitch />

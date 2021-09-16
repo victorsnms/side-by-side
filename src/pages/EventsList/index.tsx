@@ -1,12 +1,13 @@
 import { EventCard } from "../../components/EventCard";
 import { DashboardMenu } from "../../components/DashboardMenu";
-import { Flex, Box, Heading } from "@chakra-ui/layout";
+import { Flex, Box, Heading, Image } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { useMarkers } from "../../providers/MarkersContext";
 import { useAuth } from "../../providers/AuthContext";
 import { useEffect } from "react";
 import { useLocation } from "../../providers/LocationContext";
 import { haversine } from "../../utils/haversine";
+import LogoImg from "../../assets/images/biglogog.png";
 
 export const EventsList = () => {
   const isMobile = window.innerWidth < 768;
@@ -29,6 +30,7 @@ export const EventsList = () => {
   return (
     <Box pl={{ base: "0", lg: "125px" }} w="90vw" h="100vh" m="0 auto">
       {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <Image src={LogoImg} w="60px" mt="10vh" position="absolute" top="-38px" left="10px" display={{ lg: "none" }} />
       <Box display="flex" flexDirection="column" alignItems="center">
         <Heading
           as="h2"

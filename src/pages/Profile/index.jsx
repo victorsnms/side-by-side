@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Center, Flex, Spacer } from "@chakra-ui/layout";
+import { Box, Center, Flex, Spacer, Image } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { useAuth } from "../../providers/AuthContext";
@@ -8,6 +8,7 @@ import Icon from "@chakra-ui/icon";
 import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
+import LogoImg from "../../assets/images/biglogog.png";
 
 const Profile = () => {
   const { signOut } = useAuth();
@@ -25,16 +26,11 @@ const Profile = () => {
 
   return (
     <Box>
+      <Image src={LogoImg} w="60px" mt="10vh" position="absolute" top="-38px" left="10px" display={{ lg: "none" }} />
+
       {isMobile ? <BottomMenu /> : <DashboardMenu />}
       <Flex flexDirection="column">
         <Flex>
-          {isMobile ? (
-            <Center ml="5" fontSize="2xl" color="green.400">
-              LOGO
-            </Center>
-          ) : (
-            <></>
-          )}
           <Spacer />
           <Button
             fontSize={["lg", "xl", "2xl"]}

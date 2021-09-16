@@ -1,8 +1,9 @@
-import { Flex, Accordion, Heading } from "@chakra-ui/react";
+import { Flex, Accordion, Heading, Image } from "@chakra-ui/react";
 import { InfoDropDown } from "../../components/InfoDropDown";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { infos } from "../../utils/infos";
 import { BottomMenu } from "../../components/BottomMenu";
+import LogoImg from "../../assets/images/biglogog.png";
 
 export const Info = () => {
   const isMobile = window.innerWidth < 992;
@@ -17,6 +18,7 @@ export const Info = () => {
       mb={{ base: "80px", lg: "0" }}
       justifyContent="space-between"
     >
+      <Image src={LogoImg} w="60px" mt="10vh" position="absolute" top="-38px" left="10px" display={{ lg: "none" }} />
       {isMobile ? <BottomMenu /> : <DashboardMenu />}
       <Flex alignItems="center" p="10" w="100%" flexDirection="column">
         <Heading
