@@ -27,7 +27,7 @@ const Home = () => {
           direction="column"
           justifyContent="center"
           w="100%"
-          h={["65vh", "74vh", "83vh", "97vh"]}
+          h={["65vh", "74vh", "83vh", "100vh"]}
           bg="white"
           bgImage={cover}
           backgroundSize="cover"

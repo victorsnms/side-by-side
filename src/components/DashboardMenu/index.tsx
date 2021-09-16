@@ -1,7 +1,7 @@
 import { Box, VStack, Icon, Text, Image } from "@chakra-ui/react";
 import { BiHome, BiBookOpen, BiMap, BiGroup, BiTrophy } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import LogoImg from "../../assets/images/biglogow.png";
+import LogoImg from "../../assets/images/logo-desktop.png";
 
 export const DashboardMenu = () => {
   return (

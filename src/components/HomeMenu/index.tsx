@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Center, Flex, HStack, Spacer, Image } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
-import LogoImg from "../../assets/images/biglogow.png";
+import LogoImg from "../../assets/images/logo-desktop.png";
 import { Link } from "react-router-dom";
 
 const HomeMenu = () => {
@@ -26,7 +26,7 @@ const HomeMenu = () => {
     >
       <Center color="white">
         <Link to="/">
-          <Image src={LogoImg} w={{ base: "80px", lg: "120px" }} />
+          <Image src={LogoImg} w={{ base: "70px", lg: "100px" }} />
         </Link>
       </Center>
       <Spacer />
@@ -52,7 +52,7 @@ const HomeMenu = () => {
           h="38px"
           borderRadius="5px"
           border="1px solid white"
-          _hover={{ color: "#2dffd2", borderColor: "#2dffd2" }}
+          _hover={{ color: "green.300", bgColor: "white" }}
           _focus={{}}
           onClick={() => sendTo("Login")}
         >
