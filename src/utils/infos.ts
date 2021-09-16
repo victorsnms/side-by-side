@@ -6,7 +6,7 @@ interface IInfo {
 export const infos: Array<IInfo> = [
     {
         title: 'Recyclable vs recycled packaging',
-        content: `'Before all, a recyclable pachkaging is a pachkaging  that can go thru the process of recycling and become raw material for industry again.
+        content: `Before all, a recyclable pachkaging is a pachkaging  that can go thru the process of recycling and become raw material for industry again.
 
         In this way, we need to explain that not all recyclable packaging (that comes with the recyclable symbol) is in the matter of fact recycled!
         
@@ -58,16 +58,16 @@ export const infos: Array<IInfo> = [
     },
     {
         title: `Decomposition takes time!`,
-        content: `Paper  From 3 to 6 months
-        Fabric  From 6 months to 1 year
-        Cigarette filter  More than 5 years
-        Painted wood  More than 13 years
-        nylon  20+ years
-        Metal  over 100 years
-        Aluminum  Over 200 years
-        Plastic  Over 400 years
-        Glass  More than 1000 years
-        rubber  indefinite time`
+        content: `Paper  From 3 to 6 months /
+        Fabric  From 6 months to 1 year /
+        Cigarette filter  More than 5 years /
+        Painted wood  More than 13 years /
+        Nylon  20+ years /
+        Metal  over 100 years /
+        Aluminum  Over 200 years /
+        Plastic  Over 400 years /
+        Glass  More than 1000 years /
+        rubber  indefinite time.`
     },
     {
         title: `What are the materials that cannot be recycled?`,
