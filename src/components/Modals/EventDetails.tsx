@@ -167,7 +167,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
               backgroundImage={`linear-gradient(
                 rgba(0, 0, 0, 0.3),
                 rgba(0, 0, 0, 0.5)
-              ), url(${markerUpdated.picture_url})`}
+              ), url(${marker.picture_url})`}
               backgroundRepeat="no-repeat"
               backgroundSize="cover"
               backgroundPosition="center"
@@ -190,19 +190,19 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
                 bgSize={"cover"}
                 bgPosition={"center"}
               >
-                <Text fontSize={"1.5rem"}>{markerUpdated.title}</Text>
+                <Text fontSize={"1.5rem"}>{marker.title}</Text>
                 <Flex direction={"column"} position={"absolute"} bottom={2}>
                   <Flex alignItems={"center"} fontSize={"1rem"}>
                     <Box marginRight={"5px"}>
                       <BiCalendarAlt />
                     </Box>
-                    {markerUpdated.date}
+                    {marker.date}
                   </Flex>
                   <Flex alignItems={"center"} fontSize={"1rem"}>
                     <Box marginRight={"5px"}>
                       <FiClock />
                     </Box>
-                    {markerUpdated.start_time} - {markerUpdated.end_time}
+                    {marker.start_time} - {marker.end_time}
                   </Flex>
                 </Flex>
               </Box>
