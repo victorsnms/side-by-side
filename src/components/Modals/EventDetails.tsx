@@ -165,10 +165,22 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
               backgroundImage={markerUpdated.picture_url}
               width={"100%"}
               height={150}
+              color={"gray.60"}
+              position={"relative"}
+              bgSize={"cover"}
+              bgPosition={"center"}
+            >
+              <Box
+              //gray layer
+              width={"100%"}
+              height={150}
               paddingX={5}
               paddingY={5}
               color={"gray.60"}
-              position={"relative"}
+              position={"absolute"}
+              bgSize={"cover"}
+              bgPosition={"center"}
+              bgColor={"gray.300"}
             >
               <Text fontSize={"1.5rem"}>{markerUpdated.title}</Text>
               <Flex direction={"column"} position={"absolute"} bottom={2}>
@@ -185,6 +197,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
                   {markerUpdated.start_time} - {markerUpdated.end_time}
                 </Flex>
               </Flex>
+              </Box>
               <Flex
                 direction={"column"}
                 position={"absolute"}
