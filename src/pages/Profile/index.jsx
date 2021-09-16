@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Center, Flex, Spacer } from "@chakra-ui/layout";
+import { Box, Center, Flex, Heading, Spacer } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { useAuth } from "../../providers/AuthContext";
@@ -8,6 +8,7 @@ import Icon from "@chakra-ui/icon";
 import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
+import { EventsCarousel } from "../../components/EventsCarousel";
 
 const Profile = () => {
   const { signOut } = useAuth();
@@ -24,7 +25,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <Box>
+    <Box ml={{ base: "0", lg:"126px"}}>
       {isMobile ? <BottomMenu /> : <DashboardMenu />}
       <Flex flexDirection="column">
         <Flex>
@@ -53,10 +54,15 @@ const Profile = () => {
             <Icon fontSize={["3xl", "4xl", "5xl", "5xl"]} as={BiLogOut} />
           </Button>
         </Flex>
-        <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
+        <Box>
           <UserInfo />
         </Box>
       </Flex>
+
+      <Box w="75vw" m="0 auto" mt="45px">
+        <Heading as="h3" fontSize="20px" pl="20px">My Events</Heading>
+        <EventsCarousel/>
+      </Box>
     </Box>
   );
 };
