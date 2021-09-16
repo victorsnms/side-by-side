@@ -74,7 +74,7 @@ export const LoginForm = () => {
         as="form"
         flexDirection="column"
         onSubmit={handleSubmit(handleSignUp)}
-        flex="1"
+        flex={["0", "0", "1"]}
         transition="ease-in all .5s"
       >
         <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
