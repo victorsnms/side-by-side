@@ -13,7 +13,7 @@ export const DashboardMenu = () => {
       bg="green.400"
       color="white"
       h="100%"
-      display="flex"
+      display={["none", "none", "flex"]}
       flexDirection="column"
       justifyContent="center"
       alignItems="center"

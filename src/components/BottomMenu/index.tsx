@@ -19,6 +19,7 @@ export const BottomMenu = () => {
 
 
     return <Box 
+        display={["block", "block", "none"]}
         zIndex='100'
         as='nav'
         pos='fixed'

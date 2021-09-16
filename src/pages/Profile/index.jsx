@@ -13,7 +13,6 @@ import { MiniMap } from "../../components/MiniMap";
 const Profile = () => {
   const { signOut } = useAuth();
   const { location, setLocation } = useLocation();
-  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -26,16 +25,13 @@ const Profile = () => {
 
   return (
     <Box>
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <BottomMenu />
+      <DashboardMenu />
       <Flex flexDirection="column">
         <Flex>
-          {isMobile ? (
-            <Center ml="5" fontSize="2xl" color="green.400">
+            <Center display={["block", "block", "none"]} ml="5" fontSize="2xl" color="green.400">
               LOGO
             </Center>
-          ) : (
-            <></>
-          )}
           <Spacer />
           <Button
             fontSize={["lg", "xl", "2xl"]}
