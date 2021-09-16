@@ -5,10 +5,9 @@ import { infos } from "../../utils/infos";
 import { BottomMenu } from "../../components/BottomMenu";
 
 export const Info = () => {
-
   return (
     <Flex
-      pl={{ base: "0", lg: "125px" }}
+      pl={{ base: "0", md: "125px", lg: "125px" }}
       w="90vw"
       minH="100vh"
       h="auto"
@@ -27,9 +26,14 @@ export const Info = () => {
         >
           Informations
         </Heading>
-        <Accordion w={{ base: "90vw", lg: "85%" }} allowToggle>
-          {infos.map(({ title, content },index) => (
-            <InfoDropDown w="100%" title={title} content={content} key={index}/>
+        <Accordion w={{ base: "90vw", md: "85%", lg: "85%" }} allowToggle>
+          {infos.map(({ title, content }, index) => (
+            <InfoDropDown
+              w="100%"
+              title={title}
+              content={content}
+              key={index}
+            />
           ))}
         </Accordion>
       </Flex>
