@@ -9,6 +9,8 @@ import { useUser } from "../../providers/UserContext";
 export const UserInfo = () => {
   const { userData: user } = useUser()
 
+  console.log(user)
+
   return (
     <Flex w="100%" justifyContent="center">
       <Flex
@@ -59,7 +61,7 @@ export const UserInfo = () => {
             fontSize={["1rem", "1rem", "1.5rem", "1.8rem","2rem"]}
             textAlign={["center", "center", "left", "left"]}
           >
-            <b>{user.name}</b>
+            <b>{Object.values(user).length !== 0 ? user.name : 'user'}</b>
           </Text>
           <Text
             as="h2"
@@ -86,13 +88,13 @@ export const UserInfo = () => {
           <Box 
             as={BoxBadges} 
             name="Badges" 
-            count={`${Object.values(user.badges).filter(badge => badge).length}`} 
+            count={`${Object.values(user).length !== 0 ? Object.values(user.badges).filter(badge => badge).length : 0}`} 
             icon={RiShieldFill}
           ></Box>
           <Box 
             as={BoxBadges} 
             name="Places" 
-            count={`${user.my_events.length}`} 
+            count={`${Object.values(user).length !== 0 ? user.my_events.length : 0}`}
             icon={RiMapFill}
           ></Box>
         </HStack>
