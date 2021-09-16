@@ -14,5 +14,6 @@ export const userDefaultData = {
     },
     my_events: [],
     experience: 0,
-    places: []
+    places: [],
+    location: null
 };
