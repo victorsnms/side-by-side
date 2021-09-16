@@ -129,7 +129,25 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
           <Text as="p" color="green.400">
             Create a new Waste Point
           </Text>
-          <HStack w="50%">
+          <Input
+            icon={AiFillShop}
+            placeholder="Local name"
+            {...register("title")}
+            error={errors.title}
+          />
+          <Input
+            icon={FaMapMarkerAlt}
+            placeholder="Address"
+            error={errors.address}
+            {...register("address")}
+          />
+          <Input
+            icon={RiContactsBookFill}
+            placeholder="Contact"
+            error={errors.contact}
+            {...register("contact")}
+          />
+          <HStack w="100%">
             <Input
               icon={RiTimeLine}
               placeholder="Open at:"
@@ -140,6 +158,10 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
               sx={{
                 "&::-webkit-calendar-picker-indicator": {
                   background: "none",
+                },
+                "&::-webkit-datetime-edit-fields-wrapper": {
+                  color: "gray.200",
+                  backgroundColor: "black",
                 },
               }}
               width={["100%"]}

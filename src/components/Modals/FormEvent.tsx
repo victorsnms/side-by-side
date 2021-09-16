@@ -232,6 +232,19 @@ export const FormEvent = ({ inputMarker, onClose }: FormEventProps) => {
               }}
             />
           </HStack>
+          <Textarea
+            icon={AiOutlineAlignLeft}
+            placeholder="Description..."
+            error={errors.description}
+            {...register("description")}
+            h="5rem"
+          />
+          <Input
+            icon={FaRegImage}
+            placeholder="Cover picture url"
+            error={errors.picture_url}
+            {...register("picture_url")}
+          />
           <Box flex="1" width="100%" textAlign="center">
             <ButtonForms
               isLoading={isLoading}
