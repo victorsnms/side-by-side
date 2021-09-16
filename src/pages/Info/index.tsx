@@ -1,11 +1,19 @@
-import { Flex, Accordion, Heading } from "@chakra-ui/react";
+import {
+  Flex,
+  Accordion,
+  Heading,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { InfoDropDown } from "../../components/InfoDropDown";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { infos } from "../../utils/infos";
 import { BottomMenu } from "../../components/BottomMenu";
+import LogoImg from "../../assets/images/marcador-recycle2.png";
 
 export const Info = () => {
-  const isMobile = window.innerWidth < 992;
+  const display = useBreakpointValue({ base: "flex", lg: "none" });
 
   return (
     <Flex
@@ -17,7 +25,20 @@ export const Info = () => {
       mb={{ base: "80px", lg: "0" }}
       justifyContent="space-between"
     >
-      {isMobile ? <BottomMenu /> : <DashboardMenu />}
+      <BottomMenu />
+      <DashboardMenu />
+      <Flex position="absolute" top="14px" left="12px" display={display}>
+        <Image src={LogoImg} w="12px" h="18px" mt="2px" opacity="40%" />
+        <Text
+          pl="0.2em"
+          fontSize="16px"
+          fontWeight="bold"
+          color="green.400"
+          opacity="30%"
+        >
+          Side by Side
+        </Text>
+      </Flex>
       <Flex alignItems="center" p="10" w="100%" flexDirection="column">
         <Heading
           as="h2"
@@ -28,8 +49,13 @@ export const Info = () => {
           Informations
         </Heading>
         <Accordion w={{ base: "90vw", lg: "85%" }} allowToggle>
-          {infos.map(({ title, content },index) => (
-            <InfoDropDown w="100%" title={title} content={content} key={index}/>
+          {infos.map(({ title, content }, index) => (
+            <InfoDropDown
+              w="100%"
+              title={title}
+              content={content}
+              key={index}
+            />
           ))}
         </Accordion>
       </Flex>

@@ -4,6 +4,7 @@ import {
   useContext,
   useState,
   ReactNode,
+  Dispatch
 } from "react";
 import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
@@ -31,6 +32,7 @@ interface AuthContextData {
   signOut: () => void;
   getUser: () => void;
   userData: User;
+  setData: Dispatch<React.SetStateAction<AuthState>>
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -93,6 +95,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         signOut,
         getUser,
         userData,
+        setData
       }}
     >
       {children}

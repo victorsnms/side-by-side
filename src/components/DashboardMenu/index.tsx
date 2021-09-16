@@ -1,6 +1,7 @@
-import { Box, VStack, Icon, Text } from "@chakra-ui/react";
+import { Box, VStack, Icon, Text, Image } from "@chakra-ui/react";
 import { BiHome, BiBookOpen, BiMap, BiGroup, BiTrophy } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import LogoImg from "../../assets/images/logo-desktop.png";
 
 export const DashboardMenu = () => {
   return (
@@ -13,7 +14,7 @@ export const DashboardMenu = () => {
       bg="green.400"
       color="white"
       h="100%"
-      display="flex"
+      display={["none", "none", "flex"]}
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
@@ -21,11 +22,11 @@ export const DashboardMenu = () => {
     >
       <Box
         position="absolute"
-        top="1rem"
+        top="2rem"
         left="50%"
         transform="translateX(-50%)"
       >
-        <Text fontSize="2rem">Logo</Text>
+        <Image src={LogoImg} />
       </Box>
       <VStack spacing="5">
         <Box textAlign="center" as={Link} to="/dashboard">
