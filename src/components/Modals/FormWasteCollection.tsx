@@ -8,6 +8,7 @@ import {
   Icon,
   useBoolean,
   useDisclosure,
+  useToast
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -74,6 +75,8 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(eventSchema) });
 
+  const toast = useToast()
+
   const createMarker = async (data: Marker, accessToken: string) => {
     api
       .post("/markers", data, {
@@ -83,6 +86,25 @@ export const FormWasteCollection = ({ inputMarker, onClose }: FormWCProps) => {
         setIsLoading.off();
         setMarkers((oldMarkers) => [...oldMarkers, response.data]);
         createdAWasteCollectionPoint(userData)
+          .then(resp => {
+            if (resp) return toast({
+              position: "top-right",
+              duration: 3000,
+              isClosable: true,
+              render: () => (
+                <Box 
+                  zIndex='10000' 
+                  p='1rem 1.2rem' 
+                  bg="white" 
+                  borderRadius='10px'
+                >
+                  <Text color="green.300" fontSize='1rem'>Won a badge!!!</Text>
+                  <Text color="green.300" fontSize='0.8rem'>Check badges page to see your prize</Text>
+                </Box>
+              ),
+            })
+          })
+          .catch(err => console.log(err))
         onSuccessOpen();
       })
       .catch((_) => {
