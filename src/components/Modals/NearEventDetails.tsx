@@ -11,6 +11,7 @@ import {
   Text,
   Flex,
   useBoolean,
+  useToast
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -25,6 +26,7 @@ import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
 import { useEventDetails } from "../../providers/EventDetailsContext";
 import { useMarkers } from "../../providers/MarkersContext";
+import { joinEvents } from "../../utils/Badges/badgesLogic";
 
 interface EventDetailsProps {
   marker: Marker;
@@ -35,6 +37,7 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
   const { getUser, userData } = useUser();
   const { accessToken, id } = useAuth();
   const [isLoading, setIsLoading] = useBoolean();
+  const toast = useToast()
   const {
     isOpen: isSuccessOpen,
     onClose: onSuccessClose,
@@ -113,6 +116,26 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
           )
           .then((_) => {
             setIsLoading.off();
+            joinEvents(userData)
+              .then(resp => {
+                if (resp) return toast({
+                  position: "top-right",
+                  duration: 3000,
+                  isClosable: true,
+                  render: () => (
+                    <Box 
+                      zIndex='10000' 
+                      p='1rem 1.2rem' 
+                      bg="white" 
+                      borderRadius='10px'
+                    >
+                      <Text color="green.300" fontSize='1rem'>Won a badge!!!</Text>
+                      <Text color="green.300" fontSize='0.8rem'>Check badges page to see your prize</Text>
+                    </Box>
+                  ),
+                })
+              })
+              .catch(err => console.log(err))
             onSuccessOpen();
           })
           .catch((_) => {
