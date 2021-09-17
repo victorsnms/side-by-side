@@ -50,8 +50,8 @@ export const EventsCarousel = () => {
       >
         {userData.my_events &&
           userData.my_events.map((event, index) => (
-            <Box m="2px 1rem">
-              <EventCard key={index} marker={event} />
+            <Box key={index} m="2px 1rem">
+              <EventCard marker={event} />
             </Box>
           ))}
 

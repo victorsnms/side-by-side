@@ -38,16 +38,16 @@ export const Profile = () => {
       <BottomMenu />
       <DashboardMenu />
 
-      <Flex flexDirection="column" pt="12px">
-        <Box mt={{ base: "38px", lg: "20px" }} ml={["2%", "2%", "20%", "10%"]}>
+      <Flex flexDirection="column" pt="7px">
+        <Box mt={{ base: "38px", lg: "10px" }} ml={["0", "2%", "20%", "10%"]}>
           <UserInfo />
 
           <Flex justify="center">
             <Box
-              ml={{ lg: "-60px" }}
+              ml={{ base: "0", lg: "-60px" }}
               mt="60px"
               border={"1px solid black"}
-              w={{ base: "100vw", lg: "62vw" }}
+              w={{ base: "90vw", lg: "62vw" }}
               h={"200px"}
               position={"relative"}
             >
@@ -59,7 +59,7 @@ export const Profile = () => {
             w={{ base: "100vw", lg: "75%" }}
             ml={{ lg: "110px" }}
             mt="40px"
-            mb={{ base: "100px", lg: "50px" }}
+            mb={{ base: "0", lg: "50px" }}
           >
             <Heading
               as="h3"
