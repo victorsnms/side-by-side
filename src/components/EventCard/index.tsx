@@ -1,4 +1,4 @@
-import { Text, Flex, Box, Heading } from "@chakra-ui/react";
+import { Text, Flex, Heading } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BiCalendarAlt } from "react-icons/bi";
 import { MdGroup } from "react-icons/md";

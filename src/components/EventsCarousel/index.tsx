@@ -1,4 +1,4 @@
-import { Box, Flex, Button } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { useAuth } from "../../providers/AuthContext";
 import { useUser } from "../../providers/UserContext";

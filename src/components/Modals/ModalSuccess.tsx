@@ -12,7 +12,6 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 import ImageSuccess from "../../assets/images/flowers-success.svg";
 import { ButtonForms } from "../ButtonForms";
 

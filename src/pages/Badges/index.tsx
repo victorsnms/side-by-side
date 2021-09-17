@@ -1,6 +1,5 @@
 import {
   Box,
-  Center,
   Flex,
   Image,
   Text,
@@ -17,7 +16,7 @@ const Badges = () => {
 
   return (
     <Box>
-      <Flex position="absolute" top="14px" left="12px" display={display}>
+      <Flex position="absolute" top="7px" left="12px" display={display}>
         <Image src={LogoImg} w="12px" h="18px" mt="2px" opacity="40%" />
         <Text
           pl="0.2em"

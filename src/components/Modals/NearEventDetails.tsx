@@ -24,7 +24,6 @@ import { api } from "../../services/api";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
 import { useEventDetails } from "../../providers/EventDetailsContext";
-import { useMarkers } from "../../providers/MarkersContext";
 
 interface EventDetailsProps {
   marker: Marker;

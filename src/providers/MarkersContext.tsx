@@ -13,7 +13,6 @@ import { api } from "../services/api";
 import { Marker, Participants } from "../types/makerData";
 import { MyEvent, User } from "../types/userData";
 import { createdAnEvent } from "../utils/Badges/badgesLogic";
-import { useUser } from "./UserContext";
 
 interface MarkersProviderProps {
   children: ReactNode;

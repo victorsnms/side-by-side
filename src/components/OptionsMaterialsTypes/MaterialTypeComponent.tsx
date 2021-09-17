@@ -1,8 +1,6 @@
-import { Wrap, WrapItem, Center } from "@chakra-ui/react";
+import { WrapItem, Center } from "@chakra-ui/react";
 import { useBoolean } from "@chakra-ui/hooks";
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { types } from "../../utils/materialsTypesData";
-import { filter } from "lodash";
 
 interface RadioValuesProps {
   setMaterialsType: Dispatch<SetStateAction<string[]>>;
