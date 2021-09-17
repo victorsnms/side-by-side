@@ -15,7 +15,6 @@ import * as yup from "yup";
 import { api } from "../../services/api";
 import { userDefaultData } from "../../utils/userDefaultData";
 import { ModalSuccess } from "../../components/Modals/ModalSuccess";
-import { useModal } from "../../providers/ModalProviders";
 import { ModalError } from "../../components/Modals/ModalError";
 
 interface IFormValues {

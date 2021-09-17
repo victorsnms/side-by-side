@@ -13,13 +13,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../providers/AuthContext";
-import { ModalSuccess } from "../../components/Modals/ModalSuccess";
-import { useModal } from "../../providers/ModalProviders";
 import { ModalError } from "../../components/Modals/ModalError";
 import { api } from "../../services/api";
 import jwt_decode from "jwt-decode";
 import { useUser } from "../../providers/UserContext";
-import { userInfo } from "os";
 
 interface IFormValues {
   email: string;

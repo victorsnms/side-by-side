@@ -14,8 +14,6 @@ export const Profile = () => {
   const { userData: user, openFirstAccessForm } = useUser();
   const [sizeMyEvent, setSizeMyEvents] = useState(0);
 
-  console.log(openFirstAccessForm, user.location)
-
   useEffect(() => {
     if (user.my_events !== undefined) {
       setSizeMyEvents(user.my_events.length);
