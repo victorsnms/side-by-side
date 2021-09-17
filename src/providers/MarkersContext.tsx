@@ -1,4 +1,5 @@
 //necessita passar para o app provider
+import { useToast, Box, Text } from "@chakra-ui/react";
 import { AxiosResponse } from "axios";
 import {
   createContext,
@@ -58,6 +59,7 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
   const [markers, setMarkers] = useState<Marker[]>([]);
   const [allEvents, setAllEvents] = useState<Marker[]>([]);
   const [markerUpdated, setMarkerUpdated] = useState<Marker>({} as Marker);
+  const toast = useToast()
 
   const loadMarkers = useCallback(async (accessToken: string) => {
     try {
@@ -102,6 +104,25 @@ const MarkersProvider = ({ children }: MarkersProviderProps) => {
         .then((response: AxiosResponse<User>) => {
           console.log(response)
           createdAnEvent(user)
+            .then(resp => {
+              if (resp) return toast({
+                position: "top-right",
+                duration: 3000,
+                isClosable: true,
+                render: () => (
+                  <Box 
+                    zIndex='10000' 
+                    p='1rem 1.2rem' 
+                    bg="white" 
+                    borderRadius='10px'
+                  >
+                    <Text color="green.300" fontSize='1rem'>Won a badge!!!</Text>
+                    <Text color="green.300" fontSize='0.8rem'>Check badges page to see your prize</Text>
+                  </Box>
+                ),
+              })
+            })
+            .catch(err => console.log(err))
         })
         .catch((err) => console.log(err));
     },
