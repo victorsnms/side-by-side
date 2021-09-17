@@ -192,7 +192,6 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
                   {marker.start_time} - {marker.end_time}
                 </Flex>
               </Flex>
-            </Box>
             <Flex
               direction={"column"}
               position={"absolute"}
@@ -206,6 +205,7 @@ export const NearEventDetails = ({ marker }: EventDetailsProps) => {
                 </Box>
               </Flex>
             </Flex>
+            </Box>
           </ModalHeader>
           <ModalCloseButton color="gray.60" />
           <ModalBody color={"gray.400"}>{marker.description}</ModalBody>

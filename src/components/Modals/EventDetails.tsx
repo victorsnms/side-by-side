@@ -11,6 +11,7 @@ import {
   Text,
   Flex,
   useBoolean,
+  useToast,
 } from "@chakra-ui/react";
 import { BiCalendarAlt } from "react-icons/bi";
 import { FiClock } from "react-icons/fi";
@@ -54,6 +55,8 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
       updateEvent(marker.id, accessToken);
     }
   }, []);
+
+  const toast = useToast()
 
   const handleSubmit = () => {
     //updates event participants and user events
@@ -114,7 +117,26 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
           )
           .then((_) => {
             setIsLoading.off();
-            joinEvents(userData);
+            joinEvents(userData)
+              .then(resp => {
+                if (resp) return toast({
+                  position: "top-right",
+                  duration: 3000,
+                  isClosable: true,
+                  render: () => (
+                    <Box 
+                      zIndex='10000' 
+                      p='1rem 1.2rem' 
+                      bg="white" 
+                      borderRadius='10px'
+                    >
+                      <Text color="green.300" fontSize='1rem'>Won a badge!!!</Text>
+                      <Text color="green.300" fontSize='0.8rem'>Check badges page to see your prize</Text>
+                    </Box>
+                  ),
+                })
+              })
+              .catch(err => console.log(err))
             onSuccessOpen();
           })
           .catch((_) => {

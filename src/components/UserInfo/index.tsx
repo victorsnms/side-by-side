@@ -9,8 +9,6 @@ import { useUser } from "../../providers/UserContext";
 export const UserInfo = () => {
   const { userData: user } = useUser();
 
-  console.log(user);
-
   return (
     <Flex w="100%" justifyContent="center">
       <Flex
@@ -69,7 +67,8 @@ export const UserInfo = () => {
             textAlign={["center", "center", "left", "left"]}
           >
             {/* TODO */}
-            <Icon as={FaMapMarkerAlt} /> Brasil, América do Sul
+            <Icon as={FaMapMarkerAlt} /> {user.location?.country},{" "}
+            {user.location?.city} - {user.location?.state}
           </Text>
         </Flex>
         <HStack

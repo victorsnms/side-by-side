@@ -93,7 +93,7 @@ export const SignupForm = () => {
         as="form"
         flexDirection="column"
         onSubmit={handleSubmit(handleSignUp)}
-        flex="1"
+        flex={["0", "0", "1"]}
       >
         <VStack spacing="14px" mt={["30px", "30px", "30px", "60px"]}>
           <Input
