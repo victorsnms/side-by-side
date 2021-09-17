@@ -18,6 +18,8 @@ import { useModal } from "../../providers/ModalProviders";
 import { ModalError } from "../../components/Modals/ModalError";
 import { api } from "../../services/api";
 import jwt_decode from "jwt-decode";
+import { useUser } from "../../providers/UserContext";
+import { userInfo } from "os";
 
 interface IFormValues {
   email: string;
@@ -25,7 +27,7 @@ interface IFormValues {
 }
 
 export const LoginForm = () => {
-  const { signIn, setData } = useAuth();
+  const { setData } = useAuth();
   const {
     isOpen: isErrorOpen,
     onClose: onErrorClose,
@@ -45,8 +47,13 @@ export const LoginForm = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const handleSignUp = async (data: IFormValues) => {
+  const { setOpenFirstAccessForm, userData } = useUser();
+
+  const handleSignIn = async (data: IFormValues) => {
     setIsLoading.on();
+    if(userData.location === undefined) {
+      setOpenFirstAccessForm(true);
+    }
     const response = await api
       .post("/login", data)
       .then((res) => {
@@ -56,6 +63,7 @@ export const LoginForm = () => {
         localStorage.setItem("@SideBySide:id", JSON.stringify(id));
         setData({ accessToken, id });
         setIsLoading.off();
+        
       })
       .catch((_) => {
         onErrorOpen();
@@ -73,7 +81,7 @@ export const LoginForm = () => {
       <Center
         as="form"
         flexDirection="column"
-        onSubmit={handleSubmit(handleSignUp)}
+        onSubmit={handleSubmit(handleSignIn)}
         flex={["0", "0", "1"]}
         transition="ease-in all .5s"
       >

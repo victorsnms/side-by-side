@@ -11,8 +11,10 @@ import { useUser } from "../../providers/UserContext";
 import { useEffect, useState } from "react";
 
 export const Profile = () => {
-  const { userData: user } = useUser();
+  const { userData: user, openFirstAccessForm } = useUser();
   const [sizeMyEvent, setSizeMyEvents] = useState(0);
+
+  console.log(openFirstAccessForm, user.location)
 
   useEffect(() => {
     if (user.my_events !== undefined) {
@@ -40,6 +42,7 @@ export const Profile = () => {
 
       <BottomMenu />
       <DashboardMenu />
+      {openFirstAccessForm && <FirstAccessForm />}
 
       <Flex flexDirection="column" pt="7px">
         {!user.location && <FirstAccessForm />}

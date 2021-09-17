@@ -35,9 +35,9 @@ export const FirstAccessForm = () => {
 
   const { accessToken, id: idUser } = useAuth();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { openFirstAccessForm, setOpenFirstAccessForm } = useUser();
 
-  const onToggle = () => setIsOpen(!isOpen);
+  const onToggle = () => setOpenFirstAccessForm(!openFirstAccessForm);
 
   const onSubmit = (data: ILocationData) => {
     const { id } = user;
@@ -61,17 +61,17 @@ export const FirstAccessForm = () => {
     onToggle();
   };
 
-  useEffect(() => {
-    if (!user.location) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user.location) {
+  //     setIsOpen(true);
+  //   } else {
+  //     setIsOpen(false);
+  //   }
+  // }, [user]);
 
   return (
     <>
-      {isOpen && (
+      {openFirstAccessForm && (
         <Box
           pos="absolute"
           w="100%"
@@ -82,7 +82,7 @@ export const FirstAccessForm = () => {
           zIndex="9"
         ></Box>
       )}
-      <Slide in={isOpen} direction="bottom" style={{ zIndex: 10 }}>
+      <Slide in={openFirstAccessForm} direction="bottom" style={{ zIndex: 10 }}>
         <Flex
           as="form"
           flexDirection="column"
@@ -97,9 +97,6 @@ export const FirstAccessForm = () => {
           borderRadius="1rem 1rem 0 0"
           onSubmit={handleSubmit(onSubmit)}
         >
-          {/* <Box w="100%" textAlign="right">
-            <Icon mr="0.5rem" as={IoIosArrowDown} onClick={onToggle} />
-          </Box> */}
           <Box>
             <Heading fontSize="1.5rem" textAlign="center">
               WHATS YOUR ADDRESS?
