@@ -1,10 +1,4 @@
-import {
-  Box,
-  Flex,
-  Image,
-  Text,
-  Heading,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Text, Heading } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { UserInfo } from "../../components/UserInfo";
@@ -14,10 +8,18 @@ import { MiniMap } from "../../components/MiniMap";
 import { EventsCarousel } from "../../components/EventsCarousel";
 import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
 import { useUser } from "../../providers/UserContext";
+import { useEffect, useState } from "react";
 
 export const Profile = () => {
   const { userData: user } = useUser();
-  
+  const [sizeMyEvent, setSizeMyEvents] = useState(0);
+
+  useEffect(() => {
+    if (user.my_events !== undefined) {
+      setSizeMyEvents(user.my_events.length);
+    }
+  }, []);
+
   return (
     <Box mb="100px" overflow="hidden">
       <Flex w="100vw" align="center" justify="space-between">
@@ -35,7 +37,7 @@ export const Profile = () => {
         </Flex>
         <ButtonSignout />
       </Flex>
-        
+
       <BottomMenu />
       <DashboardMenu />
 
@@ -70,7 +72,21 @@ export const Profile = () => {
             >
               MY EVENTS
             </Heading>
-            <EventsCarousel />
+            {sizeMyEvent >= 1 ? (
+              <EventsCarousel />
+            ) : (
+              <Box
+                w={{ base: "100vw", lg: "50%" }}
+                m="0 auto"
+                textAlign="center"
+                pl={{ lg: "60px" }}
+                color="gray.400"
+              >
+                <Text as="p" margin="16px" fontSize="12px"  />
+                  You do not participate in any events yet
+                <Text />
+              </Box>
+            )}
           </Box>
         </Box>
       </Flex>
