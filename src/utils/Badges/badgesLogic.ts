@@ -84,37 +84,37 @@ export const joinEvents = async (user: User) => {
         return gotBadge
     }
 
-    if (user.my_events.length >= 1 && !user.badges.first) {
+    if (user.my_events.length +1 >= 1 && !user.badges.first) {
         user.badges.first = true
         await updateBadges(userAuth, user)
         gotBadge = true
     }
 
-    if (user.my_events.length >= 2 && !user.badges.second) {
+    if (user.my_events.length +1 >= 2 && !user.badges.second) {
         user.badges.second = true
         await updateBadges(userAuth, user)
         gotBadge = true
     }
 
-    if (user.my_events.length >= 5 && !user.badges.third) {
+    if (user.my_events.length +1 >= 5 && !user.badges.third) {
         user.badges.third = true
         await updateBadges(userAuth, user)
         gotBadge = true
     }
 
-    if (user.my_events.length >= 8 && !user.badges.fourth) {
+    if (user.my_events.length +1 >= 8 && !user.badges.fourth) {
         user.badges.fourth = true
         await updateBadges(userAuth, user)
         gotBadge = true
     }
 
-    if (user.my_events.length >= 12 && !user.badges.fifth) {
+    if (user.my_events.length +1 >= 12 && !user.badges.fifth) {
         user.badges.fifth = true
         await updateBadges(userAuth, user)
         gotBadge = true
     }
 
-    if (user.my_events.length >= 15 && !user.badges.sixth) {
+    if (user.my_events.length +1 >= 15 && !user.badges.sixth) {
         user.badges.sixth = true
         await updateBadges(userAuth, user)
         gotBadge = true
