@@ -100,7 +100,7 @@ export const EditProfile = () => {
       .then((response) => {
         setIsLoading.off();
         onSuccessOpen();
-        console.log(newData);
+        getUser(id, accessToken);
       })
       .catch((_) => {
         setIsLoading.off();
@@ -220,6 +220,7 @@ export const EditProfile = () => {
                   width={["auto"]}
                   bg="blue.500"
                   mr="16px"
+                  onClick={onClose}
                 />
                 <ButtonForms
                   children="Update"
