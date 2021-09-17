@@ -51,9 +51,9 @@ export const Profile = () => {
 
           <Flex justify="center">
             <Box
-              ml={{ base: "0", lg: "-60px" }}
+              ml={{ base: "0", lg: "-69px" }}
               mt="60px"
-              w={{ base: "90vw", lg: "62vw" }}
+              w={{ base: "90vw", lg: "68vw" }}
               h={"200px"}
               position={"relative"}
             >
@@ -71,6 +71,7 @@ export const Profile = () => {
               as="h3"
               fontSize="26px"
               pl={{ lg: "60px" }}
+              ml={{ lg: "20px" }}
               textAlign="center"
             >
               MY EVENTS
