@@ -32,9 +32,9 @@ export const FirstAccessForm = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const { userData: user } = useUser();
+  const { userData: user, getUser } = useUser();
 
-  const { accessToken } = useAuth();
+  const { accessToken, id: idUser } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +43,6 @@ export const FirstAccessForm = () => {
   const onSubmit = (data: ILocationData) => {
     const { id } = user;
 
-    console.log(id, accessToken);
     if (accessToken && id) {
       api
         .patch(
@@ -57,7 +56,7 @@ export const FirstAccessForm = () => {
             },
           }
         )
-        .then((resp) => console.log(resp))
+        .then((resp) => getUser(idUser, accessToken))
         .catch((err) => console.log(err));
     }
     onToggle();
@@ -99,9 +98,9 @@ export const FirstAccessForm = () => {
           borderRadius="1rem 1rem 0 0"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Box w="100%" textAlign="right">
+          {/* <Box w="100%" textAlign="right">
             <Icon mr="0.5rem" as={IoIosArrowDown} onClick={onToggle} />
-          </Box>
+          </Box> */}
           <Box>
             <Heading fontSize="1.5rem" textAlign="center">
               WHATS YOUR ADDRESS?
