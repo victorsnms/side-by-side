@@ -12,7 +12,6 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 import ImageError from "../../assets/images/rain-error.svg";
 import { ButtonForms } from "../ButtonForms";
 

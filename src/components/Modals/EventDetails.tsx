@@ -47,7 +47,7 @@ export const EventDetails = ({ marker }: EventDetailsProps) => {
     onClose: onErrorClose,
     onOpen: onErrorOpen,
   } = useDisclosure();
-  const { markerUpdated, updateEvent } = useMarkers();
+  const { updateEvent } = useMarkers();
 
   useEffect(() => {
     getUser(id, accessToken);

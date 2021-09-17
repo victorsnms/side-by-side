@@ -23,7 +23,7 @@ import { Textarea } from "../TextareaForms";
 import { eventDefaultData } from "../../utils/eventDefaultData";
 import { InputMarker, Marker } from "../../types/makerData";
 import { useAuth } from "../../providers/AuthContext";
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { api } from "../../services/api";
 import { AxiosResponse } from "axios";
 import { ModalSuccess } from "./ModalSuccess";

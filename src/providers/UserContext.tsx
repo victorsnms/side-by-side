@@ -18,6 +18,8 @@ interface UserContextData {
   getUser: (id: () => string, accessToken: string) => void;
   userData: User;
   joinEvents: (id: () => string, accessToken: string, data:Marker, my_events:Marker[]) => void
+  openFirstAccessForm: boolean;
+  setOpenFirstAccessForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -33,6 +35,7 @@ const useUser = () => {
 
 const UserProvider = ({ children }: UserProviderProps) => {
   const [userData, setUserData] = useState({} as User);
+  const [openFirstAccessForm, setOpenFirstAccessForm] = useState(false);
 
   const getUser = useCallback((id: () => string, accessToken: string) => {
     api
@@ -65,7 +68,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
       value={{
         getUser,
         userData,
-        joinEvents
+        joinEvents,
+        openFirstAccessForm,
+        setOpenFirstAccessForm
       }}
     >
       {children}
