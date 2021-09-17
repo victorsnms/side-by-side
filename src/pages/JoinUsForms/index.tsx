@@ -13,7 +13,6 @@ import { SignupForm } from "./SignupForm";
 import { LoginForm } from "./LoginForm";
 import { useToggleSwitchContext } from "../../providers/ToggleSwitchContext";
 import { useEffect } from "react";
-import LogoImg from "../../assets/images/group.png";
 import LogoImgMobile from "../../assets/images/logo-joinus.png";
 import { Link as LinkRouter } from "react-router-dom";
 

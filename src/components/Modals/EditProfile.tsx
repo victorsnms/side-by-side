@@ -15,19 +15,17 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "../../providers/AuthContext";
 import { useUser } from "../../providers/UserContext";
-import { ButtonAdd } from "../ButtomAdd";
 import { useEffect } from "react";
 import { Input } from "../Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FaImage, FaUser } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
 import { AiOutlineUser } from "react-icons/ai";
 import { api } from "../../services/api";
 import { ButtonForms } from "../ButtonForms";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
-import { theme } from "../../styles/theme";
 import { MdLocationOn } from "react-icons/md";
 
 interface Data {

@@ -7,18 +7,8 @@ import { Info } from "../pages/Info";
 import { JoinUsForms } from "../pages/JoinUsForms";
 import { useAuth } from "../providers/AuthContext";
 import { Route } from "./Routes";
-import Profile from "../pages/Profile";
+import { Profile } from "../pages/Profile";
 import Badges from "../pages/Badges";
-
-// Import your component here
-//<Route exact path="/" />
-//<Route path="/login" />
-//<Route path="/signup" />
-//<Route exact path="/dashboard" />
-//<Route path="/dashboard/badges" />
-//<Route path="/dashboard/map" />
-//<Route path="/dashboard/events" />
-//<Route />
 
 export const Routes = () => {
   const { accessToken } = useAuth();

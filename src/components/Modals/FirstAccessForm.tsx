@@ -1,11 +1,10 @@
-import { Flex, Box, Heading, Text, Icon, Slide } from "@chakra-ui/react";
+import { Flex, Box, Heading, Text, Slide } from "@chakra-ui/react";
 import { Input } from "../Input";
 import { MdLocationOn } from "react-icons/md";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ButtonForms } from "../ButtonForms";
-import { IoIosArrowDown } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { useUser } from "../../providers/UserContext";
 import { useAuth } from "../../providers/AuthContext";
