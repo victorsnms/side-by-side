@@ -4,7 +4,6 @@ import {
   Image,
   Text,
   Heading,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
@@ -13,10 +12,12 @@ import LogoImg from "../../assets/images/marcador-recycle2.png";
 import { ButtonSignout } from "../../components/ButtonSignout";
 import { MiniMap } from "../../components/MiniMap";
 import { EventsCarousel } from "../../components/EventsCarousel";
+import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
+import { useUser } from "../../providers/UserContext";
 
 export const Profile = () => {
-  const display = useBreakpointValue({ base: "flex", lg: "none" });
-
+  const { userData: user } = useUser();
+  
   return (
     <Box mb="100px" overflow="hidden">
       <Flex w="100vw" align="center" justify="space-between">
@@ -35,11 +36,11 @@ export const Profile = () => {
         <ButtonSignout />
       </Flex>
         
-   
       <BottomMenu />
       <DashboardMenu />
 
       <Flex flexDirection="column" pt="7px">
+        {!user.location && <FirstAccessForm />}
         <Box mt={{ base: "38px", lg: "10px" }} ml={["0", "2%", "20%", "10%"]}>
           <UserInfo />
 
