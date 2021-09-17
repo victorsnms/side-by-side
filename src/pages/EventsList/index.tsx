@@ -21,7 +21,7 @@ export const EventsList = () => {
   const { allEvents, displayEvents } = useMarkers();
   const { accessToken } = useAuth();
   const { location, setLocation } = useLocation();
-  const display = useBreakpointValue({ base: "flex", lg: "none" });
+  const display = useBreakpointValue({ base: "flex", md: "none", lg: "none" });
 
   const { lat: userLat, lng: userLng } = location;
 
@@ -54,7 +54,7 @@ export const EventsList = () => {
       <Box display="flex" flexDirection="column" alignItems="center">
         <Heading
           as="h2"
-          m="5.5rem 0 4rem"
+          m="5.5rem 0 2.5rem"
           textTransform="uppercase"
           fontSize="2xl"
         >

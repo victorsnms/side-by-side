@@ -13,7 +13,7 @@ import { BottomMenu } from "../../components/BottomMenu";
 import LogoImg from "../../assets/images/marcador-recycle2.png";
 
 export const Info = () => {
-  const display = useBreakpointValue({ base: "flex", lg: "none" });
+  const display = useBreakpointValue({ base: "flex", md: "none", lg: "none" });
 
   return (
     <Flex
@@ -42,7 +42,7 @@ export const Info = () => {
       <Flex alignItems="center" p="10" w="100%" flexDirection="column">
         <Heading
           as="h2"
-          m="3rem 0 4rem"
+          m="3rem 0 2.5rem"
           textTransform="uppercase"
           fontSize="2xl"
         >

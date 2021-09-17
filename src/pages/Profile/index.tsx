@@ -20,7 +20,7 @@ export const Profile = () => {
   return (
     <Box mb="100px" overflow="hidden">
       <Flex w="100vw" align="center" justify="space-between">
-        <Flex display={display} ml="12px">
+        <Flex ml="12px">
           <Image src={LogoImg} w="12px" h="18px" mt="2px" opacity="40%" />
           <Text
             pl="0.2em"
@@ -34,7 +34,8 @@ export const Profile = () => {
         </Flex>
         <ButtonSignout />
       </Flex>
-
+        
+   
       <BottomMenu />
       <DashboardMenu />
 
@@ -46,7 +47,6 @@ export const Profile = () => {
             <Box
               ml={{ base: "0", lg: "-60px" }}
               mt="60px"
-              border={"1px solid black"}
               w={{ base: "90vw", lg: "62vw" }}
               h={"200px"}
               position={"relative"}
@@ -57,21 +57,20 @@ export const Profile = () => {
 
           <Box
             w={{ base: "100vw", lg: "75%" }}
-            ml={{ lg: "110px" }}
-            mt="40px"
+            ml={{ lg: "90px" }}
+            mt="50px"
             mb={{ base: "0", lg: "50px" }}
           >
             <Heading
               as="h3"
               fontSize="26px"
-              pl={{ lg: "20px" }}
+              pl={{ lg: "60px" }}
               textAlign="center"
             >
               MY EVENTS
             </Heading>
             <EventsCarousel />
           </Box>
-
         </Box>
       </Flex>
     </Box>
