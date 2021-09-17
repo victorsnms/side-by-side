@@ -4,7 +4,6 @@ import {
   Image,
   Text,
   Heading,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
@@ -13,9 +12,24 @@ import LogoImg from "../../assets/images/marcador-recycle2.png";
 import { ButtonSignout } from "../../components/ButtonSignout";
 import { MiniMap } from "../../components/MiniMap";
 import { EventsCarousel } from "../../components/EventsCarousel";
+import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
+import { useUser } from "../../providers/UserContext";
+import { useLocation } from "../../providers/LocationContext";
+import { useEffect } from "react";
 
 export const Profile = () => {
-  const display = useBreakpointValue({ base: "flex", lg: "none" });
+  const { userData: user } = useUser();
+  const { location, setLocation } = useLocation();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  }, []);
+
 
   return (
     <Box mb="100px" overflow="hidden">
@@ -35,9 +49,9 @@ export const Profile = () => {
         <ButtonSignout />
       </Flex>
         
-   
       <BottomMenu />
       <DashboardMenu />
+      {!user.location && <FirstAccessForm />}
 
       <Flex flexDirection="column" pt="7px">
         <Box mt={{ base: "38px", lg: "10px" }} ml={["0", "2%", "20%", "10%"]}>
