@@ -37,9 +37,10 @@ const updateBadges = async (userAuth: IAuth, user: User) => {
 
 export const createdAnEvent = async (user: User) => {
     const userAuth = getAuth()
+    let gotBadge = false
 
     if (userAuth === null) {
-        return
+        return gotBadge
     }
 
     console.log(user)
@@ -47,59 +48,77 @@ export const createdAnEvent = async (user: User) => {
     if (!user.badges.event) {
         user.badges.event = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
     if (user.my_events.length > 0) {
-        await joinEvents(user)
+        gotBadge = await joinEvents(user) || gotBadge
     }
+
+    return gotBadge
 }
 
 export const createdAWasteCollectionPoint = async (user: User) => {
     const userAuth = getAuth()
+    let gotBadge = false
+
 
     if (userAuth === null) {
-        return
+        return gotBadge
     }
 
     if (!user.badges.waste) {
         user.badges.waste = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
+
+    return gotBadge
 }
 
 export const joinEvents = async (user: User) => {
     const userAuth = getAuth()
+    let gotBadge = false
+
 
     if (userAuth == null) {
-        return
+        return gotBadge
     }
 
-    if (user.my_events.length >= 1 && !user.badges.first) {
+    if (user.my_events.length +1 >= 1 && !user.badges.first) {
         user.badges.first = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
 
-    if (user.my_events.length >= 2 && !user.badges.second) {
+    if (user.my_events.length +1 >= 2 && !user.badges.second) {
         user.badges.second = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
 
-    if (user.my_events.length >= 5 && !user.badges.third) {
+    if (user.my_events.length +1 >= 5 && !user.badges.third) {
         user.badges.third = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
 
-    if (user.my_events.length >= 8 && !user.badges.fourth) {
+    if (user.my_events.length +1 >= 8 && !user.badges.fourth) {
         user.badges.fourth = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
 
-    if (user.my_events.length >= 12 && !user.badges.fifth) {
+    if (user.my_events.length +1 >= 12 && !user.badges.fifth) {
         user.badges.fifth = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
 
-    if (user.my_events.length >= 15 && !user.badges.sixth) {
+    if (user.my_events.length +1 >= 15 && !user.badges.sixth) {
         user.badges.sixth = true
         await updateBadges(userAuth, user)
+        gotBadge = true
     }
+
+    return gotBadge
 }

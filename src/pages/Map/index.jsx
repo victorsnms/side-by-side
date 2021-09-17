@@ -112,9 +112,9 @@ export const Map = () => {
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: marker.type === "event" ? "/event.png" : "/wastecol.png",
-              scaledSize: new window.google.maps.Size(30, 30),
+              scaledSize: new window.google.maps.Size(30, 40),
               origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
+              anchor: new window.google.maps.Point(15, 20),
             }}
             onClick={() => setSelected(marker)}
           />
@@ -178,6 +178,12 @@ export const Map = () => {
           <Marker
             key={marker.created_at}
             position={{ lat: marker.lat, lng: marker.lng }}
+            icon={{
+              url: "/input.png", 
+              scaledSize: new window.google.maps.Size(30, 40),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 20),
+            }}
           />
         ))}
       </GoogleMap>

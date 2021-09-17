@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Flex, Spacer, Image, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Image, Text, useBreakpointValue, Heading } from "@chakra-ui/react";
 import { BottomMenu } from "../../components/BottomMenu";
 import { DashboardMenu } from "../../components/DashboardMenu";
 import { useAuth } from "../../providers/AuthContext";
@@ -8,6 +8,7 @@ import Icon from "@chakra-ui/icon";
 import { UserInfo } from "../../components/UserInfo";
 import { useLocation } from "../../providers/LocationContext";
 import { useEffect } from "react";
+import { EventsCarousel } from "../../components/EventsCarousel";
 import LogoImg from "../../assets/images/marcador-recycle2.png";
 import { MiniMap } from "../../components/MiniMap";
 import { FirstAccessForm } from "../../components/Modals/FirstAccessForm";
@@ -29,7 +30,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <Box>
+    <Box w={{ base: "100vw", lg: "85%" }} m="0 auto">
       <BottomMenu />
       <DashboardMenu />
       <Flex position="absolute" top="14px" left="12px" display={display}>
@@ -58,10 +59,11 @@ const Profile = () => {
             <Icon fontSize="2xl" as={BiLogOut} />
           </Button>
         </Flex>
-        <Box mt="38px" ml={["2%", "2%", "20%", "10%"]}>
+        <Box>
           <UserInfo />
         </Box>
       </Flex>
+
       <Flex justifyContent="center">
         <Box
           mt="38px"
@@ -74,6 +76,23 @@ const Profile = () => {
           <MiniMap />
         </Box>
       </Flex>
+
+      <Box
+        w={{ base: "100vw", lg: "80%" }}
+        m="0 auto"
+        mt="45px"
+        mb={{ base: "100px", lg: "50px" }}
+      >
+        <Heading
+          as="h3"
+          fontSize="26px"
+          pl={{ lg: "20px" }}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          My Events
+        </Heading>
+        <EventsCarousel />
+      </Box>
     </Box>
   );
 };

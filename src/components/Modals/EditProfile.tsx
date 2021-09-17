@@ -28,10 +28,14 @@ import { ButtonForms } from "../ButtonForms";
 import { ModalSuccess } from "./ModalSuccess";
 import { ModalError } from "./ModalError";
 import { theme } from "../../styles/theme";
+import { MdLocationOn } from "react-icons/md";
 
 interface Data {
   name: string;
   image_url: string;
+  city: string;
+  state: string;
+  country: string;
 }
 
 export const EditProfile = () => {
@@ -56,11 +60,13 @@ export const EditProfile = () => {
     getUser(id, accessToken);
   }, []);
 
-  const { name, image_url } = userData;
-
+  const { name, image_url, location } = userData;
   const eventSchema = yup.object().shape({
     name: yup.string(),
-    image_url: yup.string().matches(/^(http?s)/, "Url invalid"),
+    image_url: yup.string().matches(/^$|^(http?s)/, "Url invalid"),
+    city: yup.string(),
+    state: yup.string(),
+    country: yup.string(),
   });
 
   const {
@@ -71,10 +77,21 @@ export const EditProfile = () => {
 
   const onSubmitFunction = (data: Data) => {
     setIsLoading.on();
-    const { image_url: image_url_form, name: name_form } = data;
+    const {
+      image_url: image_url_form,
+      name: name_form,
+      city,
+      country,
+      state,
+    } = data;
     const newData = {
       name: name_form === "" ? name : name_form,
       image_url: image_url_form === "" ? image_url : image_url_form,
+      location: {
+        city: city === "" ? location?.city : city,
+        state: state === "" ? location?.state : state,
+        country: country === "" ? location?.country : country,
+      },
     };
     api
       .patch(`/users/${id}`, newData, {
@@ -83,6 +100,7 @@ export const EditProfile = () => {
       .then((response) => {
         setIsLoading.off();
         onSuccessOpen();
+        getUser(id, accessToken);
       })
       .catch((_) => {
         setIsLoading.off();
@@ -171,6 +189,27 @@ export const EditProfile = () => {
                   {...register("image_url")}
                   error={errors.image_url}
                 />
+                <Input
+                  {...register("city")}
+                  name="city"
+                  placeholder="City"
+                  icon={MdLocationOn}
+                  error={errors.city}
+                />
+                <Input
+                  {...register("state")}
+                  name="state"
+                  placeholder="State"
+                  icon={MdLocationOn}
+                  error={errors.state}
+                />
+                <Input
+                  {...register("country")}
+                  name="country"
+                  placeholder="Country"
+                  icon={MdLocationOn}
+                  error={errors.country}
+                />
               </VStack>
             </Flex>
             <DrawerFooter flex="1" pr="0px">
@@ -181,6 +220,7 @@ export const EditProfile = () => {
                   width={["auto"]}
                   bg="blue.500"
                   mr="16px"
+                  onClick={onClose}
                 />
                 <ButtonForms
                   children="Update"
