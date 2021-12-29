@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# SIDE BY SIDE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Side by Side is an application made with ReactJs for studying purposees at the Front-End Developer course - Kenzie Academy Brazil.
 
-## Available Scripts
+## Team
 
-In the project directory, you can run:
+This project was developed by the team: Victor Martins, Ayana Mello, Gabriel Bueno, Lucas Rozado and Mateus Gava. We created together all the concepts, design and coding of the application.
 
-### `yarn start`
+## Server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+We used [json-server](https://github.com/victorsnms/side-by-side-json-server) library deployed in Heroku.
+The routes are used to login, signup and managing the waste points and events markers.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## About the application
 
-### `yarn test`
+**Side By Side** is an application that contributes to the environment by engaging the users in participating and creating environmental events and also helps them to find suitable places to dispose of their garbage next to their local area.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The team decided that involving the community in this types of events would have numerous benefits. So an user can create or participate in events where other users would commit to helping by cleaning, providing tools, managing, etc. There is also a "gamification" as a form of encouragement: for each event or collection point created, the user is rewarded with points and earns badges.
 
-### `yarn build`
+## API Google Maps
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We used Google Maps API to display the interactive map where the user can check and create markers.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tools and libraries
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* [react-router-dom](https://www.npmjs.com/package/react-router-dom): pages routes;
+* [yup](https://www.npmjs.com/package/yup), [react-hook-form](https://react-hook-form.com/): forms;
+* [Chakra](https://chakra-ui.com/) styling;
+* jwt, and others.
 
-### `yarn eject`
+### TypeScript
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We choose to use Typescript to have a stronger typed programming language than Javascript.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Check it out! [Syde By Side](https://sidebyside.vercel.app/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Also a video showcasing the project in my [Linkedin](https://www.linkedin.com/feed/update/urn:li:activity:6850044225472520192/)
